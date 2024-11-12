@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Size:
-  - 0.3
+  - 0.5
   - 0.8
   _HitSE: {fileID: 8300000, guid: 77890caef0b11444c95471f7961f3bb7, type: 3}
 --- !u!82 &5414347090553501158

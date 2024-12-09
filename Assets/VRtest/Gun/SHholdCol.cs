@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.iOS;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class SHholdCol : MonoBehaviour

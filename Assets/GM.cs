@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class GM : MonoBehaviour
 {
@@ -27,6 +28,14 @@ public class GM : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if(Player.GetComponent<InputActionManager>().actionAssets[0].FindActionMap("XRI RightHand Interaction").FindAction("LRchange").WasPerformedThisFrame())
+        {
+            LeftMain = !LeftMain;
         }
     }
 }

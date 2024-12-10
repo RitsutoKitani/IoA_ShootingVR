@@ -1635,6 +1635,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "LRchange",
+                    "type": "Button",
+                    "id": "a1f5f658-1359-4f24-b428-2995a3162b18",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1822,6 +1831,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2dde6706-2927-4b17-8599-3328a5ae7bc4",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "LRchange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

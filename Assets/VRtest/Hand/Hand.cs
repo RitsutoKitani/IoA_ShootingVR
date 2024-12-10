@@ -33,7 +33,7 @@ public class Hand : MonoBehaviour
         }
         else //ÉTÉu
         {
-
+            if (_Gun) Destroy(_Gun);
         }
     }
 

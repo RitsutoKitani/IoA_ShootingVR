@@ -9,7 +9,6 @@ public class SHholdCol : MonoBehaviour
     [SerializeField]
     private MainGun _GunCs;
 
-    private bool _HandIn;
     private InputActionAsset _IAA;
     private InputAction _HoldAction;
 

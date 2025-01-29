@@ -9,6 +9,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     [Header("’e‘¬")] private float _Speed;
     [SerializeField]
+    [Header("UŒ‚—Í")] private int _Atk;
+    [SerializeField]
     [Header("©“®Á–ÅŠÔ")] private float _LimitTime;
     private float _timer = 0f;
     [SerializeField]
@@ -35,7 +37,12 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<Target>()) other.GetComponent<Target>().Hit();
+        if (other.GetComponent<Enemy>())
+        {
+            Enemy ene = other.GetComponent<Enemy>();
+
+            ene.Damage(_Atk);
+        }
 
         if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation);
         _Vanish();

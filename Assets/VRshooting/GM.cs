@@ -10,8 +10,10 @@ public class GM : MonoBehaviour
     [Header("右手スクリプト")] public GameObject RightHand;
     [Header("左手スクリプト")] public GameObject LeftHand;
 
+    [Space(20)]
     [Header("左手が利き手")] public bool LeftMain;
 
+    [Space(20)]
     [Header("セットメイン武器")] public GameObject[] SetMainGun = new GameObject[2];
     [Header("使用メイン武器")] public int UseGun = 0;
     [Header("セットサブ武器")] public GameObject SetSubGun;
@@ -45,6 +47,7 @@ public class GM : MonoBehaviour
 
     private void Update()
     {
+        if(!_IAA) return;
         if(_IAA.FindActionMap("XRI RightHand Interaction").FindAction("LRchange").WasPerformedThisFrame()) //左右持ち替え（テスト用）
         {
             LeftMain = !LeftMain;

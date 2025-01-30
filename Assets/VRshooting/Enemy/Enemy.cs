@@ -10,6 +10,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _Hp;
     public int Hp { get => _Hp; }
 
+    [SerializeField] private int _Atk;
+    public int Atk { get => _Atk; }
+
     [Space(30)]
 
     [SerializeField]

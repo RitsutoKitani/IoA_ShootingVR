@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     private Rigidbody _rb;
     [SerializeField]
@@ -18,7 +17,7 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     [Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
-    private void Start()
+    private void Awake()
     {
         if (!GetComponent<Rigidbody>())
         {
@@ -37,19 +36,19 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<EnemyHitBox>())
+        if (other.GetComponent<PlayerDome>())
         {
-            Enemy ene = other.GetComponent<EnemyHitBox>().EneCs;
-            ene.Damage(_Atk);
+            PlayerDome dome = other.GetComponent<PlayerDome>();
+            dome.Damage(_Atk);
         }
 
-        if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation);
+        if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
         _Vanish();
     }
 
     private void _Vanish()
     {
-        foreach (var tr in _tr) tr.gameObject.transform.parent = null;
+        foreach (var tr in _tr) tr.gameObject.transform.parent = null; //トレイルレンダラーの子を外す
         Destroy(gameObject);
     }
 }

@@ -6,9 +6,16 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class GM : MonoBehaviour
 {
+    [Header("ゲームプレイ中かどうか")] public bool PlayActive;
+
+    [Space(40)]
+
     [Header("プレイヤー")] public GameObject Player;
-    [Header("右手スクリプト")] public GameObject RightHand;
-    [Header("左手スクリプト")] public GameObject LeftHand;
+    [Header("プレイヤードーム")] public PlayerDome PlayerDome;
+
+    [Header("右手オブジェクト")] public GameObject RightHand;
+    [Header("左手オブジェクト")] public GameObject LeftHand;
+
 
     [Space(20)]
     [Header("左手が利き手")] public bool LeftMain;

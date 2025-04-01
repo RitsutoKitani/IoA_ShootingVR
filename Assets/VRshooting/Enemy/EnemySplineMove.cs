@@ -21,8 +21,9 @@ public class EnemySplineMove : MonoBehaviour
     [SerializeField] private bool _Stop = false;
     [SerializeField] private float _StopTimer = 0f;
     [SerializeField] [Header("停止時減速時間")] private float _DecTime;
-    private float _DecTimer = 0f;
+    [SerializeField] private float _DecTimer = 0f;
     private UnityEvent _StopEvent = null;
+    private bool _EventPlay = false;
 
     [Space(20)]
     [SerializeField] [Header("向く方向")] private Transform _LookTarget = null;
@@ -78,7 +79,7 @@ public class EnemySplineMove : MonoBehaviour
             else _DecTimer = _DecTime;
         }
 
-        _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime); ;
+        _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime);
     }
 
     #region//Stop関連
@@ -87,6 +88,7 @@ public class EnemySplineMove : MonoBehaviour
         _Stop = true;
         _StopTimer = stopact.StopTime;
         _StopEvent = stopact.Event;
+        _EventPlay = false;
         if (stopact.LookTarget) _LookTarget = stopact.LookTarget;
         stopact.fin = true;
         Debug.Log("ストップ開始");
@@ -94,8 +96,20 @@ public class EnemySplineMove : MonoBehaviour
 
     private void _StopUpdate()
     {
-        if (_StopTimer > 0f) _StopTimer -= Time.deltaTime;
-        else if(_StopEvent != null) _StopEvent.Invoke();
+        if (_StopTimer > 0f)
+        {
+            _StopTimer -= Time.deltaTime;
+            return;
+        }
+
+        if (_StopEvent != null)
+        {
+            if (!_EventPlay)
+            {
+                _StopEvent.Invoke();
+                _EventPlay = true;
+            }
+        }
         else StopFinish();
     }
 
@@ -126,7 +140,10 @@ public class EnemySplineMove : MonoBehaviour
             Gizmos.DrawSphere(_spline.EvaluatePosition(_TestSplinePos), 1f);
 
             Gizmos.color = Color.yellow;
-            Gizmos.DrawSphere(_spline.EvaluatePosition(0f), 0.6f);
+            foreach (StopAction action in _Actions)
+            {
+                Gizmos.DrawSphere(_spline.EvaluatePosition(action.StopStartPos), 0.6f);
+            }
         }
     }
 }

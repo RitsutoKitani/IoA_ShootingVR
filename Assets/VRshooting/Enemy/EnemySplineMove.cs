@@ -7,10 +7,8 @@ using UnityEngine.Splines;
 public class EnemySplineMove : MonoBehaviour
 {
     [SerializeField] private SplineContainer _spline; //移動ルート
-    [SerializeField] private GameObject _EneBody; //敵本体
-
-    [Space(20)]
-    [SerializeField] private bool _Active = false;
+    [SerializeField] private Enemy _EneCs; //敵本体
+    private GameObject _EneBody;
 
     [Space(20)]
     [SerializeField] [Header("移動速度")] private float _speed;
@@ -39,11 +37,12 @@ public class EnemySplineMove : MonoBehaviour
     private void Start()
     {
         _SplineLength = _spline.CalculateLength();
+        _EneBody = _EneCs.gameObject;
     }
 
     private void Update()
     {
-        if (!_Active) return;
+        if (!_EneCs.Active) return;
         _MoveUpdate();
 
         if(!_EneBody) return;
@@ -91,7 +90,6 @@ public class EnemySplineMove : MonoBehaviour
         _EventPlay = false;
         if (stopact.LookTarget) _LookTarget = stopact.LookTarget;
         stopact.fin = true;
-        Debug.Log("ストップ開始");
     }
 
     private void _StopUpdate()
@@ -117,7 +115,6 @@ public class EnemySplineMove : MonoBehaviour
     {
         _Stop = false;
         _LookTarget = null;
-        Debug.Log("ストップ終了");
     }
     #endregion
 

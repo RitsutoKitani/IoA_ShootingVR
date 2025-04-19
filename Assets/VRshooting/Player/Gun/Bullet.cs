@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     private Rigidbody _rb;
+
+    [Space(30)]
+
     [SerializeField]
     [Header("弾速")] private float _Speed;
     [SerializeField]
@@ -18,20 +22,14 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     [Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
-    private void Start()
+    private void Awake()
     {
-        if (!GetComponent<Rigidbody>())
-        {
-            Debug.LogError("弾にリジッドボディが入っていません");
-            _Vanish();
-        }
         _rb = GetComponent<Rigidbody>();
-        _rb.velocity = transform.forward * _Speed;
     }
 
     private void Update()
     {
-        if (_timer > _LimitTime) _Vanish();
+        if (_timer > _LimitTime && _LimitTime > 0f) _Vanish();
         else _timer += Time.deltaTime;
     }
 
@@ -49,7 +47,32 @@ public class Bullet : MonoBehaviour
 
     private void _Vanish()
     {
-        foreach (var tr in _tr) tr.gameObject.transform.parent = null;
-        Destroy(gameObject);
+        _rb.velocity = Vector3.zero;
+
+        foreach (TrailRenderer tr in _tr)
+        {
+            tr.Clear();
+        }
+
+        gameObject.SetActive(false);
     }
+
+    public void ReStatus(BulletStatus status)
+    {
+        _Speed = status._Speed;
+        _Atk = status._Atk;
+        _LimitTime = status._LimitTime;
+        _timer = 0f;
+
+        _rb.velocity = transform.forward * _Speed;
+    }
+}
+
+[System.Serializable]
+public class BulletStatus
+{
+    public float _Speed;
+    public int _Atk;
+    public float _LimitTime;
+    public GameObject _HitEff;
 }

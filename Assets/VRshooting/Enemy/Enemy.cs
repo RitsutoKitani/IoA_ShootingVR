@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField]
+    private bool _Active;
+    public bool Active { get => _Active; }
+
     [SerializeField] private int _HpMax;
     public int HpMax { get => HpMax; }
 
@@ -22,18 +26,9 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        Relocation();
-        _ani = GetComponent<Animator>();
+        _ani = GetComponent<Animator>();;
     }
 
-    /// <summary>
-    /// 敵の再配置（初期処理）
-    /// </summary>
-    public void Relocation()
-    {
-        _Hp = _HpMax;
-        if (_ani) _ani.SetBool("Destroy", false);
-    }
 
     /// <summary>
     /// ダメージ
@@ -55,5 +50,19 @@ public class Enemy : MonoBehaviour
     {
         if (_FinishDel) Destroy(gameObject);
         gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 活動開始
+    /// </summary>
+    public void Activate()
+    {
+        _Active = true;
+    }
+
+    public void ReSetting()
+    {
+        _Hp = _HpMax;
+        _Active = false;
     }
 }

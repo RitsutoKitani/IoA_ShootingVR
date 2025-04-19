@@ -26,7 +26,8 @@ public class PlayerDome : MonoBehaviour
 
     void Update()
     {
-        if (!GM.instance.PlayActive) return;
+        if (!GM.instance.StageManager) return;
+        if (GM.instance.IsPose || !GM.instance.StageManager.StageActive) return;
 
         AutoHealUpdate();
     }
@@ -52,7 +53,7 @@ public class PlayerDome : MonoBehaviour
         if (_Hp < 0)
         {
             Debug.Log("GAME OVER");
-            GM.instance.PlayActive = false;
+
         }
     }
 }

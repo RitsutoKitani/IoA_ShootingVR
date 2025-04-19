@@ -142,7 +142,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
-  m_Autodestruct: 1
+  m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 0
 --- !u!1 &7405893749740642319
@@ -292,6 +292,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 982c95597cd00af40b595e19cb2b3fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mr: {fileID: 4697872850594635498}
+  _Active: 0
   _Speed: 200
   _Atk: 5
   _LimitTime: 1

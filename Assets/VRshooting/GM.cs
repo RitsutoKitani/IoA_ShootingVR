@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class GM : MonoBehaviour
 {
-    [Header("ゲームプレイ中かどうか")] public bool PlayActive;
+    [Header("ポーズ中")] public bool IsPose;
 
     [Space(40)]
 
@@ -16,6 +16,7 @@ public class GM : MonoBehaviour
     [Header("右手オブジェクト")] public GameObject RightHand;
     [Header("左手オブジェクト")] public GameObject LeftHand;
 
+    [Header("ステージマネージャー")] public StageManager StageManager;
 
     [Space(20)]
     [Header("左手が利き手")] public bool LeftMain;
@@ -55,7 +56,7 @@ public class GM : MonoBehaviour
     private void Update()
     {
         if(!_IAA) return;
-        if(_IAA.FindActionMap("XRI RightHand Interaction").FindAction("LRchange").WasPerformedThisFrame()) //左右持ち替え（テスト用）
+        if(_IAA.FindActionMap("GunAction R").FindAction("LRchange").WasPerformedThisFrame()) //左右持ち替え（テスト用）
         {
             LeftMain = !LeftMain;
         }
@@ -80,7 +81,8 @@ public class GM : MonoBehaviour
         }
         if (!se)
         {
-            se = Instantiate(SEobj); Debug.Log("SE生成");
+            se = Instantiate(SEobj);
+            se.transform.parent = transform;
             _SEobjList.Add(se);
         }
 

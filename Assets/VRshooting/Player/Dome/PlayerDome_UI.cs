@@ -23,6 +23,6 @@ public class PlayerDome_UI : MonoBehaviour
     private void Update()
     {
         _HpGage.fillAmount = (float)_DomeCs.Hp / _DomeCs.HpMax;
-        _HpText.text = string.Format("{0} / {1}", _DomeCs.Hp, _DomeCs.HpMax);
+        //_HpText.text = string.Format("{0} / {1}", _DomeCs.Hp, _DomeCs.HpMax);
     }
 }

@@ -6,5 +6,5 @@ public class EnemyHitBox : MonoBehaviour
 {
     [SerializeField]
     [Header("本体スクリプト")] private Enemy _EneCs;
-    public Enemy EneCs { get => EneCs; }
+    public Enemy EneCs { get => _EneCs; }
 }

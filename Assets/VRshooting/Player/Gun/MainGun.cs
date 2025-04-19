@@ -19,6 +19,31 @@ public class MainGun : MonoBehaviour
     [Header("発射位置")] private Transform _ShotPos;
     [SerializeField]
     [Header("連射間隔")] private float _Interval = 0f;
+    private float _ShotTimer = 0f;
+
+    [Space(30)]
+    [SerializeField]
+    [Header("弾ステータス")] private BulletStatus _BulletStatus;
+
+
+    [Space(30)]
+    [SerializeField]
+    [Header("マガジン最大弾数")] private int _MagazineBulletMax;
+    public int MagazineBulletMax { get => _MagazineBulletMax; }
+
+    [SerializeField]
+    [Header("マガジン弾数")] private int _MagazineBullet;
+    public int MagazineBullet { get => _MagazineBullet; }
+
+    [Space(10)]
+    [SerializeField]
+    private bool _Reloading = false;
+    [SerializeField]
+    [Header("リロード時間")] private float _ReloadTime;
+    private float _ReloadTimer = 0f;
+    
+
+    [Space(30)]
     [SerializeField]
     [Header("照準UI距離")] private float _AimUIdistance;
     [SerializeField]
@@ -32,7 +57,6 @@ public class MainGun : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     [Header("両手ブレ補正")] private float _BHstabi;
 
-    private float _timer = 0f;
 
     [Space(30)]
     [SerializeField] private GameObject _AimUI;
@@ -42,6 +66,7 @@ public class MainGun : MonoBehaviour
     private XRBaseController _SubXRBC;
     private InputActionAsset _IAA;
     private InputAction _GunShotAct;
+    private InputAction _GunReloadAct;
     private AudioSource _AS;
     private Animator _ani;
 
@@ -50,8 +75,17 @@ public class MainGun : MonoBehaviour
         _ani = GetComponent<Animator>();
         _AS = GetComponent<AudioSource>();
         _IAA = GM.instance.Player.GetComponent<InputActionManager>().actionAssets[0];
-        if(_Left) _GunShotAct = _IAA.FindActionMap("XRI LeftHand Interaction").FindAction("GunShot");
-        else _GunShotAct = _IAA.FindActionMap("XRI RightHand Interaction").FindAction("GunShot");
+        if (_Left)
+        {
+            _GunShotAct = _IAA.FindActionMap("GunAction L").FindAction("GunShot");
+            _GunReloadAct = _IAA.FindActionMap("GunAction L").FindAction("GunReload");
+        }
+        else
+        {
+            _GunShotAct = _IAA.FindActionMap("GunAction R").FindAction("GunShot");
+            _GunReloadAct = _IAA.FindActionMap("GunAction R").FindAction("GunReload");
+
+        }
     }
 
     void Update()
@@ -79,25 +113,66 @@ public class MainGun : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, Stabi);
+
+
+        if (_GunReloadAct.WasPerformedThisFrame()) _ReloadStart();
     }
 
     private void _ShotUpdate()
     {
-        if (_timer < _Interval) _timer += Time.deltaTime;
-        else if (_GunShotAct.IsPressed())
+        if (_Reloading)
         {
-            if (!_Bullet || !_ShotPos)
-            {
-                Debug.LogError("弾か発射位置が設定されていません"); return;
-            }
-
-            Instantiate(_Bullet, _ShotPos.position, _ShotPos.rotation);
-            _timer = 0f;
-
-            _MainXRBC.SendHapticImpulse(0.6f, 0.05f);
-            if (_SubHand) _SubXRBC.SendHapticImpulse(0.6f, 0.05f);
-            if (_ani) _ani.SetTrigger("Shot");
+            if (_ReloadTimer < _ReloadTime) _ReloadTimer += Time.deltaTime;
+            else _ReloadFinish();
+            return;
         }
+
+        if (_ShotTimer < _Interval)
+        {
+            _ShotTimer += Time.deltaTime;
+            return;
+        }
+        
+        if (_GunShotAct.IsPressed()) _Shot();
+    }
+
+    private void _Shot()
+    {
+        if (_MagazineBullet <= 0) //弾ないのでリロードします
+        {
+            _ReloadStart();
+            return;
+        }
+
+        if (!_Bullet || !_ShotPos)
+        {
+            Debug.LogError("弾か発射位置が設定されていません"); return;
+        }
+
+        if (ObjPool.instance) ObjPool.instance.MakeBullet(_ShotPos, _BulletStatus); //弾生成
+        else Instantiate(_Bullet, _ShotPos.position, _ShotPos.rotation);
+
+        _ShotTimer = 0f;
+        _MagazineBullet--;
+
+        _MainXRBC.SendHapticImpulse(0.6f, 0.05f); //持ち手に振動
+        if (_SubHand) _SubXRBC.SendHapticImpulse(0.6f, 0.05f); //反対の手にも振動
+        if (_ani) _ani.SetTrigger("Shot");
+    }
+
+    private void _ReloadStart()
+    {
+        _Reloading = true;
+        _ReloadTimer = 0f;
+        Debug.Log("リロード！");
+    }
+
+    private void _ReloadFinish()
+    {
+        _Reloading = false;
+        _ShotTimer = _Interval;
+        _MagazineBullet = _MagazineBulletMax;
+        Debug.Log("アローリ！");
     }
 
     private void _IndicatorUpdate()

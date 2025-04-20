@@ -38,9 +38,13 @@ public class MainGun : MonoBehaviour
     [Space(10)]
     [SerializeField]
     private bool _Reloading = false;
+
     [SerializeField]
     [Header("ƒŠƒ[ƒhŽžŠÔ")] private float _ReloadTime;
+    public float ReloadTime { get => _ReloadTime; }
+
     private float _ReloadTimer = 0f;
+    public float ReloadTimer { get => _ReloadTimer; }
     
 
     [Space(30)]
@@ -115,6 +119,7 @@ public class MainGun : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, Stabi);
 
 
+        if (_ani) _ani.SetBool("Reloading", _Reloading);
         if (_GunReloadAct.WasPerformedThisFrame()) _ReloadStart();
     }
 

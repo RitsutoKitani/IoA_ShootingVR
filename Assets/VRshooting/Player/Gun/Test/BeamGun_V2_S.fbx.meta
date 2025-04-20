@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8a6a9500eade93c40bccb0633b165c95
+guid: a7c41b2a02b0e6946af05087710e2744
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Light
-    second: {fileID: 2100000, guid: d2956d9626513814c9d5d2507a625d67, type: 2}
+    second: {fileID: 2100000, guid: 7aac4e4da93693b4a8479e06819e01ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -75,7 +75,7 @@ ModelImporter:
     useFileScale: 1
     strictVertexDataChecks: 0
   tangentSpace:
-    normalSmoothAngle: 60
+    normalSmoothAngle: 180
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4

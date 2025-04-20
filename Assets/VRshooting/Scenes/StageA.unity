@@ -3800,8 +3800,8 @@ MonoBehaviour:
   StageManager: {fileID: 0}
   LeftMain: 0
   SetMainGun:
-  - {fileID: 3164206078389076889, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
-  - {fileID: 3164206078389076889, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
+  - {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
+  - {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
   UseGun: 0
   SetSubGun: {fileID: 0}
   _SEobjList: []

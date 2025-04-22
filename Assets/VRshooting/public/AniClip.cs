@@ -8,4 +8,9 @@ public class AniClip : MonoBehaviour
     {
         GM.instance.PlayOneSE(SE, transform);
     }
+
+    private void StopActive()
+    {
+        gameObject.SetActive(false);
+    }
 }

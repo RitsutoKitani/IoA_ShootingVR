@@ -11,6 +11,7 @@ public class GM : MonoBehaviour
     [Space(40)]
 
     [Header("プレイヤー")] public GameObject Player;
+    [Header("カメラ")] public GameObject CameraObj;
     [Header("プレイヤードーム")] public PlayerDome PlayerDome;
 
     [Header("右手オブジェクト")] public GameObject RightHand;

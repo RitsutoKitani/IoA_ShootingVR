@@ -12,7 +12,10 @@ public class StageManager : MonoBehaviour
     [Header("ステージ進行時間")] private float _StageTimer = 0f;
 
     [SerializeField]
-    private List<EnemyInfo> _Enemys = new List<EnemyInfo>();
+    [Header("敵活動リスト")] private List<EnemyInfo> _Enemys = new List<EnemyInfo>();
+
+    [Space(30)]
+    [Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
 
     private void Start()
     {
@@ -32,12 +35,18 @@ public class StageManager : MonoBehaviour
     {
         _StageTimer += Time.deltaTime;
 
-        foreach (EnemyInfo enemy in _Enemys)
+        foreach (EnemyInfo enemy in _Enemys) //敵活動開始！
         {
             if (_StageTimer < enemy.ActiveTime || !enemy.EneCs) continue;
-            if (enemy.EneCs.Active || enemy.EneCs.Hp <= 0) continue;
+            if (enemy.EneCs.gameObject.activeSelf || enemy.EneCs.Hp <= 0) continue;
 
-            enemy.EneCs.Activate();
+            enemy.EneCs.gameObject.SetActive(true);
+            _ActEnemys.Add(enemy.EneCs);
+        }
+
+        for (int i = 0; i < _ActEnemys.Count; i++) //やられた敵はリストから除外
+        {
+            if (!_ActEnemys[i] || _ActEnemys[i].Hp <= 0) _ActEnemys.RemoveAt(i);
         }
     }
 
@@ -45,7 +54,11 @@ public class StageManager : MonoBehaviour
     {
         _StageTimer = 0f;
         _StageActive = true;
-        foreach (EnemyInfo enemy in _Enemys) enemy.EneCs.ReSetting();
+        foreach (EnemyInfo enemy in _Enemys)
+        {
+            enemy.EneCs.ReSetting();
+            enemy.EneCs.gameObject.SetActive(false);
+        }
     }
 }
 

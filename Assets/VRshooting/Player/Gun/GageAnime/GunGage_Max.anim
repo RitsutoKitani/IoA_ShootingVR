@@ -42,8 +42,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: _flash
-    path: 
+    attribute: _alpha
+    path: InfoUI
     classID: 114
     script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
     flags: 0
@@ -72,8 +72,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: _alpha
-    path: 
+    attribute: _flash
+    path: InfoUI
     classID: 114
     script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
     flags: 0
@@ -86,8 +86,8 @@ AnimationClip:
   m_ClipBindingConstant:
     genericBindings:
     - serializedVersion: 2
-      path: 0
-      attribute: 636924831
+      path: 714950604
+      attribute: 1524159990
       script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
       typeID: 114
       customType: 0
@@ -95,8 +95,8 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     - serializedVersion: 2
-      path: 0
-      attribute: 1524159990
+      path: 714950604
+      attribute: 636924831
       script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
       typeID: 114
       customType: 0
@@ -150,8 +150,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: _flash
-    path: 
+    attribute: _alpha
+    path: InfoUI
     classID: 114
     script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
     flags: 0
@@ -180,8 +180,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: _alpha
-    path: 
+    attribute: _flash
+    path: InfoUI
     classID: 114
     script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
     flags: 0

@@ -165,7 +165,6 @@ GameObject:
   - component: {fileID: 2430034354738020353}
   - component: {fileID: 1475588015172052685}
   - component: {fileID: 4561206000442359952}
-  - component: {fileID: 3294404100850256231}
   m_Layer: 0
   m_Name: MainGunTest
   m_TagString: Untagged
@@ -230,7 +229,6 @@ MonoBehaviour:
   _SubHand: {fileID: 0}
   _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
   _ShotPos: {fileID: 2932081032931784438}
-  _Interval: 0.3
   _BulletStatus:
     _Speed: 200
     _Atk: 5
@@ -239,9 +237,12 @@ MonoBehaviour:
       type: 3}
   _MagazineBulletMax: 12
   _MagazineBullet: 6
+  _Interval: 0.3
   _Reloading: 0
   _ReloadTime: 1.4
-  _AimUIdistance: 200
+  _DiffAngleOH: 1.2
+  _DiffAngleBH: 0.3
+  _AimUIdistance: 100
   _AimUIsize:
     serializedVersion: 2
     m_Curve:
@@ -282,25 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &3294404100850256231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497341379657642263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _GunCs: {fileID: 1475588015172052685}
-  _BulletText: {fileID: 8188293500371324718}
-  _MR: {fileID: 1852685107891851127}
-  _matFillMax: 0.16
-  _matFillMin: -0.145
-  _alpha: 0
-  _flash: 0
 --- !u!1 &1987812324772960485
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +328,7 @@ GameObject:
   - component: {fileID: 53765264416564930}
   - component: {fileID: 7655382881199692439}
   - component: {fileID: 6763812720091850074}
+  - component: {fileID: 1328778105343760396}
   m_Layer: 5
   m_Name: InfoUI
   m_TagString: Untagged
@@ -361,7 +344,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2314724662873399653}
   m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
-  m_LocalPosition: {x: 0, y: 0, z: -0.08}
+  m_LocalPosition: {x: 0, y: 0, z: -0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -370,7 +353,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0.14}
+  m_AnchoredPosition: {x: 0, y: 0.16}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &53765264416564930
@@ -436,6 +419,27 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1328778105343760396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2314724662873399653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d58fc23910291743b62dd66d7961870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _GunCs: {fileID: 1475588015172052685}
+  _LookCamera: 1
+  _LookSmooth: 0.1
+  _BulletText: {fileID: 8188293500371324718}
+  _MR: {fileID: 1852685107891851127}
+  _matFillMax: 0.16
+  _matFillMin: -0.145
+  _alpha: 0
+  _flash: 0
 --- !u!1 &2606678804273252255
 GameObject:
   m_ObjectHideFlags: 0

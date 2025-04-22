@@ -8,10 +8,17 @@ public class MainGun_UI : MonoBehaviour
     [SerializeField]
     private MainGun _GunCs;
 
+    [SerializeField]
+    [Header("ÉJÉÅÉâï˚å¸Çå¸Ç≠")] private bool _LookCamera;
+    [SerializeField]
+    private float _LookSmooth;
+
     [Space(30)]
 
     [SerializeField]
     private Text _BulletText;
+
+    [Space(30)]
 
     [SerializeField]
     private SkinnedMeshRenderer _MR;
@@ -42,6 +49,13 @@ public class MainGun_UI : MonoBehaviour
         if (!_GunCs) return;
 
         _BulletText.text = string.Format("{0:00}/{1:00}", _GunCs.MagazineBullet, _GunCs.MagazineBulletMax);
+
+        if (GM.instance.CameraObj && _LookCamera)
+        {
+            var aim = transform.position - GM.instance.CameraObj.transform.position;
+            Quaternion AimRot = Quaternion.LookRotation(aim);
+            transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, _LookSmooth);
+        }
 
         if(!_MR) return;
 

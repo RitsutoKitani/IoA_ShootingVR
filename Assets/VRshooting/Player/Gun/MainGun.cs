@@ -13,20 +13,18 @@ public class MainGun : MonoBehaviour
     [Header("ÉTÉuéË")] private Transform _SubHand;
     public Transform SubHand { get => _SubHand; }
 
+    [Space(30)]
+
     [SerializeField]
     [Header("íe")] private GameObject _Bullet;
     [SerializeField]
     [Header("î≠éÀà íu")] private Transform _ShotPos;
-    [SerializeField]
-    [Header("òAéÀä‘äu")] private float _Interval = 0f;
-    private float _ShotTimer = 0f;
 
-    [Space(30)]
+    [Space(10)]
+
     [SerializeField]
     [Header("íeÉXÉeÅ[É^ÉX")] private BulletStatus _BulletStatus;
 
-
-    [Space(30)]
     [SerializeField]
     [Header("É}ÉKÉWÉìç≈ëÂíeêî")] private int _MagazineBulletMax;
     public int MagazineBulletMax { get => _MagazineBulletMax; }
@@ -35,7 +33,10 @@ public class MainGun : MonoBehaviour
     [Header("É}ÉKÉWÉìíeêî")] private int _MagazineBullet;
     public int MagazineBullet { get => _MagazineBullet; }
 
-    [Space(10)]
+    [SerializeField]
+    [Header("òAéÀä‘äu")] private float _Interval = 0f;
+    private float _ShotTimer = 0f;
+
     [SerializeField]
     private bool _Reloading = false;
 
@@ -45,9 +46,16 @@ public class MainGun : MonoBehaviour
 
     private float _ReloadTimer = 0f;
     public float ReloadTimer { get => _ReloadTimer; }
+
+    [SerializeField]
+    [Header("ägéUäpìxÅiï–éËÅj")] private float _DiffAngleOH;
+
+    [SerializeField]
+    [Header("ägéUäpìxÅióºéËÅj")] private float _DiffAngleBH;
     
 
     [Space(30)]
+
     [SerializeField]
     [Header("è∆èÄUIãóó£")] private float _AimUIdistance;
     [SerializeField]
@@ -154,8 +162,18 @@ public class MainGun : MonoBehaviour
             Debug.LogError("íeÇ©î≠éÀà íuÇ™ê›íËÇ≥ÇÍÇƒÇ¢Ç‹ÇπÇÒ"); return;
         }
 
-        if (ObjPool.instance) ObjPool.instance.MakeBullet(_ShotPos, _BulletStatus); //íeê∂ê¨
-        else Instantiate(_Bullet, _ShotPos.position, _ShotPos.rotation);
+        float DiffAngle = 0f;
+        if (_SubHand) DiffAngle = _DiffAngleBH;
+        else DiffAngle = _DiffAngleOH;
+
+        Vector2 ShotDiff = Vector2.zero;
+        ShotDiff.x = Random.Range(-DiffAngle, DiffAngle);
+        ShotDiff.y = Random.Range(-DiffAngle, DiffAngle);
+
+        GameObject bullet = ObjPool.instance.MakeObj(ObjPool.instance.BulletPool, _ShotPos.position, _ShotPos.rotation); //íeê∂ê¨
+        bullet.transform.Rotate(transform.right, ShotDiff.y);
+        bullet.transform.Rotate(transform.up, ShotDiff.x);
+        bullet.GetComponent<Bullet>().ReStatus(_BulletStatus);
 
         _ShotTimer = 0f;
         _MagazineBullet--;

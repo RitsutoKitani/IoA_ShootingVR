@@ -42,10 +42,8 @@ public class EnemySplineMove : MonoBehaviour
 
     private void Update()
     {
-        if (!_EneCs.Active) return;
+        if(!_EneBody.activeSelf) return;
         _MoveUpdate();
-
-        if(!_EneBody) return;
         _LookUpdate();
 
         if (_Stop) _StopUpdate();
@@ -67,7 +65,7 @@ public class EnemySplineMove : MonoBehaviour
 
         float Speed = _speed * _SpeedCurve.Evaluate(_SplinePos) / _SplineLength / 100;
 
-        if (_Stop)
+        if (_Stop || _EneCs.Hp <= 0)
         {
             if(_DecTimer > 0f) _DecTimer -= Time.deltaTime;
             else _DecTimer = 0f;

@@ -7,38 +7,43 @@ public class ObjPool : MonoBehaviour
 {
     public static ObjPool instance;
 
-    [Space(30)]
-    [SerializeField]
-    private GameObject _Bullet;
-    [SerializeField]
-    private List<GameObject> _BulletList = new List<GameObject>();
+    public ObjPoolInfo BulletPool;
+
+    public ObjPoolInfo ExploEffPool;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void MakeBullet(Transform pos, BulletStatus status)
+    public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot)
     {
-        GameObject bullet = null;
-        foreach (GameObject obj in _BulletList)
+        GameObject obj = null;
+        foreach (GameObject list in opi.ObjList)
         {
-            if(!obj.activeSelf)
+            if (!list.activeSelf)
             {
-                bullet = obj;
-                bullet.transform.position = pos.position;
-                bullet.transform.rotation = pos.rotation;
-                bullet.SetActive(true);
+                obj = list;
+                obj.transform.position = pos;
+                obj.transform.rotation = rot;
+                obj.SetActive(true);
                 break;
             }
         }
 
-        if(!bullet)
+        if (!obj)
         {
-            bullet = Instantiate(_Bullet, pos.position, pos.rotation);
-            _BulletList.Add(bullet);
+            obj = Instantiate(opi.Obj, pos, rot);
+            opi.ObjList.Add(obj);
         }
 
-        bullet.GetComponent<Bullet>().ReStatus(status);
+        return obj;
     }
+}
+
+[System.Serializable]
+public class ObjPoolInfo
+{
+    public GameObject Obj;
+    public List<GameObject> ObjList;
 }

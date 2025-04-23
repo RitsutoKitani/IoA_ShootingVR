@@ -15,6 +15,8 @@ public class EnemySplineMove : MonoBehaviour
     [SerializeField] [Header("移動速度変化 [0-1]")]  private AnimationCurve _SpeedCurve;
     [SerializeField, Range(0,1)] [Header("スプライン上の位置 [0-1]")] private float _SplinePos = 0f;
     private float _SplineLength; //スプラインの長さ
+    private Vector3 _OffsetPos;
+    private Quaternion _OffsetRot;
 
     [SerializeField] private bool _Stop = false;
     [SerializeField] private float _StopTimer = 0f;
@@ -38,13 +40,18 @@ public class EnemySplineMove : MonoBehaviour
     {
         _SplineLength = _spline.CalculateLength();
         _EneBody = _EneCs.gameObject;
+
+        transform.parent = null;
+        transform.position = _spline.EvaluatePosition(0);
+        transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(0));
+        _OffsetPos = transform.InverseTransformPoint(_EneBody.transform.position);
     }
 
     private void Update()
     {
         if(!_EneBody.activeSelf) return;
-        _MoveUpdate();
         _LookUpdate();
+        _MoveUpdate();
 
         if (_Stop) _StopUpdate();
         else
@@ -61,9 +68,11 @@ public class EnemySplineMove : MonoBehaviour
     /// </summary>
     private void _MoveUpdate()
     {
-        transform.position = _spline.EvaluatePosition(_SplinePos);
+        Vector3 splinePos = _spline.EvaluatePosition(_SplinePos);
+        transform.position = splinePos;
+        _EneBody.transform.position = transform.TransformPoint(_OffsetPos);
 
-        float Speed = _speed * _SpeedCurve.Evaluate(_SplinePos) / _SplineLength / 100;
+        float Speed = _speed * _SpeedCurve.Evaluate(_SplinePos) / _SplineLength * Time.deltaTime;
 
         if (_Stop || _EneCs.Hp <= 0)
         {
@@ -122,6 +131,8 @@ public class EnemySplineMove : MonoBehaviour
     private void _LookUpdate()
     {
         Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
+        transform.rotation = LookRot;
+
         if (_LookTarget) LookRot = Quaternion.LookRotation(_LookTarget.position - _EneBody.transform.position);
 
         _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);

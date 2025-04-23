@@ -206,7 +206,6 @@ GameObject:
   - component: {fileID: 6940629075317846319}
   - component: {fileID: 283749875844892333}
   - component: {fileID: 5360400983472496673}
-  - component: {fileID: 4238795546326297934}
   - component: {fileID: 845946020470622034}
   m_Layer: 6
   m_Name: EneFly1
@@ -266,12 +265,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _HpMax: 10
-  _Hp: 0
-  _Atk: 0
+  _Hp: 10
+  _Atk: 1
   _FinishDel: 0
-  _cols: []
+  _cols:
+  - {fileID: 5566055385334803229}
   _smr: {fileID: 4374680498557451558}
-  _dither: 0
+  _dither: 1
   _flash: 0
 --- !u!114 &5360400983472496673
 MonoBehaviour:
@@ -285,21 +285,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4238795546326297934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3991053507840034652}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34d0a85a05460f54a892d23718751bb5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _SplineMoveCs: {fileID: 0}
-  _ShotPos: {fileID: 7445863102803107942}
-  _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
 --- !u!114 &845946020470622034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -762,6 +747,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 202269533314167084}
+  - component: {fileID: 5566055385334803229}
+  - component: {fileID: 4289977996937004679}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -785,6 +772,40 @@ Transform:
   - {fileID: 4635178691210320926}
   m_Father: {fileID: 2078589404598030765}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5566055385334803229
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552552240555057044}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 1.85, z: 0}
+--- !u!114 &4289977996937004679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552552240555057044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84b7c15da56588a4da4c6367052389bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _EneCs: {fileID: 283749875844892333}
 --- !u!1 &6636382759374391620
 GameObject:
   m_ObjectHideFlags: 0

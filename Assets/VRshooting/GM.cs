@@ -54,6 +54,7 @@ public class GM : MonoBehaviour
         if (Player) _IAA = Player.GetComponent<InputActionManager>().actionAssets[0];
     }
 
+    /*
     private void Update()
     {
         if(!_IAA) return;
@@ -62,6 +63,7 @@ public class GM : MonoBehaviour
             LeftMain = !LeftMain;
         }
     }
+    */
 
     /// <summary>
     /// SEçƒê∂

@@ -37,6 +37,7 @@ public class TargetSpone : MonoBehaviour
                 float y = Random.Range(-_SponeArea.y / 2, _SponeArea.y / 2);
                 float z = Random.Range(-_SponeArea.z / 2, _SponeArea.z / 2);
                 GameObject tartget = Instantiate(_TargetObj, transform.position + new Vector3(x, y, z), Quaternion.identity);
+                if(!tartget.activeSelf) tartget.SetActive(true);
                 _TargetList.Add(tartget);
                 _timer = 0f;
             }

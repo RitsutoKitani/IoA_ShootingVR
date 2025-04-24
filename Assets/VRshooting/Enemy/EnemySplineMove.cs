@@ -49,6 +49,7 @@ public class EnemySplineMove : MonoBehaviour
 
     private void Update()
     {
+        if(!_EneBody) Destroy(gameObject);
         if(!_EneBody.activeSelf) return;
         _LookUpdate();
         _MoveUpdate();
@@ -86,6 +87,13 @@ public class EnemySplineMove : MonoBehaviour
         }
 
         _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime);
+        if (_SplinePos >= 1f) _Finish();
+    }
+
+    private void _Finish()
+    {
+        _EneCs.Finish();
+        Destroy(gameObject);
     }
 
     #region//StopŠÖ˜A

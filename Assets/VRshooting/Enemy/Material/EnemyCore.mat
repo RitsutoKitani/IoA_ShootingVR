@@ -119,7 +119,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _dither: 1
+    - _dither: 0
     - _flash: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}

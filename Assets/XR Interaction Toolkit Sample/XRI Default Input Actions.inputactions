@@ -2854,6 +2854,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GunChange",
+                    "type": "Button",
+                    "id": "526b6956-71ac-4c86-bbfd-83756f2de888",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Hold",
                     "type": "Button",
                     "id": "319a7d23-fc94-45cb-8cc3-3c3a5e601ecd",
@@ -2896,6 +2905,17 @@
                     "action": "GunReload",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9469fad1-6538-4b93-a303-2a8e8de2be78",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "GunChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -2925,6 +2945,15 @@
                     "name": "Hold",
                     "type": "Button",
                     "id": "6ed9ad07-91bd-4c09-9345-b63d92ef2867",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "GunChange",
+                    "type": "Button",
+                    "id": "e5089304-0c17-4a63-8d1b-c5a000f47d1b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -2982,6 +3011,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "GunReload",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9e6cf788-5616-4ac3-a005-a612749bd241",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "GunChange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

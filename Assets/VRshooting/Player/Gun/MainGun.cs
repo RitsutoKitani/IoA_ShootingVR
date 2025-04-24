@@ -69,18 +69,29 @@ public class MainGun : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     [Header("両手ブレ補正")] private float _BHstabi;
 
-
     [Space(30)]
     [SerializeField] private GameObject _AimUI;
 
+    #region//VR入力関連
     private bool _Left;
     private XRBaseController _MainXRBC;
     private XRBaseController _SubXRBC;
     private InputActionAsset _IAA;
     private InputAction _GunShotAct;
     private InputAction _GunReloadAct;
+    private InputAction _GunChangeAct;
+    #endregion
+
     private AudioSource _AS;
     private Animator _ani;
+    private ControlMat _MatCtrl;
+
+    [Space(30)]
+    [SerializeField] private SErepeat _rSEcs;
+    [SerializeField] private AudioClip _ReloadingSE;
+    [SerializeField] private AnimationCurve _ReloadingVolume;
+
+    [SerializeField] private AudioClip _ReloadFinishSE;
 
     private void Start()
     {
@@ -91,12 +102,13 @@ public class MainGun : MonoBehaviour
         {
             _GunShotAct = _IAA.FindActionMap("GunAction L").FindAction("GunShot");
             _GunReloadAct = _IAA.FindActionMap("GunAction L").FindAction("GunReload");
+            _GunChangeAct = _IAA.FindActionMap("GunAction L").FindAction("GunChange");
         }
         else
         {
             _GunShotAct = _IAA.FindActionMap("GunAction R").FindAction("GunShot");
             _GunReloadAct = _IAA.FindActionMap("GunAction R").FindAction("GunReload");
-
+            _GunChangeAct = _IAA.FindActionMap("GunAction R").FindAction("GunChange");
         }
     }
 
@@ -128,13 +140,15 @@ public class MainGun : MonoBehaviour
 
 
         if (_ani) _ani.SetBool("Reloading", _Reloading);
-        if (_GunReloadAct.WasPerformedThisFrame()) _ReloadStart();
+        if (_GunReloadAct.WasPerformedThisFrame() && _MagazineBullet < _MagazineBulletMax && !_Reloading) _ReloadStart();
     }
 
     private void _ShotUpdate()
     {
+        _rSEcs.isPlaying = _Reloading;
         if (_Reloading)
         {
+            _rSEcs.Volume = _ReloadingVolume.Evaluate(_ReloadTimer / _ReloadTime);
             if (_ReloadTimer < _ReloadTime) _ReloadTimer += Time.deltaTime;
             else _ReloadFinish();
             return;
@@ -187,6 +201,7 @@ public class MainGun : MonoBehaviour
     {
         _Reloading = true;
         _ReloadTimer = 0f;
+        _rSEcs.clip = _ReloadingSE;
         Debug.Log("リロード！");
     }
 
@@ -195,6 +210,7 @@ public class MainGun : MonoBehaviour
         _Reloading = false;
         _ShotTimer = _Interval;
         _MagazineBullet = _MagazineBulletMax;
+        GM.instance.PlayOneSE(_ReloadFinishSE, transform);
         Debug.Log("アローリ！");
     }
 

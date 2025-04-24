@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6145226837951467751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitRU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4635178691210320926}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JointMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +76,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1959913717351389031}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitRU_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5712763291893739996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3430666843042725822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitLU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 34455739176652095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JointLU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +316,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2026418589248649713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitLD_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 652167202628220166}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitRD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -379,7 +379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8960068425763546199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitRD_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2078589404598030765}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armorture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -618,7 +618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5235222839783193229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BitLU_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -649,7 +649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8645241502100773697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JointLD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +681,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6667941015292033977}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -715,7 +715,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4137339683971013240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JointRU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -749,7 +749,7 @@ GameObject:
   - component: {fileID: 202269533314167084}
   - component: {fileID: 5566055385334803229}
   - component: {fileID: 4289977996937004679}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -815,7 +815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5505972711348323029}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JointRD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -848,7 +848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8000408400782711942}
   - component: {fileID: 4374680498557451558}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}

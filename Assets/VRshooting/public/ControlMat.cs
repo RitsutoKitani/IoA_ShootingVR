@@ -11,6 +11,7 @@ public class ControlMat : MonoBehaviour
 
     [SerializeField, Range(0f, 1f)]
     private float _dither = 1f;
+    public float dither { get => _dither; }
     
     [SerializeField]
     [Header("‰Šú‚Édither‚ğƒ[ƒ‚É")] private bool _FirstDitherZero;
@@ -37,5 +38,10 @@ public class ControlMat : MonoBehaviour
             mat.SetFloat("_dither", _dither);
             mat.SetFloat("_flash", _flash);
         }
+    }
+
+    public void SetDither(float num)
+    {
+        _dither = num;
     }
 }

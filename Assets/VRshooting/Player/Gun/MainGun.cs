@@ -16,6 +16,10 @@ public class MainGun : MonoBehaviour
     [Space(30)]
 
     [SerializeField]
+    private bool _CanShot = true;
+    public bool CanShot { get =>  _CanShot; }
+
+    [SerializeField]
     [Header("弾")] private GameObject _Bullet;
     [SerializeField]
     [Header("発射位置")] private Transform _ShotPos;
@@ -39,6 +43,7 @@ public class MainGun : MonoBehaviour
 
     [SerializeField]
     private bool _Reloading = false;
+    public bool Reloading { get => _Reloading; }
 
     [SerializeField]
     [Header("リロード時間")] private float _ReloadTime;
@@ -69,6 +74,10 @@ public class MainGun : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     [Header("両手ブレ補正")] private float _BHstabi;
 
+    [SerializeField]
+    [Header("武器切り替え時間")] private float _GunChangeTime;
+    public float GunChangeTime { get => _GunChangeTime;}
+
     [Space(30)]
     [SerializeField] private GameObject _AimUI;
 
@@ -79,7 +88,6 @@ public class MainGun : MonoBehaviour
     private InputActionAsset _IAA;
     private InputAction _GunShotAct;
     private InputAction _GunReloadAct;
-    private InputAction _GunChangeAct;
     #endregion
 
     private AudioSource _AS;
@@ -87,11 +95,13 @@ public class MainGun : MonoBehaviour
     private ControlMat _MatCtrl;
 
     [Space(30)]
+
+    #region//リロードSE関連
     [SerializeField] private SErepeat _rSEcs;
     [SerializeField] private AudioClip _ReloadingSE;
     [SerializeField] private AnimationCurve _ReloadingVolume;
-
     [SerializeField] private AudioClip _ReloadFinishSE;
+    #endregion
 
     private void Start()
     {
@@ -102,13 +112,11 @@ public class MainGun : MonoBehaviour
         {
             _GunShotAct = _IAA.FindActionMap("GunAction L").FindAction("GunShot");
             _GunReloadAct = _IAA.FindActionMap("GunAction L").FindAction("GunReload");
-            _GunChangeAct = _IAA.FindActionMap("GunAction L").FindAction("GunChange");
         }
         else
         {
             _GunShotAct = _IAA.FindActionMap("GunAction R").FindAction("GunShot");
             _GunReloadAct = _IAA.FindActionMap("GunAction R").FindAction("GunReload");
-            _GunChangeAct = _IAA.FindActionMap("GunAction R").FindAction("GunChange");
         }
     }
 
@@ -121,7 +129,7 @@ public class MainGun : MonoBehaviour
             return;
         }
 
-        _ShotUpdate();
+        if(CanShot) _ShotUpdate();
 
         _IndicatorUpdate();
 
@@ -199,10 +207,11 @@ public class MainGun : MonoBehaviour
 
     private void _ReloadStart()
     {
+        if(!_CanShot) return;
+
         _Reloading = true;
         _ReloadTimer = 0f;
         _rSEcs.clip = _ReloadingSE;
-        Debug.Log("リロード！");
     }
 
     private void _ReloadFinish()
@@ -211,7 +220,6 @@ public class MainGun : MonoBehaviour
         _ShotTimer = _Interval;
         _MagazineBullet = _MagazineBulletMax;
         GM.instance.PlayOneSE(_ReloadFinishSE, transform);
-        Debug.Log("アローリ！");
     }
 
     private void _IndicatorUpdate()
@@ -256,6 +264,23 @@ public class MainGun : MonoBehaviour
             _SubXRBC = GM.instance.LeftHand.GetComponent<XRBaseController>();
         }
         
+    }
+
+    /// <summary>
+    /// 武器切り替え時の設定。出現させる場合は「InRot」に手の位置情報を入れてください
+    /// </summary>
+    /// <param name="InRot"></param>
+    public void GunChangeSetting(bool Out)
+    {
+        if (Out)
+        {
+            _CanShot = false;
+            _SubHand = null;
+        }
+        else
+        {
+            _CanShot = true;
+        }
     }
 
     public void HoldSubHand(Transform subhand = null)

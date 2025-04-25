@@ -244,10 +244,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MainHand: {fileID: 0}
   _SubHand: {fileID: 0}
+  _CanShot: 1
   _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
   _ShotPos: {fileID: 8414909466758896003}
   _BulletStatus:
-    _Speed: 200
+    _Speed: 300
     _Atk: 2
     _LimitTime: 5
     _HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
@@ -257,8 +258,8 @@ MonoBehaviour:
   _Interval: 0.1
   _Reloading: 0
   _ReloadTime: 1.6
-  _DiffAngleOH: 1.4
-  _DiffAngleBH: 0.6
+  _DiffAngleOH: 1.6
+  _DiffAngleBH: 0.65
   _AimUIdistance: 60
   _AimUIsize:
     serializedVersion: 2
@@ -287,6 +288,7 @@ MonoBehaviour:
   _Aimline: {fileID: 3584826321656947878}
   _OHstabi: 0.3
   _BHstabi: 0.2
+  _GunChangeTime: 0.5
   _AimUI: {fileID: 1244329490154855678}
   _rSEcs: {fileID: 3281076499281256810}
   _ReloadingSE: {fileID: 8300000, guid: 85da19a345f3f224fb138de46f716269, type: 3}
@@ -452,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _smr: {fileID: 2526002294777059601}
-  _dither: 0
+  _dither: 1
   _FirstDitherZero: 1
   _flash: 0
 --- !u!1 &2601520645845547402

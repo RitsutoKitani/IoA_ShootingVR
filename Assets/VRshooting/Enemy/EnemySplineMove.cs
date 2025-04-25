@@ -50,6 +50,7 @@ public class EnemySplineMove : MonoBehaviour
     private void Update()
     {
         if(!_EneBody) Destroy(gameObject);
+
         if(!_EneBody.activeSelf) return;
         _LookUpdate();
         _MoveUpdate();

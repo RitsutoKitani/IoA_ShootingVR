@@ -23,7 +23,7 @@ public class GM : MonoBehaviour
     [Header("左手が利き手")] public bool LeftMain;
 
     [Space(20)]
-    [Header("セットメイン武器")] public GameObject[] SetMainGun = new GameObject[2];
+    [Header("セットメイン武器")] public List<GameObject> SetMainGun;
     [Header("使用メイン武器")] public int UseGun = 0;
     [Header("セットサブ武器")] public GameObject SetSubGun;
 

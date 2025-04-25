@@ -23,7 +23,7 @@ public class SHholdCol : MonoBehaviour
     {
         if((other.gameObject == GM.instance.RightHand && GM.instance.LeftMain) || (other.gameObject == GM.instance.LeftHand && !GM.instance.LeftMain))
         {
-            if (!_GunCs.SubHand && _HoldAction.IsPressed()) _GunCs.HoldSubHand(other.transform);
+            if (!_GunCs.SubHand && _HoldAction.IsPressed() && _GunCs.CanShot) _GunCs.HoldSubHand(other.transform);
         }
     }
 

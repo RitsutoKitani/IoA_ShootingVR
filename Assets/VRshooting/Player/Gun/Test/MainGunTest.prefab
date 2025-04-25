@@ -167,6 +167,7 @@ GameObject:
   - component: {fileID: 4561206000442359952}
   - component: {fileID: 1400296195027136870}
   - component: {fileID: 2707713356887951997}
+  - component: {fileID: 6918970220604413896}
   m_Layer: 0
   m_Name: MainGunTest
   m_TagString: Untagged
@@ -229,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _MainHand: {fileID: 0}
   _SubHand: {fileID: 0}
+  CanShot: 1
   _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
   _ShotPos: {fileID: 2932081032931784438}
   _BulletStatus:
@@ -272,6 +274,7 @@ MonoBehaviour:
   _Aimline: {fileID: 3779526721536677293}
   _OHstabi: 0.3
   _BHstabi: 0.2
+  _GunChangeTime: 0.2
   _AimUI: {fileID: 7355967012565161908}
   _rSEcs: {fileID: 1400296195027136870}
   _ReloadingSE: {fileID: 8300000, guid: 85da19a345f3f224fb138de46f716269, type: 3}
@@ -424,6 +427,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6918970220604413896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497341379657642263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e61673e1e24779a43b3dce5d10622718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _smr: {fileID: 5141697095475353730}
+  _dither: 1
+  _FirstDitherZero: 1
+  _flash: 0
 --- !u!1 &1987812324772960485
 GameObject:
   m_ObjectHideFlags: 0
@@ -573,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _GunCs: {fileID: 1475588015172052685}
-  _LookCamera: 1
+  _LookCamera: 0
   _LookSmooth: 0.1
   _BulletText: {fileID: 8188293500371324718}
   _MR: {fileID: 1852685107891851127}

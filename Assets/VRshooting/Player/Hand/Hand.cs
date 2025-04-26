@@ -27,6 +27,10 @@ public class Hand : MonoBehaviour
     private InputAction _GunChangeAct;
     #endregion
 
+    [Space(30)]
+    [SerializeField]
+    private Animator _HandAni;
+
     private void Start()
     {
         _IAA = GM.instance.Player.GetComponent<InputActionManager>().actionAssets[0];
@@ -49,6 +53,7 @@ public class Hand : MonoBehaviour
     {
         if(GM.instance.LeftMain == _Left) //メイン(左利き手＝＝このオブジェクトが左手)のとき
         {
+            
             if(_GunChangeAct.WasPressedThisFrame() && !_GunsCs[GM.instance.UseGun].Reloading && _NextNum < 0)
             {
                 _GunChangeStart(_SelectGun());
@@ -64,8 +69,14 @@ public class Hand : MonoBehaviour
             _UseGun = _GunsCs[GM.instance.UseGun].gameObject;
             _GunDitherInUpdate();
             _GunDitherOutUpdate();
+            if (_HandAni)
+            {
+                _HandAni.gameObject.transform.rotation = _UseGun.transform.rotation;
+            }
         }
         else _UseGun = null;
+
+        if (_HandAni) _HandAni.SetBool("Grip", GM.instance.LeftMain == _Left);
     }
 
     /// <summary>

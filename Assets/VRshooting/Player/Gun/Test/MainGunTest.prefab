@@ -233,6 +233,7 @@ MonoBehaviour:
   _CanShot: 1
   _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
   _ShotPos: {fileID: 2932081032931784438}
+  _SubHandle: {fileID: 6738665802343277255}
   _BulletStatus:
     _Speed: 200
     _Atk: 5
@@ -246,7 +247,7 @@ MonoBehaviour:
   _ReloadTime: 1.4
   _DiffAngleOH: 1.2
   _DiffAngleBH: 0.3
-  _AimUIdistance: 100
+  _AimUIdistance: 150
   _AimUIsize:
     serializedVersion: 2
     m_Curve:

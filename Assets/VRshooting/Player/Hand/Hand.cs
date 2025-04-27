@@ -12,9 +12,7 @@ public class Hand : MonoBehaviour
 
     [SerializeField]
     private GameObject _UseGun;
-
-    [SerializeField]
-    private List<MainGun> _GunsCs;
+    private MainGun _UseGunCs;
 
     [SerializeField]
     private int _NextNum = -1;
@@ -51,32 +49,46 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
-        if(GM.instance.LeftMain == _Left) //メイン(左利き手＝＝このオブジェクトが左手)のとき
+        _UseGun = GM.instance.SetMainGunsCs[GM.instance.UseGun].gameObject;
+        _UseGunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
+
+        Transform HandTra = null;
+        if (_HandAni)
         {
-            
-            if(_GunChangeAct.WasPressedThisFrame() && !_GunsCs[GM.instance.UseGun].Reloading && _NextNum < 0)
+            HandTra = _HandAni.gameObject.transform;
+            HandTra.localPosition = Vector3.zero;
+            HandTra.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+
+
+        if (GM.instance.LeftMain == _Left) //メイン(左利き手＝＝このオブジェクトが左手)のとき
+        {
+            _GunDitherInUpdate();
+            _GunDitherOutUpdate();
+            if (_HandAni)
+            {
+                HandTra.rotation = _UseGun.transform.rotation;
+            }
+
+            if (_GunChangeAct.WasPressedThisFrame() && !GM.instance.SetMainGunsCs[GM.instance.UseGun].Reloading && _NextNum < 0)
             {
                 _GunChangeStart(_SelectGun());
             }
         }
         else //サブ
         {
-
-        }
-
-        if (_GunsCs.Count > GM.instance.UseGun)
-        {
-            _UseGun = _GunsCs[GM.instance.UseGun].gameObject;
-            _GunDitherInUpdate();
-            _GunDitherOutUpdate();
-            if (_HandAni)
+            if (_UseGunCs.SubHand && _UseGunCs.SubHandle && _HandAni)
             {
-                _HandAni.gameObject.transform.rotation = _UseGun.transform.rotation;
+                HandTra.position = _UseGunCs.SubHandle.position;
+                HandTra.rotation = _UseGunCs.SubHandle.rotation;
             }
         }
-        else _UseGun = null;
 
-        if (_HandAni) _HandAni.SetBool("Grip", GM.instance.LeftMain == _Left);
+        if (_HandAni)
+        {
+            _HandAni.SetBool("TriggerGrip", GM.instance.LeftMain == _Left);
+            _HandAni.SetBool("Grip", (GM.instance.LeftMain != _Left) && (_UseGunCs.SubHand));
+        }
     }
 
     /// <summary>
@@ -85,14 +97,14 @@ public class Hand : MonoBehaviour
     /// <param name="Gun"></param>
     private void _SetGun(GameObject Gun = null)
     {
-        _GunsCs = new List<MainGun>();
+        GM.instance.SetMainGunsCs = new List<MainGun>();
         for(int i = 0;i < GM.instance.SetMainGun.Count;i++)
         {
             GameObject gun = Instantiate(GM.instance.SetMainGun[i], transform.position, transform.rotation, GM.instance.Player.transform);
             if (!gun.GetComponent<MainGun>()) Debug.LogError("MainGunCsが銃オブジェクトにありません");
             gun.GetComponent<MainGun>().InitalSetting(transform, _Left);
             gun.gameObject.SetActive(false);
-            _GunsCs.Add(gun.GetComponent<MainGun>());
+            GM.instance.SetMainGunsCs.Add(gun.GetComponent<MainGun>());
         }
 
         _GunChange(GM.instance.UseGun);
@@ -140,17 +152,17 @@ public class Hand : MonoBehaviour
     private void _GunChange(int num)
     {
         _NextNum = -1;
-        _GunsCs[GM.instance.UseGun].gameObject.SetActive(false);
-        _GunsCs[num].gameObject.transform.rotation = transform.rotation;
-        _GunsCs[num].gameObject.transform.position = transform.position;
-        _GunsCs[num].gameObject.SetActive(true);
-        _GunsCs[num].GunChangeSetting(false);
+        GM.instance.SetMainGunsCs[GM.instance.UseGun].gameObject.SetActive(false); //しまう武器を非アクティブに
+        GM.instance.SetMainGunsCs[num].gameObject.transform.rotation = transform.rotation; //取り出す武器の位置・回転を手に同期
+        GM.instance.SetMainGunsCs[num].gameObject.transform.position = transform.position;
+        GM.instance.SetMainGunsCs[num].gameObject.SetActive(true); //取り出す武器をアクティブに
+        GM.instance.SetMainGunsCs[num].GunChangeSetting(false);
         GM.instance.UseGun = num;
     }
 
     private void _GunChangeStart(int gunNum)
     {
-        if (_GunsCs.Count < gunNum) return;
+        if (GM.instance.SetMainGunsCs.Count < gunNum) return;
         if (gunNum == GM.instance.UseGun) return;
 
         Debug.Log("銃切り替え : " + gunNum);
@@ -159,7 +171,7 @@ public class Hand : MonoBehaviour
 
         if (_UseGun.GetComponent<ControlMat>()) //dither処理できる場合
         {
-            MainGun GunCs = _GunsCs[GM.instance.UseGun];
+            MainGun GunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
             GunCs.GunChangeSetting(true);
             _GunChangeTimer = GunCs.GunChangeTime;
             _GunChangeTime = GunCs.GunChangeTime;
@@ -172,7 +184,7 @@ public class Hand : MonoBehaviour
 
     private int _SelectGun()
     {
-        if (_GunsCs.Count != 2) Debug.LogError("銃は2種類までにして！【テスト段階】");
+        if (GM.instance.SetMainGunsCs.Count != 2) Debug.LogError("銃は2種類までにして！【テスト段階】");
 
         if (GM.instance.UseGun == 0) return 1;
         else return 0;

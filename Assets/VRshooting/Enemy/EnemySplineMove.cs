@@ -47,9 +47,13 @@ public class EnemySplineMove : MonoBehaviour
         _OffsetPos = transform.InverseTransformPoint(_EneBody.transform.position);
     }
 
-    private void Update()
+    private void LateUpdate()
     {
-        if(!_EneBody) Destroy(gameObject);
+        if (!_EneBody)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
         if(!_EneBody.activeSelf) return;
         _LookUpdate();

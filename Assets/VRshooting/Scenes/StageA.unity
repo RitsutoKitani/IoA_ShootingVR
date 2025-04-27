@@ -3582,7 +3582,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Left: 1
   _UseGun: {fileID: 0}
-  _GunsCs: []
   _NextNum: -1
   _HandAni: {fileID: 607516674}
 --- !u!135 &1143666220
@@ -4973,7 +4972,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Left: 0
   _UseGun: {fileID: 0}
-  _GunsCs: []
   _NextNum: -1
   _HandAni: {fileID: 4058088367922783752}
 --- !u!135 &1366344358
@@ -5209,6 +5207,7 @@ MonoBehaviour:
   - {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
   UseGun: 0
   SetSubGun: {fileID: 0}
+  SetMainGunsCs: []
   _SEobjList: []
   SEobj: {fileID: 6240744482106376375, guid: 3ad657cf0bed159488e04c3877780969, type: 3}
 --- !u!4 &1420604668

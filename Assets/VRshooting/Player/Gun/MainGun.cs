@@ -23,6 +23,9 @@ public class MainGun : MonoBehaviour
     [Header("’e")] private GameObject _Bullet;
     [SerializeField]
     [Header("”­ŽËˆÊ’u")] private Transform _ShotPos;
+    [SerializeField]
+    [Header("ƒTƒuŽ‚¿Žè")] private Transform _SubHandle;
+    public Transform SubHandle { get => _SubHandle; }
 
     [Space(10)]
 

@@ -12,7 +12,7 @@ public class PlayerDome_UI : MonoBehaviour
 
     private void Start()
     {
-        if (GM.instance.PlayerDome) _DomeCs = GM.instance.PlayerDome;
+        if (StageManager.instance.DomeCs) _DomeCs = StageManager.instance.DomeCs;
         else
         {
             Debug.LogWarning("プレイヤードームのスクリプトが設定されていません");

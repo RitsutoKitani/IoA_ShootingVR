@@ -38,7 +38,7 @@ public class EnemyFly : MonoBehaviour
         _BulletNum = num;
         _Charging = true;
 
-        if (GM.instance.PlayerDome.gameObject) _AimPos = GM.instance.PlayerDome.gameObject.transform.position;
+        if (StageManager.instance.DomeCs.gameObject) _AimPos = StageManager.instance.DomeCs.gameObject.transform.position;
         else _AimPos = transform.position + transform.forward * 100f;
     }
 

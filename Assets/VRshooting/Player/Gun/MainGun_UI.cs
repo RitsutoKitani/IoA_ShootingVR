@@ -50,9 +50,9 @@ public class MainGun_UI : MonoBehaviour
 
         _BulletText.text = string.Format("{0:00}/{1:00}", _GunCs.MagazineBullet, _GunCs.MagazineBulletMax);
 
-        if (GM.instance.CameraObj && _LookCamera)
+        if (StageManager.instance.CameraObj && _LookCamera)
         {
-            var aim = transform.position - GM.instance.CameraObj.transform.position;
+            var aim = transform.position - StageManager.instance.CameraObj.transform.position;
             Quaternion AimRot = Quaternion.LookRotation(aim);
             transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, _LookSmooth);
         }

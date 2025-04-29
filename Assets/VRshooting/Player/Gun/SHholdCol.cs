@@ -14,14 +14,14 @@ public class SHholdCol : MonoBehaviour
 
     private void Start()
     {
-        _IAA = GM.instance.Player.GetComponent<InputActionManager>().actionAssets[0];
+        _IAA = StageManager.instance.IAA;
         if (GM.instance.LeftMain) _HoldAction = _IAA.FindActionMap("GunAction R").FindAction("Hold");
         else _HoldAction = _IAA.FindActionMap("GunAction L").FindAction("Hold");
     }
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerStay(Collider other)  
     {
-        if((other.gameObject == GM.instance.RightHand && GM.instance.LeftMain) || (other.gameObject == GM.instance.LeftHand && !GM.instance.LeftMain))
+        if((other.gameObject == StageManager.instance.RightHand && GM.instance.LeftMain) || (other.gameObject == StageManager.instance.LeftHand && !GM.instance.LeftMain))
         {
             if (!_GunCs.SubHand && _HoldAction.IsPressed() && _GunCs.CanShot) _GunCs.HoldSubHand(other.transform);
         }

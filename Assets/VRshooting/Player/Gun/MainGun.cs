@@ -110,7 +110,8 @@ public class MainGun : MonoBehaviour
     {
         _ani = GetComponent<Animator>();
         _AS = GetComponent<AudioSource>();
-        _IAA = GM.instance.Player.GetComponent<InputActionManager>().actionAssets[0];
+        _IAA = StageManager.instance.IAA;
+
         if (_Left)
         {
             _GunShotAct = _IAA.FindActionMap("GunAction L").FindAction("GunShot");
@@ -176,15 +177,18 @@ public class MainGun : MonoBehaviour
 
     private void _Shot()
     {
+        if (!ObjPool.instance) {
+            Debug.LogError("ObjectPoolスクリプトがありません"); return; }
+
+        if (!_Bullet || !_ShotPos){
+            Debug.LogError("弾か発射位置が設定されていません"); return; }
+
+
+
         if (_MagazineBullet <= 0) //弾ないのでリロードします
         {
             _ReloadStart();
             return;
-        }
-
-        if (!_Bullet || !_ShotPos)
-        {
-            Debug.LogError("弾か発射位置が設定されていません"); return;
         }
 
         float DiffAngle = 0f;
@@ -258,13 +262,13 @@ public class MainGun : MonoBehaviour
         _Left = Left;
         if (Left)
         {
-            _MainXRBC = GM.instance.LeftHand.GetComponent<XRBaseController>();
-            _SubXRBC = GM.instance.RightHand.GetComponent<XRBaseController>();
+            _MainXRBC = StageManager.instance.LeftHand.GetComponent<XRBaseController>();
+            _SubXRBC = StageManager.instance.RightHand.GetComponent<XRBaseController>();
         }
         else
         {
-            _MainXRBC = GM.instance.RightHand.GetComponent<XRBaseController>();
-            _SubXRBC = GM.instance.LeftHand.GetComponent<XRBaseController>();
+            _MainXRBC = StageManager.instance.RightHand.GetComponent<XRBaseController>();
+            _SubXRBC = StageManager.instance.LeftHand.GetComponent<XRBaseController>();
         }
         
     }

@@ -27,24 +27,29 @@ public class Hand : MonoBehaviour
 
     [Space(30)]
     [SerializeField]
+    private GameObject _RayInteractive;
+    [SerializeField]
     private Animator _HandAni;
 
     private void Start()
     {
-        _IAA = GM.instance.Player.GetComponent<InputActionManager>().actionAssets[0];
+        _IAA = StageManager.instance.IAA;
 
         if (_Left)
         {
-            GM.instance.LeftHand = gameObject;
+            StageManager.instance.LeftHand = gameObject;
             _GunChangeAct = _IAA.FindActionMap("GunAction L").FindAction("GunChange");
         }
         else
         {
-            GM.instance.RightHand = gameObject;
+            StageManager.instance.RightHand = gameObject;
             _GunChangeAct = _IAA.FindActionMap("GunAction R").FindAction("GunChange");
         }
 
-        if (GM.instance.LeftMain == _Left) _SetGun(); //開始時に銃生成【テスト】
+        if (GM.instance.LeftMain == _Left)
+        {
+            _SetGun(); //開始時に銃生成【テスト】
+        }
     }
 
     private void Update()
@@ -89,6 +94,8 @@ public class Hand : MonoBehaviour
             _HandAni.SetBool("TriggerGrip", GM.instance.LeftMain == _Left);
             _HandAni.SetBool("Grip", (GM.instance.LeftMain != _Left) && (_UseGunCs.SubHand));
         }
+
+        if (_RayInteractive) _RayInteractive.SetActive(GM.instance.LeftMain != _Left && !_UseGunCs.SubHand);
     }
 
     /// <summary>
@@ -100,7 +107,7 @@ public class Hand : MonoBehaviour
         GM.instance.SetMainGunsCs = new List<MainGun>();
         for(int i = 0;i < GM.instance.SetMainGun.Count;i++)
         {
-            GameObject gun = Instantiate(GM.instance.SetMainGun[i], transform.position, transform.rotation, GM.instance.Player.transform);
+            GameObject gun = Instantiate(GM.instance.SetMainGun[i], transform.position, transform.rotation, StageManager.instance.Player.transform);
             if (!gun.GetComponent<MainGun>()) Debug.LogError("MainGunCsが銃オブジェクトにありません");
             gun.GetComponent<MainGun>().InitalSetting(transform, _Left);
             gun.gameObject.SetActive(false);

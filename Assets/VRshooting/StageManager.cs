@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class StageManager : MonoBehaviour
 {
+    public static StageManager instance;
+
     [SerializeField]
     [Header("ステージが稼働中か")] private bool _StageActive = false;
     public bool StageActive { get => _StageActive; }
@@ -17,10 +21,28 @@ public class StageManager : MonoBehaviour
     [Space(30)]
     [Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
 
+    [Space(30)]
+
+    [SerializeField]
+    private InputActionManager _IAM;
+    [HideInInspector]
+    public InputActionAsset IAA { get => _IAM.actionAssets[0]; }
+
+
+    [Header("プレイヤー")] public GameObject Player;
+    [Header("カメラ")] public GameObject CameraObj;
+
+    [Header("右手オブジェクト")] public GameObject RightHand;
+    [Header("左手オブジェクト")] public GameObject LeftHand;
+    [Header("プレイヤードーム")] public PlayerDome DomeCs;
+
+    private void Awake()
+    {
+        instance= this;
+    }
+
     private void Start()
     {
-        GM.instance.StageManager = this;
-
         StageStart(); //スタートテスト
     }
 

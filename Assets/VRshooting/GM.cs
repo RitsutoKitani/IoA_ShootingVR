@@ -10,13 +10,6 @@ public class GM : MonoBehaviour
 
     [Space(40)]
 
-    [Header("プレイヤー")] public GameObject Player;
-    [Header("カメラ")] public GameObject CameraObj;
-    [Header("プレイヤードーム")] public PlayerDome PlayerDome;
-
-    [Header("右手オブジェクト")] public GameObject RightHand;
-    [Header("左手オブジェクト")] public GameObject LeftHand;
-
     [Header("ステージマネージャー")] public StageManager StageManager;
 
     [Space(20)]
@@ -34,8 +27,6 @@ public class GM : MonoBehaviour
     [SerializeField] private List<GameObject> _SEobjList = new List<GameObject>();
     [SerializeField] private GameObject SEobj;
 
-    private InputActionAsset _IAA;
-
     public static GM instance = null;
 
     void Awake()
@@ -50,11 +41,6 @@ public class GM : MonoBehaviour
             Destroy(gameObject);
         }
 
-    }
-
-    private void Start()
-    {
-        if (Player) _IAA = Player.GetComponent<InputActionManager>().actionAssets[0];
     }
 
     /*

@@ -9,7 +9,6 @@ public class GM : MonoBehaviour
     [Header("ポーズ中")] public bool IsPose;
 
     [Space(40)]
-
     [Header("ステージマネージャー")] public StageManager StageManager;
 
     [Space(20)]
@@ -19,11 +18,15 @@ public class GM : MonoBehaviour
     [Header("セットメイン武器")] public List<GameObject> SetMainGun;
     [Header("使用メイン武器番号")] public int UseGun = 0;
     [Header("セットサブ武器")] public GameObject SetSubGun;
-
     [HideInInspector]
-    public List<MainGun> SetMainGunsCs;
+    public List<MainGun> SetMainGunsCs; //セット武器オブジェクト
 
-    [Space(30)]
+    [Space(40)]
+    [SerializeField, Range(0f, 1f)]
+    [Header("BGM音量")] public float BGMvol;
+    [SerializeField, Range(0f, 1f)]
+    [Header("SE音量")] public float SEvol;
+
     [SerializeField] private List<GameObject> _SEobjList = new List<GameObject>();
     [SerializeField] private GameObject SEobj;
 
@@ -43,23 +46,12 @@ public class GM : MonoBehaviour
 
     }
 
-    /*
-    private void Update()
-    {
-        if(!_IAA) return;
-        if(_IAA.FindActionMap("GunAction R").FindAction("LRchange").WasPerformedThisFrame()) //左右持ち替え（テスト用）
-        {
-            LeftMain = !LeftMain;
-        }
-    }
-    */
-
     /// <summary>
     /// SE再生
     /// </summary>
     /// <param name="clip"></param>
     /// <param name="pos"></param>
-    public void PlayOneSE(AudioClip clip, Transform pos)
+    public void PlayOneSE(AudioClip clip, Transform pos, float volume = 1f)
     {
         GameObject se = null;
         foreach (GameObject obj in _SEobjList)
@@ -80,6 +72,7 @@ public class GM : MonoBehaviour
 
         AudioSource seAS = se.GetComponent<AudioSource>();
         se.transform.position = pos.position;
+        seAS.volume = SEvol * volume;
         seAS.PlayOneShot(clip);
     }
 }

@@ -46,10 +46,7 @@ public class Hand : MonoBehaviour
             _GunChangeAct = _IAA.FindActionMap("GunAction R").FindAction("GunChange");
         }
 
-        if (GM.instance.LeftMain == _Left)
-        {
-            _SetGun(); //開始時に銃生成【テスト】
-        }
+        StageStartSetting(); //開始時に武器セット【テスト段階】
     }
 
     private void Update()
@@ -96,6 +93,11 @@ public class Hand : MonoBehaviour
         }
 
         if (_RayInteractive) _RayInteractive.SetActive(GM.instance.LeftMain != _Left && !_UseGunCs.SubHand);
+    }
+
+    public void StageStartSetting()
+    {
+        if (GM.instance.LeftMain == _Left) _SetGun();
     }
 
     /// <summary>

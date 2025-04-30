@@ -21,6 +21,6 @@ public class SErepeat : MonoBehaviour
         if (isPlaying && !_as.isPlaying) _as.Play();
         if(!isPlaying &&  _as.isPlaying) _as.Stop();
         if(_as.clip != clip) _as.clip = clip;
-        _as.volume = Volume;
+        _as.volume = Volume * GM.instance.SEvol;
     }
 }

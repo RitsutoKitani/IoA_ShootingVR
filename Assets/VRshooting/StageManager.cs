@@ -13,6 +13,8 @@ public class StageManager : MonoBehaviour
     public bool StageActive { get => _StageActive; }
 
     [SerializeField]
+    [Header("ステージ全体時間")] private float _StageTime;
+    [SerializeField]
     [Header("ステージ進行時間")] private float _StageTimer = 0f;
 
     [SerializeField]

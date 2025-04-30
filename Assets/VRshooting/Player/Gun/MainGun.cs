@@ -93,7 +93,6 @@ public class MainGun : MonoBehaviour
     private InputAction _GunReloadAct;
     #endregion
 
-    private AudioSource _AS;
     private Animator _ani;
     private ControlMat _MatCtrl;
 
@@ -109,7 +108,6 @@ public class MainGun : MonoBehaviour
     private void Start()
     {
         _ani = GetComponent<Animator>();
-        _AS = GetComponent<AudioSource>();
         _IAA = StageManager.instance.IAA;
 
         if (_Left)

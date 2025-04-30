@@ -36,7 +36,8 @@ public class TargetSpone : MonoBehaviour
                 float x = Random.Range(-_SponeArea.x / 2, _SponeArea.x / 2);
                 float y = Random.Range(-_SponeArea.y / 2, _SponeArea.y / 2);
                 float z = Random.Range(-_SponeArea.z / 2, _SponeArea.z / 2);
-                GameObject tartget = Instantiate(_TargetObj, transform.position + new Vector3(x, y, z), Quaternion.identity);
+                Vector3 offset = new Vector3(x, y, z);
+                GameObject tartget = Instantiate(_TargetObj, transform.TransformPoint(offset), Quaternion.identity);
                 if(!tartget.activeSelf) tartget.SetActive(true);
                 _TargetList.Add(tartget);
                 _timer = 0f;
@@ -47,7 +48,10 @@ public class TargetSpone : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position, _SponeArea);
+        var cache = Gizmos.matrix;
+        Gizmos.matrix = Matrix4x4.TRS(transform.position, transform.rotation, Vector3.one);
+        Gizmos.DrawWireCube(Vector3.zero, _SponeArea);
+        Gizmos.matrix = cache;
     }
 
 }

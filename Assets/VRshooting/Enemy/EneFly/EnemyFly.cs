@@ -28,7 +28,8 @@ public class EnemyFly : MonoBehaviour
     private void Update()
     {
         if(_Charging) _ChargeUpdate();
-        if (_ani) _ani.SetBool("Charging", _Charging);
+        if(_ani) _ani.SetBool("Charging", _Charging);
+        if(!_splineMoveCs.enabled) _splineMoveCs.enabled = true;
         _PointerUpdate();
     }
 

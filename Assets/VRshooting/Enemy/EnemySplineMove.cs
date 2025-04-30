@@ -15,8 +15,8 @@ public class EnemySplineMove : MonoBehaviour
     [SerializeField] [Header("移動速度変化 [0-1]")]  private AnimationCurve _SpeedCurve;
     [SerializeField, Range(0,1)] [Header("スプライン上の位置 [0-1]")] private float _SplinePos = 0f;
     private float _SplineLength; //スプラインの長さ
+    [SerializeField]
     private Vector3 _OffsetPos;
-    private Quaternion _OffsetRot;
 
     [SerializeField] private bool _Stop = false;
     [SerializeField] private float _StopTimer = 0f;
@@ -36,14 +36,14 @@ public class EnemySplineMove : MonoBehaviour
     [SerializeField] [Header("確認用マーカー表示")] private bool _TestGizmoPreview;
     [SerializeField, Range(0, 1)] [Header("確認用マーカーの位置（確認用）")] private float _TestSplinePos;
 
-    private void Start()
+    private void OnEnable()
     {
         _SplineLength = _spline.CalculateLength();
         _EneBody = _EneCs.gameObject;
 
-        transform.parent = null;
+        //transform.parent = null;
         transform.position = _spline.EvaluatePosition(0);
-        transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(0));
+        transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(0.01f / _SplineLength));
         _OffsetPos = transform.InverseTransformPoint(_EneBody.transform.position);
     }
 
@@ -76,6 +76,7 @@ public class EnemySplineMove : MonoBehaviour
     {
         Vector3 splinePos = _spline.EvaluatePosition(_SplinePos);
         transform.position = splinePos;
+        transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
         _EneBody.transform.position = transform.TransformPoint(_OffsetPos);
 
         float Speed = _speed * _SpeedCurve.Evaluate(_SplinePos) / _SplineLength * Time.deltaTime;
@@ -144,7 +145,6 @@ public class EnemySplineMove : MonoBehaviour
     private void _LookUpdate()
     {
         Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
-        transform.rotation = LookRot;
 
         if (_LookTarget) LookRot = Quaternion.LookRotation(_LookTarget.position - _EneBody.transform.position);
 

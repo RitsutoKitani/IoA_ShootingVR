@@ -23,7 +23,14 @@ public class EnemyFly : MonoBehaviour
     [SerializeField] private Animator _ani;
     [SerializeField] private EnemySplineMove _splineMoveCs;
 
+    private void OnEnable()
+    {
+        _Charging = false;
+        _timer = 0f;
+        _BulletNum = 0;
 
+        if (_splineMoveCs) _splineMoveCs.Resetting();
+    }
 
     private void Update()
     {

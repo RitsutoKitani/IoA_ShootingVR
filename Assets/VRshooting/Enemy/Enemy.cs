@@ -15,12 +15,10 @@ public class Enemy : MonoBehaviour
     public int Atk { get => _Atk; }
 
     [Space(30)]
-
     [SerializeField]
     [Header("I—¹Žž‚Ì‚Éíœ")] private bool _FinishDel;
 
     [Space(30)]
-
     private Animator _ani;
 
     [SerializeField]
@@ -36,11 +34,18 @@ public class Enemy : MonoBehaviour
     [SerializeField, Range(0f,1f)]
     private float _flash = 0f;
 
-    private void Start()
+    private Vector3 _FirstPos;
+    public Vector3 FirstPos { get => _FirstPos; }
+    private bool _FirstTime = true;
+
+
+    private void Awake()
     {
         _ani = GetComponent<Animator>();;
         if (_smr) materials = _smr.materials;
         else materials = new Material[0];
+
+        _FirstPos = transform.position;
     }
 
     private void Update()
@@ -83,7 +88,12 @@ public class Enemy : MonoBehaviour
 
     public void ReSetting()
     {
+        if(!_FirstTime) transform.position = _FirstPos;
+        _FirstTime = false;
+
+        foreach (Collider col in _cols) col.enabled = true;
         _Hp = _HpMax;
+        gameObject.SetActive(false);
     }
 
     private void ExploEff()

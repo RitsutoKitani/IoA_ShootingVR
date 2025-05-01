@@ -112,6 +112,7 @@ public class Hand : MonoBehaviour
             GameObject gun = Instantiate(GM.instance.SetMainGun[i], transform.position, transform.rotation, StageManager.instance.Player.transform);
             if (!gun.GetComponent<MainGun>()) Debug.LogError("MainGunCsが銃オブジェクトにありません");
             gun.GetComponent<MainGun>().InitalSetting(transform, _Left);
+            gun.GetComponent<ControlMat>().SetDither(0f);
             gun.gameObject.SetActive(false);
             GM.instance.SetMainGunsCs.Add(gun.GetComponent<MainGun>());
         }

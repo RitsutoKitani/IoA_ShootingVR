@@ -24,7 +24,6 @@ public class StageManager : MonoBehaviour
     [Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
 
     [Space(30)]
-
     [SerializeField]
     private InputActionManager _IAM;
     [HideInInspector]
@@ -38,14 +37,12 @@ public class StageManager : MonoBehaviour
     [Header("左手オブジェクト")] public GameObject LeftHand;
     [Header("プレイヤードーム")] public PlayerDome DomeCs;
 
+    [Space(30)]
+    [SerializeField] private ResultUI _ResultCs;
+
     private void Awake()
     {
         instance= this;
-    }
-
-    private void Start()
-    {
-        StageStart(); //スタートテスト
     }
 
     private void Update()
@@ -62,10 +59,11 @@ public class StageManager : MonoBehaviour
         foreach (EnemyInfo enemy in _Enemys) //敵活動開始！
         {
             if (_StageTimer < enemy.ActiveTime || !enemy.EneCs) continue;
-            if (enemy.EneCs.gameObject.activeSelf || enemy.EneCs.Hp <= 0) continue;
+            if (enemy.sortie) continue;
 
             enemy.EneCs.gameObject.SetActive(true);
             _ActEnemys.Add(enemy.EneCs);
+            enemy.sortie = true;
         }
 
         for (int i = 0; i < _ActEnemys.Count; i++) //やられた敵はリストから除外
@@ -81,8 +79,14 @@ public class StageManager : MonoBehaviour
         foreach (EnemyInfo enemy in _Enemys)
         {
             enemy.EneCs.ReSetting();
-            enemy.EneCs.gameObject.SetActive(false);
+            enemy.sortie = false;
         }
+    }
+
+    public void StandByStart()
+    {
+        if (_ResultCs) _ResultCs.GetComponent<Animator>().SetTrigger("Start");
+        else StageStart();
     }
 }
 
@@ -92,4 +96,7 @@ public class EnemyInfo
 {
     public Enemy EneCs;
     [Header("活動開始時間")] public float ActiveTime;
+
+    [HideInInspector]
+    public bool sortie = false;
 }

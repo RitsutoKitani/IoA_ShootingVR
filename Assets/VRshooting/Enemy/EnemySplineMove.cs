@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,20 +42,15 @@ public class EnemySplineMove : MonoBehaviour
         _SplineLength = _spline.CalculateLength();
         _EneBody = _EneCs.gameObject;
 
-        //transform.parent = null;
+        _SplinePos = 0f;
         transform.position = _spline.EvaluatePosition(0);
         transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(0.01f / _SplineLength));
         _OffsetPos = transform.InverseTransformPoint(_EneBody.transform.position);
+        StopFinish();
     }
 
     private void LateUpdate()
     {
-        if (!_EneBody)
-        {
-            Destroy(gameObject);
-            return;
-        }
-
         if(!_EneBody.activeSelf) return;
         _LookUpdate();
         _MoveUpdate();
@@ -67,6 +63,8 @@ public class EnemySplineMove : MonoBehaviour
                 if (action.StopStartPos < _SplinePos && !action.fin) _StopStart(action);
             }
         }
+
+        if (_SplinePos >= 1f) _Finish();
     }
 
     /// <summary>
@@ -93,13 +91,23 @@ public class EnemySplineMove : MonoBehaviour
         }
 
         _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime);
-        if (_SplinePos >= 1f) _Finish();
+    }
+
+    /// <summary>
+    /// ‰ñ“]
+    /// </summary>
+    private void _LookUpdate()
+    {
+        Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
+
+        if (_LookTarget) LookRot = Quaternion.LookRotation(_LookTarget.position - _EneBody.transform.position);
+
+        _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);
     }
 
     private void _Finish()
     {
         _EneCs.Finish();
-        Destroy(gameObject);
     }
 
     #region//StopŠÖ˜A
@@ -139,16 +147,17 @@ public class EnemySplineMove : MonoBehaviour
     }
     #endregion
 
-    /// <summary>
-    /// ‰ñ“]
-    /// </summary>
-    private void _LookUpdate()
+    public void Resetting()
     {
-        Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
-
-        if (_LookTarget) LookRot = Quaternion.LookRotation(_LookTarget.position - _EneBody.transform.position);
-
-        _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);
+        _SplinePos = 0f;
+        transform.position = _spline.EvaluatePosition(0);
+        transform.rotation = Quaternion.LookRotation(_spline.EvaluateTangent(0.01f / _SplineLength));
+        _OffsetPos = transform.InverseTransformPoint(_EneBody.transform.position);
+        foreach (var act in _Actions)
+        {
+            act.fin = false;
+        }
+        StopFinish();
     }
 
     private void OnDrawGizmos()

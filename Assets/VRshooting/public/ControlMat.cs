@@ -19,7 +19,7 @@ public class ControlMat : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     private float _flash = 0f;
 
-    private void Awake()
+    private void OnEnable()
     {
         if (_smr) materials = _smr.materials;
         else materials = new Material[0];

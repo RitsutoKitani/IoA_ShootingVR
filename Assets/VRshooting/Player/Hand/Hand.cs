@@ -45,32 +45,19 @@ public class Hand : MonoBehaviour
             StageManager.instance.RightHand = gameObject;
             _GunChangeAct = _IAA.FindActionMap("GunAction R").FindAction("GunChange");
         }
-
-        StageStartSetting(); //開始時に武器セット【テスト段階】
     }
 
     private void Update()
     {
+        if (GM.instance.SetMainGunsCs.Count <= 0) return;
+
         _UseGun = GM.instance.SetMainGunsCs[GM.instance.UseGun].gameObject;
         _UseGunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
-
-        Transform HandTra = null;
-        if (_HandAni)
-        {
-            HandTra = _HandAni.gameObject.transform;
-            HandTra.localPosition = Vector3.zero;
-            HandTra.localRotation = Quaternion.Euler(0, 0, 0);
-        }
-
 
         if (GM.instance.LeftMain == _Left) //メイン(左利き手＝＝このオブジェクトが左手)のとき
         {
             _GunDitherInUpdate();
             _GunDitherOutUpdate();
-            if (_HandAni)
-            {
-                HandTra.rotation = _UseGun.transform.rotation;
-            }
 
             if (_GunChangeAct.WasPressedThisFrame() && !GM.instance.SetMainGunsCs[GM.instance.UseGun].Reloading && _NextNum < 0)
             {
@@ -79,11 +66,7 @@ public class Hand : MonoBehaviour
         }
         else //サブ
         {
-            if (_UseGunCs.SubHand && _UseGunCs.SubHandle && _HandAni)
-            {
-                HandTra.position = _UseGunCs.SubHandle.position;
-                HandTra.rotation = _UseGunCs.SubHandle.rotation;
-            }
+            
         }
 
         if (_HandAni)
@@ -95,6 +78,37 @@ public class Hand : MonoBehaviour
         if (_RayInteractive) _RayInteractive.SetActive(GM.instance.LeftMain != _Left && !_UseGunCs.SubHand);
     }
 
+    private void LateUpdate()
+    {
+        if (!_HandAni) return;
+
+        Transform HandTra = _HandAni.gameObject.transform;
+        if (GM.instance.SetMainGunsCs.Count <= 0)
+        {
+            if (HandTra.parent != transform) HandTra.parent = transform;
+            return;
+        }
+
+        HandTra.localPosition = Vector3.zero;
+        HandTra.localRotation = Quaternion.Euler(0, 0, 0);
+
+        if (GM.instance.LeftMain == _Left)
+        {
+            HandTra.rotation = _UseGun.transform.rotation;
+        }
+        else
+        {
+            if (_UseGunCs.SubHand && _UseGunCs.SubHandle)
+            {
+                HandTra.parent = _UseGunCs.SubHandle.transform;
+                //HandTra.position = _UseGunCs.SubHandle.position;
+                //HandTra.rotation = _UseGunCs.SubHandle.rotation;
+            }
+            else HandTra.parent = transform;
+
+        }
+    }
+
     public void StageStartSetting()
     {
         if (GM.instance.LeftMain == _Left) _SetGun();
@@ -103,9 +117,16 @@ public class Hand : MonoBehaviour
     /// <summary>
     /// 手の位置に銃を生成
     /// </summary>
-    /// <param name="Gun"></param>
-    private void _SetGun(GameObject Gun = null)
+    private void _SetGun()
     {
+        if (GM.instance.SetMainGunsCs.Count > 0)
+        {
+            for (int i = 0; i < GM.instance.SetMainGunsCs.Count; i++)
+            {
+                if (GM.instance.SetMainGunsCs[i]) Destroy(GM.instance.SetMainGunsCs[i].gameObject);
+            }
+        }
+
         GM.instance.SetMainGunsCs = new List<MainGun>();
         for(int i = 0;i < GM.instance.SetMainGun.Count;i++)
         {

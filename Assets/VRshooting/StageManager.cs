@@ -85,6 +85,9 @@ public class StageManager : MonoBehaviour
 
     public void StandByStart()
     {
+        if(RightHand) RightHand.GetComponent<Hand>().StageStartSetting();
+        if(LeftHand) LeftHand.GetComponent<Hand>().StageStartSetting();
+
         if (_ResultCs) _ResultCs.GetComponent<Animator>().SetTrigger("Start");
         else StageStart();
     }

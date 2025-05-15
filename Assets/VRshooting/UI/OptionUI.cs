@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class OptionUI : MonoBehaviour
@@ -27,5 +28,10 @@ public class OptionUI : MonoBehaviour
     {
         if (!_SEslider) return;
         GM.instance.SEvol = _SEslider.value;
+    }
+
+    public void GoTitle()
+    {
+        SceneManager.LoadScene(1);
     }
 }

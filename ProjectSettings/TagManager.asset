@@ -18,7 +18,7 @@ TagManager:
   - Player
   - PlayerShot
   - Map
-  - 
+  - OnlyUI
   - 
   - 
   - 
@@ -45,4 +45,7 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 1977955891
+    locked: 0
+  - name: Fade
+    uniqueID: 2147324329
     locked: 0

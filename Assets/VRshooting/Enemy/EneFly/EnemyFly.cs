@@ -29,7 +29,7 @@ public class EnemyFly : MonoBehaviour
         _timer = 0f;
         _BulletNum = 0;
 
-        if (_splineMoveCs) _splineMoveCs.Resetting();
+        //if (_splineMoveCs) _splineMoveCs.Resetting();
     }
 
     private void Update()

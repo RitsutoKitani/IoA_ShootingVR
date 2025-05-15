@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleUI : MonoBehaviour
 {
-    public void GoStage()
+    public void GoStage(int i)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(i);
     }
 }

@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private int _Atk;
     public int Atk { get => _Atk; }
 
+    [SerializeField] private int _Score;
+    public int Score { get => _Score; }
+
     [Space(30)]
     [SerializeField]
     [Header("I—¹‚Ì‚Éíœ")] private bool _FinishDel;
@@ -73,6 +76,7 @@ public class Enemy : MonoBehaviour
 
         if (_Hp <= 0)
         {
+            if (StageManager.instance) StageManager.instance.ScoreGet(Score);
             foreach(Collider col in _cols) col.enabled = false;
             if (_ani) _ani.SetBool("Destroy",true);
             else Finish();

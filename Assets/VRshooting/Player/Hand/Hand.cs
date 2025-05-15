@@ -83,7 +83,7 @@ public class Hand : MonoBehaviour
         if (!_HandAni) return;
 
         Transform HandTra = _HandAni.gameObject.transform;
-        if (GM.instance.SetMainGunsCs.Count <= 0)
+        if (!_UseGunCs || !_UseGun)
         {
             if (HandTra.parent != transform) HandTra.parent = transform;
             return;

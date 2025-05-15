@@ -103,6 +103,7 @@ MonoBehaviour:
   _HpMax: 10
   _Hp: 10
   _Atk: 0
+  _Score: 0
   _FinishDel: 1
   _cols: []
   _smr: {fileID: 7587634921049855052}
@@ -141,7 +142,7 @@ SkinnedMeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7524037758867868680}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

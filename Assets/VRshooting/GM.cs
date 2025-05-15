@@ -46,6 +46,12 @@ public class GM : MonoBehaviour
 
     }
 
+    public void SceneReset()
+    {
+        SetMainGunsCs = new List<MainGun>();
+        
+    }
+
     /// <summary>
     /// SEÄ¶
     /// </summary>

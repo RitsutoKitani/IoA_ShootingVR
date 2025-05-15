@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
@@ -16,12 +17,15 @@ public class FadeControl : MonoBehaviour
     private Volume _volume;
     private ColorAdjustments _ColorAdjust;
     [SerializeField]
-    private Color _FilterColor = Color.white;
+    [Header("フェード時の背景色")]private Color _FilterColor = Color.white;
     [SerializeField, Range(0f, 1f)] private float _BlackFade;
 
     [Space(30)]
     [SerializeField]
-    private Image _Gage;
+    [Header("読み込みゲージ")] private Image _Gage;
+
+    [Space(30)]
+    [SerializeField] private UnityEvent _FadeInEvent;
 
     private void Awake()
     {
@@ -59,9 +63,15 @@ public class FadeControl : MonoBehaviour
             yield return null;
         }
 
+        GM.instance.SceneReset();
         yield return new WaitForSeconds(0.5f);
         Debug.Log($"シーン{SceneNum}をロード完了！");
         if (_Gage) _Gage.fillAmount = 1f;
         _async.allowSceneActivation = true;
+    }
+
+    private void _FadeInEveClip()
+    {
+        _FadeInEvent.Invoke();
     }
 }

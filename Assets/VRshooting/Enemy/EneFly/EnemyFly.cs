@@ -87,7 +87,7 @@ public class EnemyFly : MonoBehaviour
         {
             lr.startColor = _PointerColor * new Color(1,1,1,_PointerAlpha);
             lr.endColor = _PointerColor * new Color(1, 1, 1, _PointerAlpha);
-                        lr.SetPosition(0, _ShotPos.position);
+            lr.SetPosition(0, _ShotPos.position);
             lr.SetPosition(1, _AimPos);
         }
     }

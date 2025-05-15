@@ -8,6 +8,12 @@ public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
 
+    [SerializeField] private int _Score;
+    [SerializeField] private int[] _LankScore = new int[3];
+    public int[] LankScore { get => _LankScore; }
+
+    public int Score { get => _Score; }
+
     [SerializeField]
     [Header("ステージが稼働中か")] private bool _StageActive = false;
     public bool StageActive { get => _StageActive; }
@@ -16,11 +22,13 @@ public class StageManager : MonoBehaviour
     [Header("ステージ全体時間")] private float _StageTime;
     [SerializeField]
     [Header("ステージ進行時間")] private float _StageTimer = 0f;
+    private bool _finish = false;
 
     [SerializeField]
     [Header("敵活動リスト")] private List<EnemyInfo> _Enemys = new List<EnemyInfo>();
 
     [Space(30)]
+    [SerializeField]
     [Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
 
     [Space(30)]
@@ -55,11 +63,13 @@ public class StageManager : MonoBehaviour
     private void StageUpdate()
     {
         _StageTimer += Time.deltaTime;
+        bool EneCheck = false;
 
         foreach (EnemyInfo enemy in _Enemys) //敵活動開始！
         {
-            if (_StageTimer < enemy.ActiveTime || !enemy.EneCs) continue;
             if (enemy.sortie) continue;
+            EneCheck = true;
+            if (_StageTimer < enemy.ActiveTime || !enemy.EneCs) continue;
 
             enemy.EneCs.gameObject.SetActive(true);
             _ActEnemys.Add(enemy.EneCs);
@@ -70,12 +80,22 @@ public class StageManager : MonoBehaviour
         {
             if (!_ActEnemys[i] || _ActEnemys[i].Hp <= 0) _ActEnemys.RemoveAt(i);
         }
+
+        if(_ActEnemys.Count > 0) EneCheck = true;
+
+        if (_StageTimer > _StageTime && !EneCheck && !_finish)
+        {
+            StageFinish();
+            _finish = true;
+        }
     }
 
     public void StageStart()
     {
         _StageTimer = 0f;
         _StageActive = true;
+        _finish = false;
+
         foreach (EnemyInfo enemy in _Enemys)
         {
             enemy.EneCs.ReSetting();
@@ -90,6 +110,17 @@ public class StageManager : MonoBehaviour
 
         if (_ResultCs) _ResultCs.GetComponent<Animator>().SetTrigger("Start");
         else StageStart();
+    }
+
+    public void ScoreGet(int score)
+    {
+        _Score += score;
+    }
+
+    public void StageFinish()
+    {
+        Debug.Log("ステージ終了！");
+        if (_ResultCs) _ResultCs.ResultStart();
     }
 }
 

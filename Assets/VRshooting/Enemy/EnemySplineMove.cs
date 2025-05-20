@@ -26,7 +26,6 @@ public class EnemySplineMove : MonoBehaviour
     private bool _EventPlay = false;
 
     [Space(20)]
-    [SerializeField] [Header("向く方向")] private Transform _LookTarget = null;
     [SerializeField] [Header("回転補正")] private float _LookLerp;
 
     [Space(20)]
@@ -97,7 +96,6 @@ public class EnemySplineMove : MonoBehaviour
     {
         if (_SplinePos == 0f) return;
         Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
-        if (_LookTarget) LookRot = Quaternion.LookRotation(_LookTarget.position - _EneBody.transform.position);
 
         _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);
     }
@@ -114,7 +112,6 @@ public class EnemySplineMove : MonoBehaviour
         _StopTimer = stopact.StopTime;
         _StopEvent = stopact.Event;
         _EventPlay = false;
-        if (stopact.LookTarget) _LookTarget = stopact.LookTarget;
         stopact.fin = true;
     }
 
@@ -140,7 +137,6 @@ public class EnemySplineMove : MonoBehaviour
     public void StopFinish()
     {
         _Stop = false;
-        _LookTarget = null;
     }
     #endregion
 
@@ -179,8 +175,6 @@ public class StopAction
     [SerializeField, Range(0, 1)][Header("ストップ開始位置")] public float StopStartPos;
     [Header("停止時間")] public float StopTime;
     [Header("イベント")] public UnityEvent Event;
-    [Header("視点先")] public Transform LookTarget;
-
     [Space(10)]
     public bool fin = false;
 }

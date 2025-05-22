@@ -28,8 +28,10 @@ public class Enemy : MonoBehaviour
     private Collider[] _cols;
 
     [SerializeField]
-    private SkinnedMeshRenderer _smr;
-    private Material[] materials;
+    private SkinnedMeshRenderer[] _smr;
+    [SerializeField]
+    private MeshRenderer[] _mr;
+    private List<Material> _materials;
 
     [SerializeField, Range(0f, 1f)]
     private float _dither = 1f;
@@ -45,8 +47,10 @@ public class Enemy : MonoBehaviour
     private void Awake()
     {
         _ani = GetComponent<Animator>();;
-        if (_smr) materials = _smr.materials;
-        else materials = new Material[0];
+
+        _materials = new List<Material>();
+        if (_smr.Length > 0) foreach (var mat in _smr) _materials.AddRange(mat.materials);
+        if (_mr.Length > 0) foreach (var mat in _mr) _materials.AddRange(mat.materials);
 
         _FirstPos = transform.position;
     }
@@ -58,8 +62,8 @@ public class Enemy : MonoBehaviour
 
     private void _MatUpdate()
     {
-        if (materials.Length <= 0) return;
-        foreach (Material mat in materials)
+        if (_materials.Count <= 0) return;
+        foreach (Material mat in _materials)
         {
             mat.SetFloat("_dither", _dither);
             mat.SetFloat("_flash", _flash);

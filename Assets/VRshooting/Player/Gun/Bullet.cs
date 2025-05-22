@@ -37,8 +37,8 @@ public class Bullet : MonoBehaviour
     {
         if (other.GetComponent<EnemyHitBox>())
         {
-            Enemy ene = other.GetComponent<EnemyHitBox>().EneCs;
-            ene.Damage(_Atk);
+            EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
+            ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
         }
 
         if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation);
@@ -59,9 +59,9 @@ public class Bullet : MonoBehaviour
 
     public void ReStatus(BulletStatus status)
     {
-        _Speed = status._Speed;
-        _Atk = status._Atk;
-        _LimitTime = status._LimitTime;
+        _Speed = status.Speed;
+        _Atk = status.Atk;
+        _LimitTime = status.LimitTime;
         _timer = 0f;
 
         _rb.velocity = transform.forward * _Speed;
@@ -71,8 +71,8 @@ public class Bullet : MonoBehaviour
 [System.Serializable]
 public class BulletStatus
 {
-    public float _Speed;
-    public int _Atk;
-    public float _LimitTime;
-    public GameObject _HitEff;
+    public float Speed;
+    public int Atk;
+    public float LimitTime;
+    public GameObject HitEff;
 }

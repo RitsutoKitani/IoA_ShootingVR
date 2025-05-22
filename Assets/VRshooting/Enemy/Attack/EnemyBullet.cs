@@ -1,48 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private Rigidbody _rb;
-    [SerializeField]
-    [Header("弾速")] private float _Speed;
-    [SerializeField]
-    [Header("攻撃力")] private int _Atk;
-    [SerializeField]
-    [Header("自動消滅時間")] private float _LimitTime;
+    protected Rigidbody _rb;
+    [SerializeField] protected BulletStatus _Status;
     private float _timer = 0f;
-    [SerializeField]
-    [Header("ヒットエフェクト")] private GameObject _HitEff;
-    [SerializeField]
-    [Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
+    [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
-    private void Awake()
+    private void Start()
     {
-        if (!GetComponent<Rigidbody>())
-        {
-            Debug.LogError("弾にリジッドボディが入っていません");
-            _Vanish();
-        }
         _rb = GetComponent<Rigidbody>();
-        _rb.velocity = transform.forward * _Speed;
     }
 
     private void Update()
     {
-        if (_timer > _LimitTime) _Vanish();
+        MoveUpdate();
+        if (_timer > _Status.LimitTime && _Status.LimitTime > 0) _Vanish();
         else _timer += Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void MoveUpdate()
+    {
+        _rb.velocity = transform.forward * _Status.Speed;
+    }
+
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<PlayerDome>())
         {
             PlayerDome dome = other.GetComponent<PlayerDome>();
-            dome.Damage(_Atk);
+            dome.Damage(_Status.Atk);
         }
 
-        if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
+        if (_Status.HitEff) Instantiate(_Status.HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
         _Vanish();
     }
 
@@ -50,5 +43,10 @@ public class EnemyBullet : MonoBehaviour
     {
         foreach (var tr in _tr) tr.gameObject.transform.parent = null; //トレイルレンダラーの子を外す
         Destroy(gameObject);
+    }
+
+    public void Setting(BulletStatus status)
+    {
+        _Status = status;
     }
 }

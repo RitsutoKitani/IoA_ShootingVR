@@ -222,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3991053507840034652}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.90342927, z: -0, w: 0.42873728}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.2, y: 11.1, z: 11.4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -230,7 +230,7 @@ Transform:
   - {fileID: 6667941015292033977}
   - {fileID: 594283461965722136}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 129.225, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6940629075317846319
 Animator:
   serializedVersion: 5
@@ -271,7 +271,9 @@ MonoBehaviour:
   _FinishDel: 0
   _cols:
   - {fileID: 5566055385334803229}
-  _smr: {fileID: 4374680498557451558}
+  _smr:
+  - {fileID: 4374680498557451558}
+  _mr: []
   _dither: 1
   _flash: 0
 --- !u!114 &5360400983472496673
@@ -302,10 +304,12 @@ MonoBehaviour:
   _Bullet: {fileID: 7405893749740642319, guid: 1de1ee256d77971428f2e55012699361, type: 3}
   _ChargeTime: 3
   _ShotInterval: 1.5
+  _TurnSpeed: 0.2
   _PointerColor: {r: 1, g: 0.19215687, b: 0.24705882, a: 1}
   _PointerAlpha: 0
   _lrs:
   - {fileID: 3318452941381088890}
+  _WarningUI: {fileID: 0}
   _ani: {fileID: 6940629075317846319}
   _splineMoveCs: {fileID: 0}
 --- !u!1 &4163259993560282942
@@ -525,8 +529,8 @@ LineRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 58982
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -535,7 +539,7 @@ LineRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0

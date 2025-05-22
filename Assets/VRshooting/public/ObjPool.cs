@@ -11,14 +11,18 @@ public class ObjPool : MonoBehaviour
 
     public ObjPoolInfo ExploEffPool;
 
+    public ObjPoolInfo WarningUI;
+
     private void Awake()
     {
         instance = this;
     }
 
-    public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot)
+    public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot, Transform parent = null)
     {
         GameObject obj = null;
+        if (!parent) parent = transform;
+
         foreach (GameObject list in opi.ObjList)
         {
             if (!list.activeSelf)
@@ -26,6 +30,7 @@ public class ObjPool : MonoBehaviour
                 obj = list;
                 obj.transform.position = pos;
                 obj.transform.rotation = rot;
+                obj.transform.parent = parent;
                 obj.SetActive(true);
                 break;
             }
@@ -33,7 +38,7 @@ public class ObjPool : MonoBehaviour
 
         if (!obj)
         {
-            obj = Instantiate(opi.Obj, pos, rot);
+            obj = Instantiate(opi.Obj, pos, rot, parent);
             opi.ObjList.Add(obj);
         }
 

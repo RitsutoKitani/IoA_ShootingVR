@@ -292,9 +292,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13b0bd2dbb5de8468b9e427063fa946, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Speed: 100
-  _Atk: 10
-  _LimitTime: 3
-  _HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4, type: 3}
+  _Status:
+    Speed: 50
+    Atk: 5
+    LimitTime: 0
+    HitEff: {fileID: 0}
   _tr:
   - {fileID: 1720366042906638996}

@@ -10,14 +10,14 @@ public class PlayerDome : MonoBehaviour
     [SerializeField] private int _Hp;
     public int Hp { get => _Hp; }
 
-    [Space(20)]
-
-    [SerializeField]
-    [Header("Ž©“®‰ñ•œ•p“x")] private float _AutoHealInterval;
+    [Space(30)]
+    [SerializeField][Header("Ž©“®‰ñ•œ•p“x")] private float _AutoHealInterval;
     private float _HealTimer = 0f;
+    [SerializeField][Header("Ž©“®‰ñ•œ—Ê")] private int _AutoHealPoint;
 
-    [SerializeField]
-    [Header("Ž©“®‰ñ•œ—Ê")] private int _AutoHealPoint;
+    [Space(30)]
+    [SerializeField][Header("”¼Œa")] private float _Radius;
+    public float Radius { get => _Radius; }
 
     private void Start()
     {

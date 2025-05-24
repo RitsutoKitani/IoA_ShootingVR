@@ -6,8 +6,9 @@ public class ControlMat : MonoBehaviour
 {
 
     [SerializeField]
-    private SkinnedMeshRenderer _smr;
-    private Material[] materials;
+    private SkinnedMeshRenderer[] _smr;
+    [SerializeField] private MeshRenderer[] _mr;
+    [SerializeField, ReadOnly] private List<Material> _mats;
 
     [SerializeField, Range(0f, 1f)]
     private float _dither = 1f;
@@ -19,21 +20,28 @@ public class ControlMat : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     private float _flash = 0f;
 
-    private void OnEnable()
+    private void Start()
     {
-        if (_smr) materials = _smr.materials;
-        else materials = new Material[0];
-
-        if (materials.Length > 0 && _FirstDitherZero)
+        _mats = new List<Material>();
+        if (_smr.Length > 0)
         {
-            foreach (var mat in materials) mat.SetFloat("_dither", 0f);
+            foreach (var smr in _smr) _mats.AddRange(smr.materials);
+        }
+        if (_mr.Length > 0)
+        {
+            foreach (var mr in _mr) _mats.AddRange(mr.materials);
+        }
+
+        if (_mats.Count > 0 && _FirstDitherZero)
+        {
+            foreach (var mat in _mats) mat.SetFloat("_dither", 0f);
         }
     }
 
     private void Update()
     {
-        if (materials.Length <= 0) return;
-        foreach (Material mat in materials)
+        if (_mats.Count <= 0) return;
+        foreach (Material mat in _mats)
         {
             mat.SetFloat("_dither", _dither);
             mat.SetFloat("_flash", _flash);

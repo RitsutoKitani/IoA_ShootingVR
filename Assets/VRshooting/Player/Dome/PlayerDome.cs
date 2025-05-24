@@ -18,9 +18,11 @@ public class PlayerDome : MonoBehaviour
     [Space(30)]
     [SerializeField][Header("”¼Œa")] private float _Radius;
     public float Radius { get => _Radius; }
+    private Animator _ani;
 
     private void Start()
     {
+        _ani = GetComponent<Animator>();
         _Hp = _HpMax;
     }
 
@@ -49,6 +51,7 @@ public class PlayerDome : MonoBehaviour
     public void Damage(int damage)
     {
         _Hp -= damage;
+        _ani.SetTrigger("Damage");
 
         if (_Hp < 0)
         {

@@ -10,9 +10,17 @@ public class EnemyMissile : EnemyBullet
 
     [Space(10)]
     private bool _purge = false;
-    [SerializeField] private GameObject _meshL;
     [SerializeField][Header("ミサイルをパージする距離")] private float _PurgeDis;
     [SerializeField][Header("パージ時速度アップ")] private float _PurgeUp;
+
+    private Animator _ani;
+
+    protected override void Start()
+    {
+
+        _rb = GetComponent<Rigidbody>();
+        _ani = GetComponent<Animator>();
+    }
 
     protected override void MoveUpdate()
     {
@@ -27,11 +35,11 @@ public class EnemyMissile : EnemyBullet
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, _torque * purgeUp);
         }
 
-        if (_meshL && !_purge)
+        if (_ani& !_purge)
         {
             if (Vector3.Distance(_TargetPos, transform.position) < _PurgeDis)
             {
-                _meshL.SetActive(false);
+                _ani.SetTrigger("Purge");   
                 _purge = true;
             }
         }

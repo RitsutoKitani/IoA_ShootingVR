@@ -18,10 +18,9 @@ public class ObjPool : MonoBehaviour
         instance = this;
     }
 
-    public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot, Transform parent = null)
+    public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot)
     {
         GameObject obj = null;
-        if (!parent) parent = transform;
 
         foreach (GameObject list in opi.ObjList)
         {
@@ -30,7 +29,6 @@ public class ObjPool : MonoBehaviour
                 obj = list;
                 obj.transform.position = pos;
                 obj.transform.rotation = rot;
-                obj.transform.parent = parent;
                 obj.SetActive(true);
                 break;
             }
@@ -38,7 +36,7 @@ public class ObjPool : MonoBehaviour
 
         if (!obj)
         {
-            obj = Instantiate(opi.Obj, pos, rot, parent);
+            obj = Instantiate(opi.Obj, pos, rot);
             opi.ObjList.Add(obj);
         }
 

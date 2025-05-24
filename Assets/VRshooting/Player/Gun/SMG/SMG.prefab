@@ -249,10 +249,10 @@ MonoBehaviour:
   _ShotPos: {fileID: 8414909466758896003}
   _SubHandle: {fileID: 887845773066289923}
   _BulletStatus:
-    _Speed: 300
-    _Atk: 2
-    _LimitTime: 5
-    _HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
+    Speed: 200
+    Atk: 5
+    LimitTime: 1
+    HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
       type: 3}
   _MagazineBulletMax: 32
   _MagazineBullet: 32
@@ -455,7 +455,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61673e1e24779a43b3dce5d10622718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _smr: {fileID: 2526002294777059601}
+  _smr:
+  - {fileID: 2526002294777059601}
+  _mr: []
   _dither: 1
   _FirstDitherZero: 1
   _flash: 0

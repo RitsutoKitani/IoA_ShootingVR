@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
@@ -10,7 +11,7 @@ public class EnemyBullet : MonoBehaviour
     private float _timer = 0f;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
-    private void Start()
+    protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
     }
@@ -33,10 +34,15 @@ public class EnemyBullet : MonoBehaviour
         {
             PlayerDome dome = other.GetComponent<PlayerDome>();
             dome.Damage(_Status.Atk);
+            _Vanish();
         }
 
-        if (_Status.HitEff) Instantiate(_Status.HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
-        _Vanish();
+        if (_Status.HitEff)
+            if (other.tag == "Wall" || _Status.HitEff)
+            {
+                Instantiate(_Status.HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
+                _Vanish();
+            }
     }
 
     private void _Vanish()

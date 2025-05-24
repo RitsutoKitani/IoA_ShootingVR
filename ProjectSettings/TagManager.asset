@@ -6,6 +6,7 @@ TagManager:
   tags:
   - AutoUI
   - UI
+  - Wall
   layers:
   - Default
   - TransparentFX

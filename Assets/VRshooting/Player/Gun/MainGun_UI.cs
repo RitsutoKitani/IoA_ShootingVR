@@ -5,13 +5,11 @@ using UnityEngine.UI;
 
 public class MainGun_UI : MonoBehaviour
 {
-    [SerializeField]
-    private MainGun _GunCs;
+    [SerializeField] private MainGun _GunCs;
 
-    [SerializeField]
-    [Header("ƒJƒƒ‰•ûŒü‚ğŒü‚­")] private bool _LookCamera;
-    [SerializeField]
-    private float _LookSmooth;
+    [SerializeField][Header("ƒJƒƒ‰•ûŒü‚ğŒü‚­")] private bool _LookCamera;
+
+    [SerializeField] private float _LookSmooth;
 
     [Space(30)]
 
@@ -20,18 +18,15 @@ public class MainGun_UI : MonoBehaviour
 
     [Space(30)]
 
-    [SerializeField]
-    private SkinnedMeshRenderer _MR;
+    [SerializeField] private SkinnedMeshRenderer _MR;
+
     private Material[] mats;
 
-    [SerializeField]
-    private float _matFillMax;
-    [SerializeField]
-    private float _matFillMin;
-    [SerializeField]
-    private float _alpha;
-    [SerializeField]
-    private float _flash;
+    [SerializeField] private float _matFillMax;
+    [SerializeField] private float _matFillMin;
+
+    [SerializeField] private float _alpha;
+    [SerializeField] private float _flash;
 
     private void Start()
     {

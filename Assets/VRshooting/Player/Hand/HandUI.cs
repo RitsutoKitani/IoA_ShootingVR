@@ -35,13 +35,30 @@ public class HandUI : MonoBehaviour
 
     private void LateUpdate()
     {
-        RaycastResult result;
-        bool ishit = _XRRI.TryGetCurrentUIRaycastResult(out result);
+        bool ishit = false;
+        Vector3 HitPos = Vector3.zero;
+        GameObject ObjPos = null;
 
-        if(_lr) _lrUpdate(ishit, result);
+        RaycastResult result;
+        if(_XRRI.TryGetCurrentUIRaycastResult(out result))
+        {
+            ishit = true;
+            HitPos = result.worldPosition;
+            ObjPos = result.gameObject;
+        }
+
+        RaycastHit hit;
+        if(_XRRI.TryGetCurrent3DRaycastHit(out hit))
+        {
+            ishit = true;
+            HitPos = hit.point;
+            ObjPos = hit.collider.gameObject;
+        }
+
+        if(_lr) _lrUpdate(ishit , HitPos, ObjPos);
     }
 
-    private void _lrUpdate(bool ishit, RaycastResult result)
+    private void _lrUpdate(bool ishit ,Vector3 HitPos, GameObject Obj)
     {
         if(!_HandObj || !_FingerPoint) return;
 
@@ -49,19 +66,17 @@ public class HandUI : MonoBehaviour
         lrPos[0] = transform.position;
         lrPos[1] = transform.position + transform.forward * _DefaLength;
         bool Lock = false;
-
-        if (ishit)
+        
+        if(ishit)
         {
-            if (result.gameObject.tag == "AutoUI")
+            if (Obj.gameObject.tag == "AutoUI")
             {
-                Vector3 UIpos = result.gameObject.transform.position;
-
-                var aim = UIpos - _FingerPoint.position;
+                var aim = Obj.transform.position - _FingerPoint.position;
                 var aimRot = Quaternion.LookRotation(aim);
                 _HandObj.rotation = Quaternion.Slerp(_HandObj.rotation, aimRot, 0.3f);
 
                 lrPos[0] = _FingerPoint.position;
-                lrPos[1] = UIpos;
+                lrPos[1] = Obj.transform.position;
 
                 Lock = true;
             }
@@ -70,7 +85,7 @@ public class HandUI : MonoBehaviour
                 _HandObj.localRotation = Quaternion.Euler(0, 0, 0);
 
                 lrPos[0] = _FingerPoint.position;
-                lrPos[1] = result.worldPosition;
+                lrPos[1] = HitPos;
             }
         }
         else _HandObj.localRotation = Quaternion.Euler(0, 0, 0);

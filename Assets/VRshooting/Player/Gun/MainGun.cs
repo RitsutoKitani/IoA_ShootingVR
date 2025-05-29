@@ -68,6 +68,7 @@ public class MainGun : MonoBehaviour
     [Header("照準UI距離")] private float _AimUIdistance;
     [SerializeField]
     [Header("照準UIサイズ[距離]")] AnimationCurve _AimUIsize;
+    [SerializeField][Header("照準UIrayレイヤーマスク")] private LayerMask _AimUIrayLayer;
 
     [SerializeField]
     [Header("ラインレンダラー")] private LineRenderer _Aimline;
@@ -169,7 +170,8 @@ public class MainGun : MonoBehaviour
             _ShotTimer += Time.deltaTime;
             return;
         }
-        
+
+        if (_GunShotAct.WasPressedThisFrame() && _MagazineBullet <= 0) _ReloadStart();
         if (_GunShotAct.IsPressed()) _Shot();
     }
 
@@ -183,11 +185,7 @@ public class MainGun : MonoBehaviour
 
 
 
-        if (_MagazineBullet <= 0) //弾ないのでリロードします
-        {
-            _ReloadStart();
-            return;
-        }
+        if (_MagazineBullet <= 0) return;
 
         float DiffAngle = 0f;
         if (_SubHand) DiffAngle = _DiffAngleBH;
@@ -232,7 +230,7 @@ public class MainGun : MonoBehaviour
         if (!_ShotPos) return;
 
         RaycastHit hit;
-        bool ishit = Physics.SphereCast(_ShotPos.position,0.2f, _ShotPos.transform.forward, out hit, Mathf.Infinity, 1 << 6| 1 << 10);
+        bool ishit = Physics.SphereCast(_ShotPos.position, 0.4f, _ShotPos.transform.forward, out hit, Mathf.Infinity, _AimUIrayLayer);
 
         if (_Aimline)
         {

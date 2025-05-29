@@ -61,7 +61,7 @@ public class EnemyFly : MonoBehaviour
         Vector3 dir;
         do dir = Random.onUnitSphere; //単位面のランダムベクトル生成
         while (Vector3.Dot(dir, Vector3.forward) < 0.5f //前方上方で横0.8以内に制限
-        || Vector3.Dot(dir, Vector3.up) < 0.1f);
+        || Vector3.Dot(dir, Vector3.up) < 0.2f);
 
         Vector3 worldDir = domeTra.TransformDirection(dir);
         _AimPos = domeTra.position + worldDir * StageManager.instance.DomeCs.Radius;

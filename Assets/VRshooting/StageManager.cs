@@ -40,6 +40,7 @@ public class StageManager : MonoBehaviour
     [Header("左手オブジェクト")] public GameObject LeftHand;
     [Header("プレイヤードーム")] public PlayerDome DomeCs;
 
+
     [Space(30)]
     [SerializeField] private ResultUI _ResultCs;
 
@@ -51,11 +52,10 @@ public class StageManager : MonoBehaviour
     private void Update()
     {
         if (!_StageActive || GM.instance.IsPose) return;
-
-        StageUpdate();
+        _StageUpdate();
     }
 
-    private void StageUpdate()
+    private void _StageUpdate()
     {
         _StageTimer += Time.deltaTime;
         bool EneCheck = false;
@@ -102,6 +102,7 @@ public class StageManager : MonoBehaviour
     {
         if(RightHand) RightHand.GetComponent<Hand>().StageStartSetting();
         if(LeftHand) LeftHand.GetComponent<Hand>().StageStartSetting();
+        GM.instance.UIhandLeft = !GM.instance.LeftMain;
 
         if (_ResultCs) _ResultCs.GetComponent<Animator>().SetTrigger("Start");
         else StageStart();

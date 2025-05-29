@@ -26,14 +26,14 @@ public class Hand : MonoBehaviour
     #endregion
 
     [Space(30)]
-    [SerializeField]
-    private GameObject _RayInteractive;
+    private HandUI _HandUI;
     [SerializeField]
     private Animator _HandAni;
 
     private void Start()
     {
         _IAA = StageManager.instance.IAA;
+        _HandUI = GetComponent<HandUI>();
 
         if (_Left)
         {
@@ -75,7 +75,7 @@ public class Hand : MonoBehaviour
             _HandAni.SetBool("Grip", (GM.instance.LeftMain != _Left) && (_UseGunCs.SubHand));
         }
 
-        if (_RayInteractive) _RayInteractive.SetActive(GM.instance.LeftMain != _Left && !_UseGunCs.SubHand);
+        if (_HandUI) _HandUI.Active = GM.instance.LeftMain != _Left && !_UseGunCs.SubHand;
     }
 
     private void LateUpdate()

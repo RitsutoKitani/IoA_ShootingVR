@@ -13,6 +13,7 @@ public class GM : MonoBehaviour
 
     [Space(20)]
     [Header("左手が利き手")] public bool LeftMain;
+    [Header("UIハンド")] public bool UIhandLeft;
 
     [Space(20)]
     [Header("セットメイン武器")] public List<GameObject> SetMainGun;
@@ -49,7 +50,6 @@ public class GM : MonoBehaviour
     public void SceneReset()
     {
         SetMainGunsCs = new List<MainGun>();
-        
     }
 
     /// <summary>

@@ -2749,11 +2749,12 @@ GameObject:
   - component: {fileID: 395232584}
   - component: {fileID: 395232587}
   - component: {fileID: 395232586}
+  - component: {fileID: 395232588}
   - component: {fileID: 395232585}
   m_Layer: 0
   m_Name: RightHand
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -2810,7 +2811,6 @@ MonoBehaviour:
   _Left: 0
   _UseGun: {fileID: 0}
   _NextNum: -1
-  _RayInteractive: {fileID: 564286586}
   _HandAni: {fileID: 123921940}
 --- !u!114 &395232587
 MonoBehaviour:
@@ -3055,6 +3055,25 @@ MonoBehaviour:
     m_Reference: {fileID: -6447266317303757838, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &395232588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 395232583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e064c5df9235745b805b6084c3f0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  _Left: 0
+  _DefaLength: 3
+  _pointer: {fileID: 122483147}
+  _FingerPoint: {fileID: 220565203}
+  _HandObj: {fileID: 123921939}
+  _Interactor: {fileID: 564286592}
 --- !u!1 &403261970
 GameObject:
   m_ObjectHideFlags: 0
@@ -4466,7 +4485,6 @@ GameObject:
   m_Component:
   - component: {fileID: 541516593}
   - component: {fileID: 541516588}
-  - component: {fileID: 541516592}
   - component: {fileID: 541516591}
   - component: {fileID: 541516590}
   - component: {fileID: 541516589}
@@ -4753,22 +4771,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
---- !u!114 &541516592
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 541516587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e064c5df9235745b805b6084c3f0ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _DefaLength: 3
-  _pointer: {fileID: 441602971}
-  _FingerPoint: {fileID: 658753512}
-  _HandObj: {fileID: 1813946114}
 --- !u!4 &541516593
 Transform:
   m_ObjectHideFlags: 0
@@ -4979,14 +4981,13 @@ GameObject:
   m_Component:
   - component: {fileID: 564286592}
   - component: {fileID: 564286587}
-  - component: {fileID: 564286591}
   - component: {fileID: 564286590}
   - component: {fileID: 564286589}
   - component: {fileID: 564286588}
   m_Layer: 0
   m_Name: Ray Interactor
   m_TagString: Untagged
-  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -5266,22 +5267,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 0
---- !u!114 &564286591
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 564286586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e064c5df9235745b805b6084c3f0ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _DefaLength: 3
-  _pointer: {fileID: 122483147}
-  _FingerPoint: {fileID: 220565203}
-  _HandObj: {fileID: 123921939}
 --- !u!4 &564286592
 Transform:
   m_ObjectHideFlags: 0
@@ -8215,6 +8200,7 @@ GameObject:
   - component: {fileID: 1005167119}
   - component: {fileID: 1005167118}
   - component: {fileID: 1005167117}
+  - component: {fileID: 1005167120}
   m_Layer: 0
   m_Name: LeftHand
   m_TagString: Untagged
@@ -8275,7 +8261,6 @@ MonoBehaviour:
   _Left: 1
   _UseGun: {fileID: 0}
   _NextNum: -1
-  _RayInteractive: {fileID: 541516587}
   _HandAni: {fileID: 1813946115}
 --- !u!114 &1005167119
 MonoBehaviour:
@@ -8520,6 +8505,25 @@ MonoBehaviour:
     m_Reference: {fileID: -1636515391019944688, guid: c348712bda248c246b8c49b3db54643f,
       type: 3}
   m_ButtonPressPoint: 0.5
+--- !u!114 &1005167120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1005167115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7e064c5df9235745b805b6084c3f0ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  _Left: 1
+  _DefaLength: 3
+  _pointer: {fileID: 441602971}
+  _FingerPoint: {fileID: 658753512}
+  _HandObj: {fileID: 1813946114}
+  _Interactor: {fileID: 541516593}
 --- !u!1 &1009049292
 GameObject:
   m_ObjectHideFlags: 0
@@ -11944,6 +11948,7 @@ MonoBehaviour:
   IsPose: 0
   StageManager: {fileID: 0}
   LeftMain: 0
+  UIhandLeft: 1
   SetMainGun:
   - {fileID: 1811064560031912671, guid: bd2acbe14511eda4d9cbfa53912cdec8, type: 3}
   - {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}

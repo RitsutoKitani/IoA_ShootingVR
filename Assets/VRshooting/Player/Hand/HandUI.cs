@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class HandUI : MonoBehaviour
 {
+    public bool Active = true;
+    [SerializeField] private bool _Left;
+
+    [Space(30)]
     [SerializeField]
     [Header("UIÇ…êGÇÍÇƒÇ¢Ç»Ç¢Ç∆Ç´ÇÃí∑Ç≥")] private float _DefaLength;
 
@@ -19,22 +22,39 @@ public class HandUI : MonoBehaviour
     [Header("éwêÊ")] private Transform _FingerPoint;
     [SerializeField]
     [Header("éËÅiâÒì]Ç≥ÇπÇÈObjÅj")] private Transform _HandObj;
+    [SerializeField] private Transform _Interactor;
 
     private LineRenderer _lr;
-    private Animator _ani;
+    private Animator _RayAni;
     private Animator _HandAni;
     private XRRayInteractor _XRRI;
 
+    private InputAction _SelectAct;
+
     private void Start()
     {
-        _lr = GetComponent<LineRenderer>();
-        _ani = GetComponent<Animator>();
+        if (_Interactor)
+        {
+            _RayAni = _Interactor.GetComponent<Animator>();
+            _XRRI = _Interactor.GetComponent<XRRayInteractor>();
+            _lr = _Interactor.GetComponent<LineRenderer>();
+        }
         if (_HandObj) _HandAni = _HandObj.GetComponent<Animator>();
-        _XRRI = GetComponent<XRRayInteractor>();
+
+        InputActionAsset IAA = StageManager.instance.IAA;
+        if (_Left) _SelectAct = IAA.FindActionMap("XRI LeftHand Interaction").FindAction("Select");
+        else _SelectAct = IAA.FindActionMap("XRI RightHand Interaction").FindAction("Select");
     }
 
     private void LateUpdate()
     {
+        _HandActiveUpdate();
+        if (GM.instance.UIhandLeft != _Left || !Active)
+        {
+            _HandAni.SetBool("HandGun", false);
+            return;
+        }
+
         bool ishit = false;
         Vector3 HitPos = Vector3.zero;
         GameObject ObjPos = null;
@@ -58,13 +78,19 @@ public class HandUI : MonoBehaviour
         if(_lr) _lrUpdate(ishit , HitPos, ObjPos);
     }
 
+    private void _HandActiveUpdate()
+    {
+        _Interactor.gameObject.SetActive(GM.instance.UIhandLeft == _Left && Active);
+        if(GM.instance.UIhandLeft != _Left && _SelectAct.WasPressedThisFrame() && Active) GM.instance.UIhandLeft = _Left;
+    }
+
     private void _lrUpdate(bool ishit ,Vector3 HitPos, GameObject Obj)
     {
         if(!_HandObj || !_FingerPoint) return;
 
         Vector3[] lrPos = new Vector3[2];
-        lrPos[0] = transform.position;
-        lrPos[1] = transform.position + transform.forward * _DefaLength;
+        lrPos[0] = _Interactor.position;
+        lrPos[1] = _Interactor.position + _Interactor.forward * _DefaLength;
         bool Lock = false;
         
         if(ishit)
@@ -92,8 +118,8 @@ public class HandUI : MonoBehaviour
 
         _lr.SetPositions(lrPos);
         _HandAni.SetBool("HandGun", ishit);
-        _ani.SetBool("Touch", ishit);
-        _ani.SetBool("Lock", Lock);
+        _RayAni.SetBool("Touch", ishit);
+        _RayAni.SetBool("Lock", Lock);
         if (_pointer) _pointer.position = _lr.GetPosition(1);
     }
 }

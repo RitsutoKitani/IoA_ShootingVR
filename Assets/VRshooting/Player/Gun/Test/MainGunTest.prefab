@@ -235,7 +235,7 @@ MonoBehaviour:
   _ShotPos: {fileID: 2932081032931784438}
   _SubHandle: {fileID: 6738665802343277255}
   _BulletStatus:
-    Speed: 400
+    Speed: 500
     Atk: 12
     LimitTime: 1
     HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,

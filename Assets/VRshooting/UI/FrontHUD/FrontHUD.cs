@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class FrontHUD : MonoBehaviour
@@ -11,6 +12,11 @@ public class FrontHUD : MonoBehaviour
     [Space(30)]
 
     [SerializeField] private Text _AmmoText;
+
+    [Space(30)]
+
+    [SerializeField] private Text _RankText;
+    [SerializeField] private Text _ScoreText;
 
     void Update()
     {
@@ -43,5 +49,19 @@ public class FrontHUD : MonoBehaviour
         MainGun GunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
 
         _AmmoText.text = $"{GunCs.MagazineBullet:D2}";
+    }
+
+    private void _ScoreUpdate()
+    {
+        if(!_RankText ||  !_ScoreText) return;
+
+        int score = StageManager.instance.Score;
+
+        _ScoreText.text = $"SCORE : {score:D6}";
+
+        _RankText.text = "C";
+        if (StageManager.instance.LankScore[0] <= score) _RankText.text = "B";
+        if (StageManager.instance.LankScore[1] <= score) _RankText.text = "A";
+        if (StageManager.instance.LankScore[2] <= score) _RankText.text = "S";
     }
 }

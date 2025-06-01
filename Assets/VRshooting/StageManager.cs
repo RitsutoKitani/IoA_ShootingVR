@@ -118,6 +118,15 @@ public class StageManager : MonoBehaviour
         Debug.Log("ステージ終了！");
         if (_ResultCs) _ResultCs.ResultStart();
     }
+
+    public void HandUnlock()
+    {
+        HandUI handUI = null;
+        if (GM.instance.UIhandLeft) handUI = LeftHand.GetComponent<HandUI>();
+        else handUI = RightHand.GetComponent<HandUI>();
+
+        handUI.UnLock();
+    }
 }
 
 [System.Serializable]

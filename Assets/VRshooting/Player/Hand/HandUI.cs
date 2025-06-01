@@ -23,10 +23,12 @@ public class HandUI : MonoBehaviour
     [SerializeField]
     [Header("éËÅiâÒì]Ç≥ÇπÇÈObjÅj")] private Transform _HandObj;
     [SerializeField] private Transform _Interactor;
+    private GameObject _AutoObj = null;
 
     private LineRenderer _lr;
     private Animator _RayAni;
     private Animator _HandAni;
+    private Animator _PointerAni;
     private XRRayInteractor _XRRI;
 
     private InputAction _SelectAct;
@@ -40,18 +42,20 @@ public class HandUI : MonoBehaviour
             _lr = _Interactor.GetComponent<LineRenderer>();
         }
         if (_HandObj) _HandAni = _HandObj.GetComponent<Animator>();
+        if(_pointer) _PointerAni = _pointer.GetComponent<Animator>();
 
         InputActionAsset IAA = StageManager.instance.IAA;
         if (_Left) _SelectAct = IAA.FindActionMap("XRI LeftHand Interaction").FindAction("Select");
         else _SelectAct = IAA.FindActionMap("XRI RightHand Interaction").FindAction("Select");
     }
 
-    private void LateUpdate()
+    private void Update()
     {
         _HandActiveUpdate();
         if (GM.instance.UIhandLeft != _Left || !Active)
         {
             _HandAni.SetBool("HandGun", false);
+            _PointerAni.SetBool("Active", false);
             return;
         }
 
@@ -91,35 +95,42 @@ public class HandUI : MonoBehaviour
         Vector3[] lrPos = new Vector3[2];
         lrPos[0] = _Interactor.position;
         lrPos[1] = _Interactor.position + _Interactor.forward * _DefaLength;
-        bool Lock = false;
-        
-        if(ishit)
+
+        if (_AutoObj)
         {
-            if (Obj.gameObject.tag == "AutoUI")
-            {
-                var aim = Obj.transform.position - _FingerPoint.position;
-                var aimRot = Quaternion.LookRotation(aim);
-                _HandObj.rotation = Quaternion.Slerp(_HandObj.rotation, aimRot, 0.3f);
+            var aim = _AutoObj.transform.position - _FingerPoint.position;
+            var aimRot = Quaternion.LookRotation(aim);
+            _HandObj.rotation = Quaternion.Slerp(_HandObj.rotation, aimRot, 0.5f);
 
-                lrPos[0] = _FingerPoint.position;
-                lrPos[1] = Obj.transform.position;
-
-                Lock = true;
-            }
-            else
-            {
-                _HandObj.localRotation = Quaternion.Euler(0, 0, 0);
-
-                lrPos[0] = _FingerPoint.position;
-                lrPos[1] = HitPos;
-            }
+            lrPos[0] = _FingerPoint.position;
+            lrPos[1] = _AutoObj.transform.position;
         }
-        else _HandObj.localRotation = Quaternion.Euler(0, 0, 0);
+        else if (ishit)
+        {
+            if (Obj.tag == "AutoUI") _AutoObj = Obj;
+
+            lrPos[0] = _FingerPoint.position;
+            lrPos[1] = HitPos;
+        }
+
+        if (((ishit && Obj.tag != "AutoUI") || !ishit) && !_SelectAct.IsPressed())
+        {
+            UnLock();
+        }
 
         _lr.SetPositions(lrPos);
-        _HandAni.SetBool("HandGun", ishit);
+        _pointer.position = lrPos[1];
+        _pointer.rotation = Quaternion.LookRotation(lrPos[1] - StageManager.instance.CameraObj.transform.position);
+        _HandAni.SetBool("HandGun", ishit || _AutoObj);
         _RayAni.SetBool("Touch", ishit);
-        _RayAni.SetBool("Lock", Lock);
-        if (_pointer) _pointer.position = _lr.GetPosition(1);
+        if (_PointerAni) _PointerAni.SetBool("Active", ishit || _AutoObj);
+        _RayAni.SetBool("Lock", _AutoObj);
+        _PointerAni.SetBool("Lock", _AutoObj);
+    }
+
+    public void UnLock()
+    {
+        _AutoObj = null;
+        if(Active) _HandObj.localRotation = Quaternion.Euler(0, 0, 0);
     }
 }

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 53cbe367d892ebd4fb0239ad35281ba7
+guid: 0581171c498e1a34caa203413e6ac6b4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -8,7 +8,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Barrier
-    second: {fileID: 2100000, guid: 2ea40a0c68075af4a97703474483b0b1, type: 2}
+    second: {fileID: 2100000, guid: 381dc935e0af6bb4bb4aab1b32ee2bca, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -19,6 +19,16 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Base2
     second: {fileID: 2100000, guid: 206d6506955566c44b03a21094152935, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BoltLight
+    second: {fileID: 2100000, guid: 3cbcd8a111204b44e8c4ebb7fd36ca8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light
+    second: {fileID: 2100000, guid: 3cbcd8a111204b44e8c4ebb7fd36ca8b, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -91,7 +101,7 @@ ModelImporter:
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
-    normalSmoothingSource: 0
+    normalSmoothingSource: 1
   referencedClips: []
   importAnimation: 1
   humanDescription:

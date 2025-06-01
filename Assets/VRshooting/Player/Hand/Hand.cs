@@ -90,7 +90,7 @@ public class Hand : MonoBehaviour
         }
 
         HandTra.localPosition = Vector3.zero;
-        HandTra.localRotation = Quaternion.Euler(0, 0, 0);
+        //HandTra.localRotation = Quaternion.Euler(0, 0, 0);
 
         if (GM.instance.LeftMain == _Left)
         {

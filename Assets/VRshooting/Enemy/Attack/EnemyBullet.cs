@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
 {
     protected Rigidbody _rb;
     [SerializeField] protected BulletStatus _Status;
+    [SerializeField] private float _GuardPene = 0f;
     private float _timer = 0f;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
@@ -37,12 +38,20 @@ public class EnemyBullet : MonoBehaviour
             _Vanish();
         }
 
-        if (_Status.HitEff)
-            if (other.tag == "Wall" || _Status.HitEff)
-            {
-                Instantiate(_Status.HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
-                _Vanish();
-            }
+        if (other.GetComponent<GuardBarrier>())
+        {
+            GuardBarrier guard = other.GetComponent<GuardBarrier>();
+            guard.GuardDamage(_Status.Atk, _GuardPene);
+            _Vanish();
+        }
+
+
+        if (other.tag == "Wall")
+        {
+            if(_Status.HitEff) Instantiate(_Status.HitEff, transform.position, transform.rotation); //エフェクトがあれば生成
+            _Vanish();
+        }
+
     }
 
     private void _Vanish()

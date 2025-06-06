@@ -20,6 +20,15 @@ public class ControlMat : MonoBehaviour
     [SerializeField, Range(0f, 1f)]
     private float _flash = 0f;
 
+
+    private void Awake()
+    {
+        if (_mats.Count > 0 && _FirstDitherZero)
+        {
+            foreach (var mat in _mats) mat.SetFloat("_dither", 0f);
+            _dither = 0f;
+        }
+    }
     private void Start()
     {
         _mats = new List<Material>();
@@ -30,11 +39,6 @@ public class ControlMat : MonoBehaviour
         if (_mr.Length > 0)
         {
             foreach (var mr in _mr) _mats.AddRange(mr.materials);
-        }
-
-        if (_mats.Count > 0 && _FirstDitherZero)
-        {
-            foreach (var mat in _mats) mat.SetFloat("_dither", 0f);
         }
     }
 
@@ -51,5 +55,7 @@ public class ControlMat : MonoBehaviour
     public void SetDither(float num)
     {
         _dither = num;
+        if (_mats.Count <= 0) return;
+        foreach (Material mat in _mats) mat.SetFloat("_dither", _dither);
     }
 }

@@ -171,7 +171,7 @@ GameObject:
   m_Layer: 0
   m_Name: MainGunTest
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -231,22 +231,11 @@ MonoBehaviour:
   _MainHand: {fileID: 0}
   _SubHand: {fileID: 0}
   _CanShot: 1
-  _Bullet: {fileID: 7405893749740642319, guid: b501e68393acc1f44ba7234e93121d9f, type: 3}
+  _Data: {fileID: 11400000, guid: 647e6fc23e334224d8812a3324748342, type: 2}
   _ShotPos: {fileID: 2932081032931784438}
   _SubHandle: {fileID: 6738665802343277255}
-  _BulletStatus:
-    Speed: 500
-    Atk: 12
-    LimitTime: 1
-    HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
-      type: 3}
-  _MagazineBulletMax: 12
   _MagazineBullet: 6
-  _Interval: 0.3
   _Reloading: 0
-  _ReloadTime: 1.4
-  _DiffAngleOH: 1.2
-  _DiffAngleBH: 0.3
   _AimUIdistance: 150
   _AimUIsize:
     serializedVersion: 2
@@ -448,7 +437,7 @@ MonoBehaviour:
   - {fileID: 5141697095475353730}
   _mr: []
   _mats: []
-  _dither: 1
+  _dither: 0
   _FirstDitherZero: 1
   _flash: 0
 --- !u!1 &1987812324772960485

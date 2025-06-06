@@ -12722,8 +12722,8 @@ MonoBehaviour:
   LeftMain: 0
   UIhandLeft: 1
   SetMainGun:
-  - {fileID: 1811064560031912671, guid: bd2acbe14511eda4d9cbfa53912cdec8, type: 3}
-  - {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
+  - {fileID: 11400000, guid: fb9130e76285b9445acdfa664738634f, type: 2}
+  - {fileID: 11400000, guid: 647e6fc23e334224d8812a3324748342, type: 2}
   UseGun: 0
   SetSubGun: {fileID: 0}
   SetMainGunsCs: []

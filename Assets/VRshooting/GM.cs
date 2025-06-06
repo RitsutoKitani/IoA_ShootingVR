@@ -16,7 +16,7 @@ public class GM : MonoBehaviour
     [Header("UIハンド")] public bool UIhandLeft;
 
     [Space(20)]
-    [Header("セットメイン武器")] public List<GameObject> SetMainGun;
+    [Header("セットメイン武器")] public List<GunData> SetMainGun;
     [Header("使用メイン武器番号")] public int UseGun = 0;
     [Header("セットサブ武器")] public GameObject SetSubGun;
     [HideInInspector]

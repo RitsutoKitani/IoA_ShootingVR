@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TitleButton : MonoBehaviour
 {
+    [SerializeField] private bool _Interactable;
+    public bool Interactable { get => _Interactable; }
+
     [SerializeField][Header("ê‡ñæï∂")] private string _helpText;
     private Animator _ani;
 
@@ -20,5 +23,10 @@ public class TitleButton : MonoBehaviour
         _Touch = touch;
         _ani.SetBool("Touch",touch);
         if (touch && TitleUI.instance) TitleUI.instance.HelpText.text = _helpText;
+    }
+
+    public void ChangeInteractable(bool interactable)
+    {
+        _Interactable = interactable;
     }
 }

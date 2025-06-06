@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5379a8b8847a3b41850795b6b0a598f, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  Name: TestHandGun
+  Icon: {fileID: 21300000, guid: 2dd230b324aeb0b43bdd3f84b923aa32, type: 3}
+  IconMesh: {fileID: -5523277661179574252, guid: ba019765b0ed8ea4e93e11160ee67578,
+    type: 3}
+  IconMaterials:
+  - {fileID: 2100000, guid: aeec9bec55b84b34fb1913e874012417, type: 2}
+  - {fileID: 2100000, guid: 2708f1b54cfcc3a4a967a94e4c8d8225, type: 2}
+  - {fileID: 2100000, guid: 12d489c925a18394eaa0eb6ce0b519d5, type: 2}
+  GunObj: {fileID: 1497341379657642263, guid: ae1febad49e015b4095ce35fea91747d, type: 3}
+  BulletStatus:
+    Speed: 600
+    Atk: 12
+    LimitTime: 1
+    HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
+      type: 3}
+  MagazineBulletMax: 12
+  ShotInterval: 0.3
+  ReloadTime: 1.2
+  DiffAngleOH: 1.2
+  DiffAngleBH: 0.3

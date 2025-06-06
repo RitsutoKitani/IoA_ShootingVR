@@ -43,7 +43,7 @@ public class MainGun_UI : MonoBehaviour
     {
         if (!_GunCs) return;
 
-        _BulletText.text = string.Format("{0:00}/{1:00}", _GunCs.MagazineBullet, _GunCs.MagazineBulletMax);
+        _BulletText.text = string.Format("{0:00}/{1:00}", _GunCs.MagazineBullet, _GunCs.Data.MagazineBulletMax);
 
         if (StageManager.instance.CameraObj && _LookCamera)
         {
@@ -56,7 +56,7 @@ public class MainGun_UI : MonoBehaviour
 
         foreach(Material mat in mats)
         {
-            mat.SetFloat("_fill", _GunCs.ReloadTimer / _GunCs.ReloadTime);
+            mat.SetFloat("_fill", _GunCs.ReloadTimer / _GunCs.Data.ReloadTime);
             mat.SetFloat("_alpha", _alpha);
             mat.SetFloat("_flash", _flash);
         }

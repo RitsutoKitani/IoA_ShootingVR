@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SMG_Data
   m_EditorClassIdentifier: 
   Name: SMG
-  Icon: {fileID: 21300000, guid: 5d9e20632d1f3754787b5e7b31f2ec84, type: 3}
+  Icon: {fileID: 21300000, guid: b73dc33435b1a9f4c89c03386dca1fe7, type: 3}
   IconMesh: {fileID: -5523277661179574252, guid: b5c33bc1bddc1564da98102324950b39,
     type: 3}
   IconMaterials:
@@ -24,7 +24,7 @@ MonoBehaviour:
   BulletStatus:
     Speed: 300
     Atk: 5
-    LimitTime: 1
+    LimitDistance: 140
     HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
       type: 3}
   MagazineBulletMax: 32

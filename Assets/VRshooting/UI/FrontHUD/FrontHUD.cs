@@ -23,6 +23,7 @@ public class FrontHUD : MonoBehaviour
         if(!StageManager.instance) return;
 
         _CanvasUpdate();
+        _ScoreUpdate();
 
         _GunUpdate();
     }
@@ -57,7 +58,7 @@ public class FrontHUD : MonoBehaviour
 
         int score = StageManager.instance.Score;
 
-        _ScoreText.text = $"SCORE : {score:D6}";
+        _ScoreText.text = $"{score:D6}";
 
         _RankText.text = "C";
         if (StageManager.instance.LankScore[0] <= score) _RankText.text = "B";

@@ -23,6 +23,7 @@ public class Hand : MonoBehaviour
     #region//VR‘€ì
     private InputActionAsset _IAA;
     private InputAction _GunChangeAct;
+    public InputAction GunChangeAct { get => _GunChangeAct; }
     #endregion
 
     [Space(30)]

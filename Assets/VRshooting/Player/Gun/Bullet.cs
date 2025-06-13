@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental;
 using UnityEditor.Rendering;
 using UnityEngine;
@@ -10,27 +11,23 @@ public class Bullet : MonoBehaviour
 
     [Space(30)]
 
-    [SerializeField]
-    [Header("弾速")] private float _Speed;
-    [SerializeField]
-    [Header("攻撃力")] private int _Atk;
-    [SerializeField]
-    [Header("自動消滅時間")] private float _LimitTime;
-    private float _timer = 0f;
-    [SerializeField]
-    [Header("ヒットエフェクト")] private GameObject _HitEff;
-    [SerializeField]
-    [Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
+    [SerializeField, ReadOnly][Header("弾速")] private float _Speed;
+    [SerializeField, ReadOnly][Header("攻撃力")] private int _Atk;
+    [SerializeField, ReadOnly][Header("射程距離")] private float _LimitDistance;
+    private Vector3 _StartPos;
+    [SerializeField, ReadOnly][Header("ヒットエフェクト")] private GameObject _HitEff;
+    [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        _StartPos = transform.position;
     }
 
     private void Update()
     {
-        if (_timer > _LimitTime && _LimitTime > 0f) _Vanish();
-        else _timer += Time.deltaTime;
+        float distance = (transform.position - _StartPos).sqrMagnitude;
+        if (distance > _LimitDistance * _LimitDistance) _Vanish();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,8 +58,8 @@ public class Bullet : MonoBehaviour
     {
         _Speed = status.Speed;
         _Atk = status.Atk;
-        _LimitTime = status.LimitTime;
-        _timer = 0f;
+        _LimitDistance = status.LimitDistance;
+        if (_LimitDistance <= 0) _LimitDistance = 1000;
 
         _rb.velocity = transform.forward * _Speed;
     }
@@ -73,6 +70,6 @@ public class BulletStatus
 {
     public float Speed;
     public int Atk;
-    public float LimitTime;
+    public float LimitDistance;
     public GameObject HitEff;
 }

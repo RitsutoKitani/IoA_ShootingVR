@@ -23,7 +23,7 @@ TagManager:
   - EnemyPhysics
   - StencilMasked
   - StencilMasking
-  - 
+  - StencilMaskedOver
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Effect
+    uniqueID: 3179696369
     locked: 0
   - name: UI
     uniqueID: 1977955891

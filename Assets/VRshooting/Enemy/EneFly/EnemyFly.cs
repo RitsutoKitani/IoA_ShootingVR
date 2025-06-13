@@ -18,7 +18,7 @@ public class EnemyFly : MonoBehaviour
     [SerializeField] private LineRenderer[] _lrs;
     private GameObject _WarningUI;
 
-    private bool _Charging;
+    [SerializeField, ReadOnly] private bool _Charging;
     private float _timer = 0f;
     private int _BulletNum = 0;
     private Vector3 _AimPos;
@@ -45,7 +45,7 @@ public class EnemyFly : MonoBehaviour
     {
         if(_Charging) _ChargeUpdate();
         if(_ani) _ani.SetBool("Charging", _Charging);
-        if(!_splineMoveCs.enabled) _splineMoveCs.enabled = true;
+        if(_splineMoveCs && !_splineMoveCs.enabled) _splineMoveCs.enabled = true;
         _PointerUpdate();
     }
 
@@ -66,12 +66,14 @@ public class EnemyFly : MonoBehaviour
         Vector3 worldDir = domeTra.TransformDirection(dir);
         _AimPos = domeTra.position + worldDir * StageManager.instance.DomeCs.Radius;
 
+        /*
         if (ObjPool.instance)
         {
             Vector3 diff = _AimPos - StageManager.instance.DomeCs.transform.position;
             Quaternion rot = Quaternion.LookRotation(diff);
             _WarningUI = ObjPool.instance.MakeObj(ObjPool.instance.WarningUI, _AimPos, rot);
         }
+        */
     }
 
     private void _ChargeUpdate()
@@ -87,14 +89,15 @@ public class EnemyFly : MonoBehaviour
             return;
         }
 
-        _Shot();
+        if (_ani) _ani.SetTrigger("Shot");
+        else _Shot();
+
         _BulletNum--;
 
         if (_BulletNum < 1)
         {
             _Charging = false;
             if (_WarningUI) _WarningUI.SetActive(false);
-            if (_splineMoveCs) _splineMoveCs.Invoke("StopFinish", 1f);
         }
         else
         {
@@ -108,7 +111,16 @@ public class EnemyFly : MonoBehaviour
 
         Quaternion ShotRot = Quaternion.LookRotation(_AimPos - _ShotPos.position);
         Instantiate(_Bullet, _ShotPos.position, ShotRot);
-        if (_ani) _ani.SetTrigger("Shot");
+    }
+
+    private void _ShotClip()
+    {
+
+    }
+
+    private void _ShotFinish()
+    {
+        if (_splineMoveCs && _splineMoveCs.Stop && _BulletNum < 1) _splineMoveCs.StopFinish();
     }
 
     private void _PointerUpdate()

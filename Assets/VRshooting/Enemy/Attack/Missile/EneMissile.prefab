@@ -10345,8 +10345,9 @@ MonoBehaviour:
   _Status:
     Speed: 12
     Atk: 15
-    LimitTime: 20
+    LimitDistance: 500
     HitEff: {fileID: 0}
+  _GuardPene: 0
   _tr: []
   _TargetPos: {x: 0, y: 0, z: 0}
   _torque: 0.006
@@ -10373,10 +10374,6 @@ MonoBehaviour:
   _cols:
   - {fileID: 7799630134595836236}
   - {fileID: 2476598670394894476}
-  _smr: []
-  _mr: []
-  _dither: 1
-  _flash: 0
 --- !u!114 &160393979646196641
 MonoBehaviour:
   m_ObjectHideFlags: 0

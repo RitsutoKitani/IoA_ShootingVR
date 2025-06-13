@@ -9,23 +9,37 @@ public class EnemyBullet : MonoBehaviour
     protected Rigidbody _rb;
     [SerializeField] protected BulletStatus _Status;
     [SerializeField] private float _GuardPene = 0f;
-    private float _timer = 0f;
+    private Vector3 _StartPos;
+    private float _StartDis;
+    [Header("距離におけるサイズ")][SerializeField] private AnimationCurve _DisSizeCurve;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
+        _StartPos = transform.position;
+        _StartDis = Vector3.SqrMagnitude(transform.position - StageManager.instance.DomeCs.transform.position);
     }
 
     private void Update()
     {
         MoveUpdate();
-        if (_timer > _Status.LimitTime && _Status.LimitTime > 0) _Vanish();
-        else _timer += Time.deltaTime;
+
+            float distance = (transform.position - _StartPos).sqrMagnitude;
+        if (distance > _Status.LimitDistance * _Status.LimitDistance) _Vanish();
     }
 
     protected virtual void MoveUpdate()
     {
+        float dis = Vector3.SqrMagnitude(transform.position - StageManager.instance.DomeCs.transform.position);
+        transform.localScale = Vector3.one * _DisSizeCurve.Evaluate(dis / _StartDis);
+
+        foreach (var tr in _tr)
+        {
+            tr.startWidth = transform.localScale.x;
+            tr.endWidth = transform.localScale.x;
+        }
+
         _rb.velocity = transform.forward * _Status.Speed;
     }
 
@@ -63,5 +77,6 @@ public class EnemyBullet : MonoBehaviour
     public void Setting(BulletStatus status)
     {
         _Status = status;
+        if (_Status.LimitDistance <= 0) _Status.LimitDistance = 1000;
     }
 }

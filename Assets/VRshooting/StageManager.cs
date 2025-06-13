@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
@@ -21,10 +22,11 @@ public class StageManager : MonoBehaviour
     [SerializeField, ReadOnly][Header("ステージ進行時間")] private float _StageTimer = 0f;
     private bool _finish = false;
 
+    [Space(30)]
     [SerializeField][Header("敵活動リスト")] private List<EnemyInfo> _Enemys = new List<EnemyInfo>();
-
     [SerializeField, ReadOnly][Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
     public List<Enemy> ActEnemy {  get => _ActEnemys; }
+    [SerializeField][Header("イベントリスト")] private List<EventInfo> _Events = new List<EventInfo>();
 
     [Space(30)]
     [SerializeField]
@@ -38,6 +40,7 @@ public class StageManager : MonoBehaviour
 
     [Header("右手オブジェクト")] public GameObject RightHand;
     [Header("左手オブジェクト")] public GameObject LeftHand;
+    [Header("ガードバリア")] public GuardBarrier GuardBarrier;
     [Header("プレイヤードーム")] public PlayerDome DomeCs;
 
 
@@ -71,6 +74,14 @@ public class StageManager : MonoBehaviour
             enemy.sortie = true;
         }
 
+        foreach (EventInfo eve in _Events)
+        {
+            if(eve.sortie || _StageTimer < eve.ActiveTime) continue;
+
+            eve.Event.Invoke();
+            eve.sortie = true;
+        }
+
         for (int i = 0; i < _ActEnemys.Count; i++) //やられた敵はリストから除外
         {
             if (!_ActEnemys[i].gameObject || _ActEnemys[i].Hp <= 0 || !_ActEnemys[i].gameObject.activeSelf) _ActEnemys.RemoveAt(i);
@@ -85,8 +96,15 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ステージを開始します
+    /// </summary>
     public void StageStart()
     {
+        if (RightHand) RightHand.GetComponent<Hand>().StageStartSetting();
+        if (LeftHand) LeftHand.GetComponent<Hand>().StageStartSetting();
+        GM.instance.UIhandLeft = !GM.instance.LeftMain;
+
         _StageTimer = 0f;
         _StageActive = true;
         _finish = false;
@@ -98,27 +116,23 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    public void StandByStart()
-    {
-        if(RightHand) RightHand.GetComponent<Hand>().StageStartSetting();
-        if(LeftHand) LeftHand.GetComponent<Hand>().StageStartSetting();
-        GM.instance.UIhandLeft = !GM.instance.LeftMain;
-
-        if (_ResultCs) _ResultCs.GetComponent<Animator>().SetTrigger("Start");
-        else StageStart();
-    }
-
     public void ScoreGet(int score)
     {
         _Score += score;
     }
 
+    /// <summary>
+    /// ステージを終了させるメソッドです
+    /// </summary>
     public void StageFinish()
     {
         Debug.Log("ステージ終了！");
         if (_ResultCs) _ResultCs.ResultStart();
     }
 
+    /// <summary>
+    /// ハンドUIのターゲットロックを解除します
+    /// </summary>
     public void HandUnlock()
     {
         HandUI handUI = null;
@@ -127,15 +141,31 @@ public class StageManager : MonoBehaviour
 
         handUI.UnLock();
     }
+
+    public void StageChangeActive(bool active)
+    {
+        _StageActive = active;
+    }
+
+
+    [System.Serializable]
+    public class EnemyInfo
+    {
+        public Enemy EneCs;
+        [Header("活動開始時間")] public float ActiveTime;
+
+        [HideInInspector]
+        public bool sortie = false;
+    }
+
+    [System.Serializable]
+    public class EventInfo
+    {
+        public UnityEvent Event;
+        [Header("発動時間")] public float ActiveTime;
+
+        [HideInInspector]
+        public bool sortie = false;
+    }
 }
 
-[System.Serializable]
-
-public class EnemyInfo
-{
-    public Enemy EneCs;
-    [Header("活動開始時間")] public float ActiveTime;
-
-    [HideInInspector]
-    public bool sortie = false;
-}

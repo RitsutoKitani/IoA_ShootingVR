@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class GuardBarrier : MonoBehaviour
 {
+    [SerializeField] private bool _Guard;
+    public bool Guard { get => _Guard; }
+
+    [Space (30)]
     [SerializeField][Header("ガード可能時間")] private float _GuardTimeMax;
     [SerializeField, ReadOnly] private float _GuardTimer;
     [SerializeField][Header("ゲージ回復速度")] private float _GageUpSpeed;
@@ -27,8 +31,9 @@ public class GuardBarrier : MonoBehaviour
 
     private void Update()
     {
+        _Guard = _toggle.Toggle && !_GuardLock;
         _toggle.Interactable = !_GuardLock;
-        _ani.SetBool("Guard", _toggle.Toggle && !_GuardLock);
+        _ani.SetBool("Guard", _Guard);
         if (_Gage)
         {
             _Gage.fillAmount = _GuardTimer / _GuardTimeMax;
@@ -36,7 +41,7 @@ public class GuardBarrier : MonoBehaviour
             else _Gage.color = _GageColor[1];
         }
 
-        if(_toggle.Toggle && !_GuardLock)
+        if(_Guard)
         {
             if (_GuardTimer > 0) _GuardTimer -= Time.deltaTime;
             else

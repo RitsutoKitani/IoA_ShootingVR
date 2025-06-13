@@ -68,7 +68,10 @@ public class MainGun : MonoBehaviour
     private XRBaseController _SubXRBC;
     private InputActionAsset _IAA;
     private InputAction _GunShotAct;
+    public InputAction GunShotAct { get => _GunShotAct; }
+
     private InputAction _GunReloadAct;
+    public InputAction GunReloadAct { get => _GunReloadAct; }
     #endregion
 
     private Animator _ani;

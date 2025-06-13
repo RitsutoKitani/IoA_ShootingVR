@@ -19,8 +19,7 @@ public class GM : MonoBehaviour
     [Header("セットメイン武器")] public List<GunData> SetMainGun;
     [Header("使用メイン武器番号")] public int UseGun = 0;
     [Header("セットサブ武器")] public GameObject SetSubGun;
-    [HideInInspector]
-    public List<MainGun> SetMainGunsCs; //セット武器オブジェクト
+    [ReadOnly] public List<MainGun> SetMainGunsCs; //セット武器オブジェクト
 
     [Space(40)]
     [SerializeField, Range(0f, 1f)]

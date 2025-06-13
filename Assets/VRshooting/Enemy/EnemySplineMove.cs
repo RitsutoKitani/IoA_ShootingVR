@@ -19,6 +19,7 @@ public class EnemySplineMove : MonoBehaviour
     private Vector3 _OffsetPos;
 
     [SerializeField] private bool _Stop = false;
+    public bool Stop { get => _Stop; }
     [SerializeField] private float _StopTimer = 0f;
     [SerializeField] [Header("’âŽ~ŽžŒ¸‘¬ŽžŠÔ")] private float _DecTime;
     [SerializeField] private float _DecTimer = 0f;
@@ -94,7 +95,7 @@ public class EnemySplineMove : MonoBehaviour
     /// </summary>
     private void _LookUpdate()
     {
-        if (_SplinePos == 0f) return;
+        if (_SplinePos == 0f || _Stop) return;
         Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
 
         _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);

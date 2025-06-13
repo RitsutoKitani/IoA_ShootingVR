@@ -12,6 +12,7 @@ public class GunWindow : MonoBehaviour
 
     [SerializeField] private Text _Aname;
     [SerializeField] private GameObject _Slot3DIcon;
+    [SerializeField] private Image[] _Agages = new Image[4];
     private MeshRenderer _SlotMeshRenderer;
     private MeshFilter _SlotMeshFilter;
 
@@ -19,8 +20,16 @@ public class GunWindow : MonoBehaviour
 
     [SerializeField] private Text _Bname;
     [SerializeField] private GameObject _Select3DIcon;
+    [SerializeField] private Image[] _Bgages = new Image[4];
     private MeshRenderer _SelectMeshRenderer;
     private MeshFilter _SelectMeshFilter;
+
+    [Space(10)]
+    [SerializeField] private float _DmgGageMax;
+    [SerializeField] private float _RateGageMin;
+    [SerializeField] private float _RangeGageMax;
+    [SerializeField] private float _AimGageMin;
+
 
     [Space(30)]
 
@@ -30,6 +39,10 @@ public class GunWindow : MonoBehaviour
     [SerializeField][Header("スクロールの親オブジェ")] private Transform _ScrollTransform;
     [SerializeField] private ScrollRect _ScrollRect;
     [SerializeField,ReadOnly] private List<GameObject> _BslotList = new List<GameObject>();
+
+    [Space(30)]
+
+    [SerializeField] private Button _SelectButton;
 
     private void Start()
     {
@@ -67,9 +80,9 @@ public class GunWindow : MonoBehaviour
             _slots[i].SetData(GM.instance.SetMainGun[i]);
             _slots[i].interact = _SelectSlot != i;
         }
+        _SelectButton.interactable = _SelectData != GM.instance.SetMainGun[_SelectSlot];
 
         if (!_SlotMeshFilter || !_SlotMeshRenderer) return;
-
         _StatusDataSet(false, Data);
     }
 
@@ -82,7 +95,14 @@ public class GunWindow : MonoBehaviour
             slotCs.interact = _SelectData != slotCs.Data;
         }
 
+        _SelectButton.interactable = _SelectData != GM.instance.SetMainGun[_SelectSlot];
         _StatusDataSet(true, Data);
+    }
+
+    public void GunSelect()
+    {
+        GM.instance.SetMainGun[_SelectSlot] = _SelectData;
+        SlotSelect(_SelectSlot);
     }
 
     private void _StatusDataSet(bool selectSlot = false, GunData Data = null)
@@ -91,15 +111,23 @@ public class GunWindow : MonoBehaviour
         Text NameText = _Aname;
         MeshRenderer mr = _SlotMeshRenderer;
         MeshFilter mf = _SlotMeshFilter;
+        Image[] gages = _Agages;
         if(selectSlot)
         {
             NameText = _Bname;
             mr = _SelectMeshRenderer;
             mf = _SelectMeshFilter;
+            gages = _Bgages;
         }
 
         NameText.text = Data.Name;
         mr.materials = Data.IconMaterials;
         mf.mesh = Data.IconMesh;
+
+        gages[0].fillAmount = Data.BulletStatus.Atk / _DmgGageMax;
+        gages[1].fillAmount = 1 - Data.ShotInterval / _RateGageMin;
+        gages[2].fillAmount = Data.BulletStatus.LimitDistance / _RangeGageMax;
+        gages[3].fillAmount = 1 - Data.DiffAngleBH / _AimGageMin;
+
     }
 }

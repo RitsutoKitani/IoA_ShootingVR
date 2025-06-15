@@ -24462,6 +24462,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ShotPos: {fileID: 7445863102803107942}
   _Bullet: {fileID: 7405893749740642319, guid: 1de1ee256d77971428f2e55012699361, type: 3}
+  _Status:
+    Speed: 50
+    Atk: 5
+    LimitDistance: 500
+    HitEff: {fileID: 0}
   _ChargeTime: 3
   _ShotInterval: 1.5
   _TurnSpeed: 0.104
@@ -24470,6 +24475,7 @@ MonoBehaviour:
   _lrs:
   - {fileID: 3318452941381088890}
   _Charging: 0
+  _EneCs: {fileID: 283749875844892333}
   _ani: {fileID: 6940629075317846319}
   _splineMoveCs: {fileID: 0}
 --- !u!114 &4816352596613783913

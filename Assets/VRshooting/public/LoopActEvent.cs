@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LoopActEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] public bool Active;
 
-    // Update is called once per frame
-    void Update()
+    [Space(30)]
+    [SerializeField] private UnityEvent _Event;
+    [SerializeField] private float _RepeatTime;
+    [SerializeField] private float _timer;
+
+    private void Update()
     {
-        
+        if(!Active) return;
+        if (_timer < _RepeatTime) _timer += Time.deltaTime;
+        else
+        {
+            _Event.Invoke();
+            _timer = 0f;
+        }
     }
 }

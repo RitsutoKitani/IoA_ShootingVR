@@ -21,7 +21,7 @@ public class ControlMat : MonoBehaviour
     private float _flash = 0f;
 
 
-    private void Awake()
+    private void OnEnable()
     {
         if (_mats.Count > 0 && _FirstDitherZero)
         {

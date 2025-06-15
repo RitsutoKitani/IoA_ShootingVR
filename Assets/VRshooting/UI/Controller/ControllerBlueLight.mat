@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: EnemyCore
+  m_Name: ControllerBlueLight
   m_Shader: {fileID: -6465566751694194690, guid: dda8a5be7bf466c4caa8058851776c69,
     type: 3}
   m_Parent: {fileID: 0}
@@ -22,7 +22,8 @@ Material:
   m_CustomRenderQueue: 2450
   stringTagMap:
     RenderType: TransparentCutout
-  disabledShaderPasses: []
+  disabledShaderPasses:
+  - SHADOWCASTER
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -85,12 +86,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _AlphaClip: 1
     - _AlphaToMask: 1
     - _Blend: 0
     - _BlendModePreserveSpecular: 1
     - _BumpScale: 1
-    - _CastShadows: 1
+    - _CastShadows: 0
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
@@ -106,6 +108,7 @@ Material:
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
+    - _Position: 0
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 0
@@ -119,17 +122,18 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     - _ZWriteControl: 0
-    - _dither: 0
+    - _dither: 1
     - _flash: 0
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1.4980392, g: 0.0627451, b: 0.0627451, a: 1}
+    - _Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _LightColor: {r: 1, g: 1, b: 1, a: 0}
+    - _RemapIn: {r: 0, g: 1, b: 0, a: 0}
+    - _RemapOut: {r: 0, g: 1, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _flashColor: {r: 2.996078, g: 2.996078, b: 2.996078, a: 0}
+    - _flashColor: {r: 1.4980392, g: 0.6600214, b: 0, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &5109249922518297330
+--- !u!114 &6036621000921236031
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

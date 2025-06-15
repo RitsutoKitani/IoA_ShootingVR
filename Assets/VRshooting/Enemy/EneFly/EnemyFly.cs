@@ -6,6 +6,7 @@ public class EnemyFly : MonoBehaviour
 {
     [SerializeField][Header("弾発射位置")] private Transform _ShotPos;
     [SerializeField][Header("攻撃弾")] private GameObject _Bullet;
+    [SerializeField][Header("弾ステータス")] private BulletStatus _Status;
     [SerializeField][Header("チャージ時間")] private float _ChargeTime;
     [SerializeField][Header("連射間隔")] private float _ShotInterval;
 
@@ -24,11 +25,14 @@ public class EnemyFly : MonoBehaviour
     private Vector3 _AimPos;
 
     [Space(30)]
+    [SerializeField] private Enemy _EneCs;
     [SerializeField] private Animator _ani;
     [SerializeField] private EnemySplineMove _splineMoveCs;
 
     private void OnEnable()
     {
+        if (GetComponent<Enemy>()) _EneCs = GetComponent<Enemy>();
+        if (GetComponent<Animator>()) _ani = GetComponent<Animator>();
         _Charging = false;
         _timer = 0f;
         _BulletNum = 0;
@@ -51,6 +55,7 @@ public class EnemyFly : MonoBehaviour
 
     public void ShotStart(int num = 1)
     {
+        if(_EneCs && _EneCs.Hp <= 0) return;
         _timer = _ChargeTime;
         _BulletNum = num;
         _Charging = true;
@@ -110,7 +115,8 @@ public class EnemyFly : MonoBehaviour
         if (!_ShotPos || !_Bullet) return;
 
         Quaternion ShotRot = Quaternion.LookRotation(_AimPos - _ShotPos.position);
-        Instantiate(_Bullet, _ShotPos.position, ShotRot);
+        GameObject bullet = Instantiate(_Bullet, _ShotPos.position, ShotRot);
+        if (bullet.GetComponent<EnemyBullet>()) bullet.GetComponent<EnemyBullet>().Setting(_Status);
     }
 
     private void _ShotClip()

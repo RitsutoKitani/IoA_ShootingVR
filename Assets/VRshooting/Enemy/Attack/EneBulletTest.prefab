@@ -189,7 +189,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7405893749740642319}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 8101628186676336084, guid: 27fada19f4958ee4e93415c3a609820b, type: 3}
 --- !u!23 &4697872850594635498
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -296,7 +296,7 @@ MonoBehaviour:
     Speed: 50
     Atk: 5
     LimitDistance: 500
-    HitEff: {fileID: 0}
+    HitEff: {fileID: 944159201174548283, guid: ac278167b5ed0aa4ba8050398f56b2a5, type: 3}
   _GuardPene: 0
   _DisSizeCurve:
     serializedVersion: 2
@@ -324,3 +324,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   _tr:
   - {fileID: 1720366042906638996}
+  _BarrierHitEffect: {fileID: 944159201174548283, guid: ac278167b5ed0aa4ba8050398f56b2a5,
+    type: 3}

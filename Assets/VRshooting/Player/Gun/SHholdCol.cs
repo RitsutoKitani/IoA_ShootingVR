@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class SHholdCol : MonoBehaviour
@@ -24,6 +25,26 @@ public class SHholdCol : MonoBehaviour
         if((other.gameObject == StageManager.instance.RightHand && GM.instance.LeftMain) || (other.gameObject == StageManager.instance.LeftHand && !GM.instance.LeftMain))
         {
             if (!_GunCs.SubHand && _HoldAction.IsPressed() && _GunCs.CanShot) _GunCs.HoldSubHand(other.transform);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (_GunCs.SubHand) return;
+        GameObject hand = GM.instance.LeftMain ? StageManager.instance.RightHand : StageManager.instance.LeftHand;
+        if (other.gameObject == hand)
+        {
+            StageManager.instance.MainSubHandVibe(true, 0.6f, 0.05f);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (_GunCs.SubHand) return;
+        GameObject hand = GM.instance.LeftMain ? StageManager.instance.RightHand : StageManager.instance.LeftHand;
+        if (other.gameObject == hand)
+        {
+            StageManager.instance.MainSubHandVibe(true, 0.3f, 0.05f);
         }
     }
 

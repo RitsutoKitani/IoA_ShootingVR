@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     [SerializeField, ReadOnly][Header("攻撃力")] private int _Atk;
     [SerializeField, ReadOnly][Header("射程距離")] private float _LimitDistance;
     private Vector3 _StartPos;
-    [SerializeField, ReadOnly][Header("ヒットエフェクト")] private GameObject _HitEff;
+    [SerializeField][Header("ヒットエフェクト")] private GameObject _HitEff;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
     private void Awake()
@@ -36,9 +36,10 @@ public class Bullet : MonoBehaviour
         {
             EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
             ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
+
+            if (_HitEff) ObjPool.instance.MakeObjByList(_HitEff, transform.position, transform.rotation);
         }
 
-        if (_HitEff) Instantiate(_HitEff, transform.position, transform.rotation);
         _Vanish();
     }
 

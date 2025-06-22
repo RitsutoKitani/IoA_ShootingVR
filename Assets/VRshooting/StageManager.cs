@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
+using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class StageManager : MonoBehaviour
@@ -128,6 +130,13 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("ステージ終了！");
         if (_ResultCs) _ResultCs.ResultStart();
+    }
+
+    public void MainSubHandVibe(bool SubHand = false, float strength = 1f, float length = 1f)
+    {
+        XRBaseController XRBC = (GM.instance.LeftMain == SubHand ? RightHand : LeftHand).GetComponent<XRBaseController>();
+
+        XRBC.SendHapticImpulse(strength, length);
     }
 
     /// <summary>

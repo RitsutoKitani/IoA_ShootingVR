@@ -14,6 +14,9 @@ public class EnemyBullet : MonoBehaviour
     [Header("距離におけるサイズ")][SerializeField] private AnimationCurve _DisSizeCurve;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
+    [Space(30)]
+    [SerializeField] protected GameObject _BarrierHitEffect;
+
     protected virtual void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -50,6 +53,7 @@ public class EnemyBullet : MonoBehaviour
             PlayerDome dome = other.GetComponent<PlayerDome>();
             dome.Damage(_Status.Atk);
             _Vanish();
+            if (_BarrierHitEffect) ObjPool.instance.MakeObjByList(_BarrierHitEffect, transform.position, transform.rotation);
         }
 
         if (other.GetComponent<GuardBarrier>())

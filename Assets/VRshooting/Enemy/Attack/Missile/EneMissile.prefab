@@ -10348,7 +10348,15 @@ MonoBehaviour:
     LimitDistance: 500
     HitEff: {fileID: 0}
   _GuardPene: 0
+  _DisSizeCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   _tr: []
+  _BarrierHitEffect: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747,
+    type: 3}
   _TargetPos: {x: 0, y: 0, z: 0}
   _torque: 0.006
   _PurgeDis: 35

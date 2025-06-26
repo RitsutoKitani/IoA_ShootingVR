@@ -5466,11 +5466,13 @@ MonoBehaviour:
   _StageTimer: 0
   _Enemys: []
   _ActEnemys: []
+  _Events: []
   _IAM: {fileID: 2105258609}
   Player: {fileID: 2105258608}
   CameraObj: {fileID: 1015309634}
   RightHand: {fileID: 153383576}
   LeftHand: {fileID: 1386319552}
+  GuardBarrier: {fileID: 0}
   DomeCs: {fileID: 0}
   _ResultCs: {fileID: 0}
 --- !u!4 &657863555
@@ -8072,7 +8074,7 @@ MonoBehaviour:
   _GunList:
   - {fileID: 11400000, guid: fb9130e76285b9445acdfa664738634f, type: 2}
   - {fileID: 11400000, guid: 647e6fc23e334224d8812a3324748342, type: 2}
-  - {fileID: 11400000, guid: 42222419a0f495e4a8b49f8592ccfd88, type: 2}
+  - {fileID: 11400000, guid: 54faa1756f39ba340b0a33c851dfaa00, type: 2}
   - {fileID: 11400000, guid: 42222419a0f495e4a8b49f8592ccfd88, type: 2}
   - {fileID: 11400000, guid: 42222419a0f495e4a8b49f8592ccfd88, type: 2}
   - {fileID: 11400000, guid: 42222419a0f495e4a8b49f8592ccfd88, type: 2}

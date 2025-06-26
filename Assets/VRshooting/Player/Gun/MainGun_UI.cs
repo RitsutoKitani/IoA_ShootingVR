@@ -25,8 +25,8 @@ public class MainGun_UI : MonoBehaviour
     [SerializeField] private float _matFillMax;
     [SerializeField] private float _matFillMin;
 
-    [SerializeField] private float _alpha;
-    [SerializeField] private float _flash;
+    [SerializeField, Range(0,1)] private float _alpha;
+    [SerializeField, Range(0, 1)] private float _flash;
 
     private void Start()
     {

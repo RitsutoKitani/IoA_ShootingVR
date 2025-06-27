@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AR
   m_EditorClassIdentifier: 
   Name: AR
-  Icon: {fileID: 21300000, guid: f010e58c8051f2e42b6b6bbf638c835f, type: 3}
+  Icon: {fileID: 21300000, guid: 0f8e71ba81f3a804ea99deb0a0d24937, type: 3}
   IconMesh: {fileID: -5523277661179574252, guid: d3dd6afe7814b9a43a714e268296f6fc,
     type: 3}
   IconMaterials:

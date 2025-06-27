@@ -1173,6 +1173,15 @@ MonoBehaviour:
     Obj: {fileID: 5445289731154973714, guid: a84f260e2e975d944852e49464f4335f, type: 3}
     ObjList: []
   PoolList: []
+  PreMakeObjs:
+  - Obj: {fileID: 3282133958298482795, guid: 243fd90d52632b940977aef1603fab32, type: 3}
+    Count: 10
+  - Obj: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747, type: 3}
+    Count: 10
+  - Obj: {fileID: 944159201174548283, guid: ac278167b5ed0aa4ba8050398f56b2a5, type: 3}
+    Count: 5
+  - Obj: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747, type: 3}
+    Count: 5
 --- !u!114 &108472025
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,12 +13,35 @@ public class ObjPool : MonoBehaviour
 
     public ObjPoolInfo WarningUI;
 
-    [SerializeField, ReadOnly]private List<ObjPoolInfo> PoolList;
+    [SerializeField, ReadOnly]private List<ObjPoolInfo> PoolList = new List<ObjPoolInfo>();
+
+    [SerializeField] private PreMake[] PreMakeObjs;
 
     private void Awake()
     {
         instance = this;
-        PoolList = new List<ObjPoolInfo>();
+    }
+
+    private void Start()
+    {
+        foreach (var pre in PreMakeObjs)
+        {
+            if(!pre.Obj || pre.Count <= 0) continue;
+
+            ObjPoolInfo opi = new ObjPoolInfo();
+            opi.Obj = pre.Obj;
+            opi.ObjList = new List<GameObject>();
+
+            while (pre.Count > 0)
+            {
+                GameObject obj = Instantiate(pre.Obj, transform.position, transform.rotation);
+                obj.SetActive(false);
+                opi.ObjList.Add(obj);
+                pre.Count--;
+            }
+
+            PoolList.Add(opi);
+        }
     }
 
     public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot)
@@ -53,7 +76,6 @@ public class ObjPool : MonoBehaviour
 
     public GameObject MakeObjByList(GameObject PoolObj, Vector3 pos, Quaternion rot)
     {
-        bool check = true;
         foreach (ObjPoolInfo list in PoolList)
         {
             if (list.Obj == PoolObj)
@@ -67,6 +89,13 @@ public class ObjPool : MonoBehaviour
         opi.ObjList = new List<GameObject>();
         PoolList.Add(opi);
         return MakeObj(opi, pos, rot);
+    }
+
+    [System.Serializable]
+    public class PreMake
+    {
+        public GameObject Obj;
+        public int Count;
     }
 }
 

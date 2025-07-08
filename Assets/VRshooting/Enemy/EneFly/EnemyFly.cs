@@ -21,7 +21,7 @@ public class EnemyFly : MonoBehaviour
 
     [SerializeField, ReadOnly] private bool _Charging;
     private float _timer = 0f;
-    private int _BulletNum = 0;
+    private int _BulletNum = -1;
     private Vector3 _AimPos;
 
     [Space(30)]
@@ -35,7 +35,7 @@ public class EnemyFly : MonoBehaviour
         if (GetComponent<Animator>()) _ani = GetComponent<Animator>();
         _Charging = false;
         _timer = 0f;
-        _BulletNum = 0;
+        _BulletNum = -1;
 
         //if (_splineMoveCs) _splineMoveCs.Resetting();
     }
@@ -126,7 +126,11 @@ public class EnemyFly : MonoBehaviour
 
     private void _ShotFinish()
     {
-        if (_splineMoveCs && _splineMoveCs.Stop && _BulletNum < 1) _splineMoveCs.StopFinish();
+        if (_splineMoveCs && _splineMoveCs.Stop && _BulletNum == 0)
+        {
+            _BulletNum = -1;
+            _splineMoveCs.StopFinish();
+        }
     }
 
     private void _PointerUpdate()

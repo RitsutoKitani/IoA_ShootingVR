@@ -52,11 +52,6 @@ public class ResultUI : MonoBehaviour
 
     }
 
-    private void _StageStart()
-    {
-        StageManager.instance.StageStart();
-    }
-
     public void ResultCheck()
     {
         _ani.SetTrigger("Check");

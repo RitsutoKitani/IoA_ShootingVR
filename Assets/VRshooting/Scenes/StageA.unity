@@ -1212,9 +1212,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Score: 800
   _LankScore: 9001000020030000b0040000
-  _StageActive: 0
+  _StageActive: 1
   _StageTime: 12
-  _StageTimer: 7.5
+  _StageTimer: 0
   _Enemys:
   - EneCs: {fileID: 1841719247}
     ActiveTime: 10
@@ -1370,6 +1370,7 @@ MonoBehaviour:
           m_CallState: 2
     ActiveTime: 8
     sortie: 0
+  _TutorialFinTime: 7
   _IAM: {fileID: 1193941266}
   Player: {fileID: 1193941265}
   CameraObj: {fileID: 44839238}
@@ -15587,6 +15588,7 @@ MonoBehaviour:
   IsPose: 0
   StageManager: {fileID: 0}
   LeftMain: 0
+  TutorialSkip: 1
   UIhandLeft: 1
   SetMainGun:
   - {fileID: 11400000, guid: 54faa1756f39ba340b0a33c851dfaa00, type: 2}

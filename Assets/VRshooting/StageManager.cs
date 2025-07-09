@@ -1,3 +1,4 @@
+using NUnit;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class StageManager : MonoBehaviour
     public bool StageActive { get => _StageActive; }
 
     [SerializeField][Header("ステージ全体時間")] private float _StageTime;
-    [SerializeField, ReadOnly][Header("ステージ進行時間")] private float _StageTimer = 0f;
+    [SerializeField][Header("ステージ進行時間")] private float _StageTimer = 0.0f;
     private bool _finish = false;
 
     [Space(30)]
@@ -29,6 +30,9 @@ public class StageManager : MonoBehaviour
     [SerializeField, ReadOnly][Header("活動中の敵")] private List<Enemy> _ActEnemys = new List<Enemy>();
     public List<Enemy> ActEnemy {  get => _ActEnemys; }
     [SerializeField][Header("イベントリスト")] private List<EventInfo> _Events = new List<EventInfo>();
+
+    [Space(30)]
+    [SerializeField][Header("チュートリアル終了時間")] private float _TutorialFinTime;
 
     [Space(30)]
     [SerializeField]
@@ -52,6 +56,10 @@ public class StageManager : MonoBehaviour
     private void Awake()
     {
         instance= this;
+    }
+
+    private void Start()
+    {
     }
 
     private void Update()
@@ -116,11 +124,26 @@ public class StageManager : MonoBehaviour
             enemy.EneCs.ReSetting();
             enemy.sortie = false;
         }
+
+        if (GM.instance.TutorialSkip) StageSkip(_TutorialFinTime);
     }
 
     public void ScoreGet(int score)
     {
         _Score += score;
+    }
+
+    public void StageSkip(float time)
+    {
+        _StageTimer = time;
+        foreach (EnemyInfo ene in _Enemys)
+        {
+            if (!ene.sortie && ene.ActiveTime <= time) ene.sortie = true;
+        }
+        foreach (EventInfo eve in _Events)
+        {
+            if (!eve.sortie && eve.ActiveTime <= time) eve.sortie = true;
+        }
     }
 
     /// <summary>

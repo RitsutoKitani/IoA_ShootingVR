@@ -13,6 +13,7 @@ public class GM : MonoBehaviour
 
     [Space(20)]
     [Header("左手が利き手")] public bool LeftMain;
+    [Header("チュートリアルスキップ")] public bool TutorialSkip;
     [Header("UIハンド")] public bool UIhandLeft;
 
     [Space(20)]

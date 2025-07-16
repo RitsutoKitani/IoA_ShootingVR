@@ -5,6 +5,7 @@ using Unity.Collections;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Splines;
 
 
@@ -43,6 +44,7 @@ public class EnemySplineMoveGra : MonoBehaviour
 
     [Space(30)]
     [SerializeField] private bool _TestGizmoPreview;
+    [SerializeField, Range(0f, 1f)] private float _CheckGizmoPos = 0f;
 
     private void Start()
     {
@@ -184,5 +186,8 @@ public class EnemySplineMoveGra : MonoBehaviour
         {
             Gizmos.DrawSphere(_spline.EvaluatePosition(action.StopStartPos), 0.6f);
         }
+
+        Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_CheckGizmoPos));
+        Gizmos.DrawCube(_spline.EvaluatePosition(_CheckGizmoPos), Vector3.one);
     }
 }

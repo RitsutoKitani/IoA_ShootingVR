@@ -37,8 +37,9 @@ public class Bullet : MonoBehaviour
             EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
             ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
 
-            if (_HitEff) ObjPool.instance.MakeObjByList(_HitEff, transform.position, transform.rotation);
         }
+
+        if (_HitEff) ObjPool.instance.MakeObjByList(_HitEff, transform.position, transform.rotation);
 
         _Vanish();
     }

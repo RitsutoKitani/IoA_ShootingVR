@@ -18,6 +18,7 @@ public class EnemyGround : MonoBehaviour
     [SerializeField] private GameObject _Bullet;
     [SerializeField] private Transform _ShotPos;
     [SerializeField] private float _ShotChargeTime;
+    [SerializeField] private float _ShotInterval;
     private float _ShotChargeTimer = 0f;
     private int _ShotCount;
     private float _ShotUpAngle;
@@ -121,18 +122,26 @@ public class EnemyGround : MonoBehaviour
         _ShotChargeTimer = _ShotChargeTime;
         _ShotUpAngle = ShotEve.ShotAngle.y;
         _NoGuideTime = ShotEve.NoGuideTime;
-        _AimPos = StageManager.instance.DomeCs.gameObject.transform.position;
+
+        _RandomAim();
 
         float Angle = ShotEve.ShotAngle.x;
-        if (StageManager.instance)
-        {
-            Angle += Vector3.SignedAngle(transform.forward, 
-                _AimPos - transform.position, Vector3.up);
-        }
+        Angle += Vector3.SignedAngle(transform.forward, _AimPos - transform.position, Vector3.up);
 
         _TurnAngle = Angle;
         _TurnRot = Angle;
         _ActCace = 3;
+    }
+
+    private void _RandomAim()
+    {
+        Vector3 dir;
+        do dir = Random.onUnitSphere; //単位面のランダムベクトル生成
+        while (Vector3.Dot(dir, Vector3.forward) < 0.5f //前方上方で横0.8以内に制限
+        || Vector3.Dot(dir, Vector3.up) < 0.2f);
+
+        Vector3 worldDir = StageManager.instance.DomeCs.transform.TransformDirection(dir);
+        _AimPos = StageManager.instance.DomeCs.transform.position + worldDir * StageManager.instance.DomeCs.Radius;
     }
 
     private void _ShotChargeUpdate()
@@ -144,7 +153,8 @@ public class EnemyGround : MonoBehaviour
         }
 
         _ani.SetTrigger("Shot");
-        _ShotChargeTimer = _ShotChargeTime;
+        _ShotChargeTimer = _ShotInterval;
+        _RandomAim();
         _ShotCount--;
 
         if (_ShotCount <= 0) _ActCace = 0;
@@ -159,6 +169,10 @@ public class EnemyGround : MonoBehaviour
         {
             bullet.transform.Rotate(-_ShotUpAngle, 0f, 0f, Space.Self);
             bullet.GetComponent<EnemyMissile>().MissileSetting(_AimPos, _NoGuideTime);
+        }
+        else
+        {
+            bullet.transform.rotation = Quaternion.LookRotation(_AimPos - _ShotPos.position);
         }
     }
 

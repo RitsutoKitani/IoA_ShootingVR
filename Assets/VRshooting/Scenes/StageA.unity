@@ -776,7 +776,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 02abc5f8daf526648bfd66506a436254,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -88.4
+      value: -99.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02abc5f8daf526648bfd66506a436254,
         type: 3}
@@ -786,7 +786,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 02abc5f8daf526648bfd66506a436254,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 103.8
+      value: 109.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 02abc5f8daf526648bfd66506a436254,
         type: 3}
@@ -1307,11 +1307,13 @@ MonoBehaviour:
   PreMakeObjs:
   - Obj: {fileID: 3282133958298482795, guid: 243fd90d52632b940977aef1603fab32, type: 3}
     Count: 10
+  - Obj: {fileID: 3282133958298482795, guid: 3202f9673a785ea43b32acf451f1be88, type: 3}
+    Count: 5
+  - Obj: {fileID: 3282133958298482795, guid: 3202f9673a785ea43b32acf451f1be88, type: 3}
+    Count: 5
   - Obj: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747, type: 3}
     Count: 10
   - Obj: {fileID: 944159201174548283, guid: ac278167b5ed0aa4ba8050398f56b2a5, type: 3}
-    Count: 5
-  - Obj: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747, type: 3}
     Count: 5
 --- !u!114 &108472025
 MonoBehaviour:
@@ -1325,8 +1327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1649adf8862194a4b98c7e613744a434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Score: 800
-  _LankScore: 9001000020030000b0040000
+  _Score: 0
+  _LankScore: e8030000d0070000280a0000
   _StageActive: 1
   _StageTime: 12
   _StageTimer: 0
@@ -1365,7 +1367,7 @@ MonoBehaviour:
     ActiveTime: 44
     sortie: 0
   - EneCs: {fileID: 1936726640517270147}
-    ActiveTime: 10
+    ActiveTime: 50
     sortie: 0
   _ActEnemys: []
   _Events:
@@ -4982,7 +4984,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: eb35ef12782d66849b4273272f44e82b,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 42.8
+      value: 37.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: eb35ef12782d66849b4273272f44e82b,
         type: 3}
@@ -6092,7 +6094,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -83.2
+      value: -92.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
@@ -6102,7 +6104,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.5
+      value: -4.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
@@ -9412,7 +9414,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 36e938f3a7d888b47b9d85abf26c8f9d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5
+      value: -6.8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 36e938f3a7d888b47b9d85abf26c8f9d,
         type: 3}
@@ -12945,7 +12947,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 30
+      value: 51.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
@@ -12955,7 +12957,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 220.3
+      value: 228.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 5dc15b8ec706bd044bdca21d5eeffaaa,
         type: 3}
@@ -15311,7 +15313,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9d647be68e838c04bbb3c48ba2573aa0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.5
+      value: 18.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9d647be68e838c04bbb3c48ba2573aa0,
         type: 3}
@@ -15321,7 +15323,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 9d647be68e838c04bbb3c48ba2573aa0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 187.3
+      value: 203.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9d647be68e838c04bbb3c48ba2573aa0,
         type: 3}
@@ -15648,7 +15650,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 021f1f9fd6260d34aa0370564c4543e8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 136.6
+      value: 152.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 021f1f9fd6260d34aa0370564c4543e8,
         type: 3}
@@ -15658,7 +15660,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 021f1f9fd6260d34aa0370564c4543e8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 58.3
+      value: 49.1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 021f1f9fd6260d34aa0370564c4543e8,
         type: 3}
@@ -16942,71 +16944,71 @@ MonoBehaviour:
       TangentIn:
         x: -0
         y: -0
-        z: -28.751163
+        z: -28.651857
       TangentOut:
         x: 0
         y: 0
-        z: 19.460014
+        z: 19.435093
       Rotation:
         value:
-          x: 0.010754455
-          y: 0.9621892
-          z: -0.042155318
-          w: 0.26888514
+          x: 0.005699806
+          y: 0.96264577
+          z: -0.024160678
+          w: 0.2696237
     - Position:
         x: 105.3
-        y: -20.699999
+        y: -16.999998
         z: -118.100006
       TangentIn:
         x: -0
         y: -0
-        z: -15.601933
+        z: -18.13385
       TangentOut:
         x: 0
         y: 0
-        z: 21.990961
+        z: 24.344185
       Rotation:
         value:
-          x: -0.015024818
-          y: 0.9363719
-          z: 0.14345106
-          w: -0.3200056
+          x: -0.010643768
+          y: 0.9653932
+          z: 0.12005158
+          w: -0.23127958
     - Position:
-        x: 2
-        y: 16.900002
-        z: -127.9
+        x: 21.800003
+        y: 11.900002
+        z: -166.1
       TangentIn:
         x: -0
         y: -0
-        z: -31.003061
+        z: -30.451952
       TangentOut:
         x: 0
         y: 0
-        z: 23.699404
+        z: 29.71372
       Rotation:
         value:
-          x: -0.13199063
-          y: -0.64135754
-          z: -0.13707592
-          w: 0.7432693
+          x: 0.13195218
+          y: 0.7278172
+          z: 0.104203805
+          w: -0.6648401
     - Position:
-        x: -52.699997
-        y: 41.6
-        z: -104.3
+        x: -64.3
+        y: 42
+        z: -137
       TangentIn:
         x: -0
         y: -0
-        z: -6.449139
+        z: -9.573939
       TangentOut:
         x: 0
         y: 0
-        z: 6.449139
+        z: 9.573939
       Rotation:
         value:
-          x: -0.09687557
-          y: -0.5546576
-          z: -0.20544538
-          w: 0.8004764
+          x: -0.06698298
+          y: -0.5861213
+          z: -0.17819817
+          w: 0.78754085
     m_MetaData:
     - Mode: 1
       Tension: 0.5
@@ -18108,7 +18110,7 @@ MonoBehaviour:
   IsPose: 0
   StageManager: {fileID: 0}
   LeftMain: 0
-  TutorialSkip: 0
+  TutorialSkip: 1
   UIhandLeft: 1
   SetMainGun:
   - {fileID: 11400000, guid: 54faa1756f39ba340b0a33c851dfaa00, type: 2}
@@ -28773,7 +28775,7 @@ MonoBehaviour:
     m_Bits: 1024
   _Stop: 0
   _StopAct:
-  - StopStartPos: 0.351
+  - StopStartPos: 0.43
     StopTime: 1
     Event:
       m_PersistentCalls:
@@ -28812,8 +28814,8 @@ MonoBehaviour:
   _DecTime: 0.5
   _DecTimer: 0
   _StopTimer: 0
-  _TestGizmoPreview: 0
-  _CheckGizmoPos: 0.782
+  _TestGizmoPreview: 1
+  _CheckGizmoPos: 0
 --- !u!4 &8170624226584708648
 Transform:
   m_ObjectHideFlags: 0

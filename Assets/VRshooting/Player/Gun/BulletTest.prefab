@@ -295,6 +295,11 @@ MonoBehaviour:
   _Speed: 200
   _Atk: 5
   _LimitDistance: 0
-  _HitEff: {fileID: 3282133958298482795, guid: 243fd90d52632b940977aef1603fab32, type: 3}
+  _HitEffWeak: {fileID: 3282133958298482795, guid: 243fd90d52632b940977aef1603fab32,
+    type: 3}
+  _HitEffNormal: {fileID: 8365342497103962713, guid: ccd7ca9002503a348bcd76c74227e3e8,
+    type: 3}
+  _HitEffWall: {fileID: 3282133958298482795, guid: 3202f9673a785ea43b32acf451f1be88,
+    type: 3}
   _tr:
   - {fileID: 1720366042906638996}

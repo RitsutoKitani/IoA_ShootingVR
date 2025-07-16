@@ -15,7 +15,9 @@ public class Bullet : MonoBehaviour
     [SerializeField, ReadOnly][Header("攻撃力")] private int _Atk;
     [SerializeField, ReadOnly][Header("射程距離")] private float _LimitDistance;
     private Vector3 _StartPos;
-    [SerializeField][Header("ヒットエフェクト")] private GameObject _HitEff;
+    [SerializeField][Header("ヒットエフェクト（弱点）")] private GameObject _HitEffWeak;
+    [SerializeField][Header("ヒットエフェクト（通常）")] private GameObject _HitEffNormal;
+    [SerializeField][Header("ヒットエフェクト（壁）")] private GameObject _HitEffWall;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
     private void Awake()
@@ -32,14 +34,17 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject Effect = _HitEffWall;
+
         if (other.GetComponent<EnemyHitBox>())
         {
             EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
             ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
-
+            if (ene.Pene <= 0.9f) Effect = _HitEffNormal;
+            else Effect = _HitEffWeak;
         }
 
-        if (_HitEff) ObjPool.instance.MakeObjByList(_HitEff, transform.position, transform.rotation);
+        if (Effect) ObjPool.instance.MakeObjByList(Effect, transform.position, transform.rotation);
 
         _Vanish();
     }

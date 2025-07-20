@@ -10,12 +10,10 @@ public class Hand : MonoBehaviour
     private bool _Left;
     public bool Left { get => _Left; }
 
-    [SerializeField]
-    private GameObject _UseGun;
+    [SerializeField, ReadOnly][Header("使用中の銃")] private GameObject _UseGun;
     private MainGun _UseGunCs;
 
-    [SerializeField]
-    private int _NextNum = -1;
+    [SerializeField, ReadOnly][Header("切り替え先の武器")] private int _NextNum = -1;
     
     private float _GunChangeTimer = 0f;
     private float _GunChangeTime = 0f;
@@ -60,9 +58,9 @@ public class Hand : MonoBehaviour
             _GunDitherInUpdate();
             _GunDitherOutUpdate();
 
-            if (_GunChangeAct.WasPressedThisFrame() && !GM.instance.SetMainGunsCs[GM.instance.UseGun].Reloading && _NextNum < 0)
+            if (_GunChangeAct.WasPressedThisFrame() && !_UseGunCs.Reloading && _NextNum < 0)
             {
-                _GunChangeStart(_SelectGun());
+                GunChangeStart(_SelectGun());
             }
         }
         else //サブ
@@ -132,7 +130,6 @@ public class Hand : MonoBehaviour
         for(int i = 0;i < GM.instance.SetMainGun.Count;i++)
         {
             GameObject gun = Instantiate(GM.instance.SetMainGun[i].GunObj, transform.position, transform.rotation, StageManager.instance.Player.transform);
-            if (!gun.GetComponent<MainGun>()) Debug.LogError("MainGunCsが銃オブジェクトにありません");
             gun.GetComponent<MainGun>().InitalSetting(transform, _Left);
             gun.GetComponent<ControlMat>().SetDither(0f);
             gun.gameObject.SetActive(false);
@@ -152,6 +149,7 @@ public class Hand : MonoBehaviour
         */
     }
 
+    //武器が消える
     private void _GunDitherOutUpdate()
     {
         if (_NextNum < 0) return;
@@ -169,6 +167,7 @@ public class Hand : MonoBehaviour
         }
     }
 
+    //武器が現れる
     private void _GunDitherInUpdate()
     {
         if (_NextNum >= 0) return;
@@ -181,6 +180,10 @@ public class Hand : MonoBehaviour
         ctrlMat.SetDither(ctrlMat.dither + (Time.deltaTime / 0.5f));
     }
 
+    /// <summary>
+    /// 銃オブジェのアクティブ切り替え
+    /// </summary>
+    /// <param name="num"></param>
     private void _GunChange(int num)
     {
         _NextNum = -1;
@@ -192,12 +195,18 @@ public class Hand : MonoBehaviour
         GM.instance.UseGun = num;
     }
 
-    private void _GunChangeStart(int gunNum)
+    /// <summary>
+    /// 武器を切り替える
+    /// </summary>
+    /// <param name="gunNum">切り替え先の武器番号</param>
+    public void GunChangeStart(int gunNum)
     {
         if (GM.instance.SetMainGunsCs.Count < gunNum) return;
         if (gunNum == GM.instance.UseGun) return;
 
         Debug.Log("銃切り替え : " + gunNum);
+
+        if(_UseGunCs.Reloading) _UseGunCs.ReloadCancel();
 
         _NextNum = gunNum;
 
@@ -216,8 +225,6 @@ public class Hand : MonoBehaviour
 
     private int _SelectGun()
     {
-        if (GM.instance.SetMainGunsCs.Count != 2) Debug.LogError("銃は2種類までにして！【テスト段階】");
-
         if (GM.instance.UseGun == 0) return 1;
         else return 0;
     }

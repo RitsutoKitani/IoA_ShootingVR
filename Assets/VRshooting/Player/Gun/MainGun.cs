@@ -205,6 +205,12 @@ public class MainGun : MonoBehaviour
         GM.instance.PlayOneSE(_ReloadFinishSE, transform);
     }
 
+    public void ReloadCancel()
+    {
+        _Reloading = false;
+        _ShotTimer = Data.ShotInterval;
+    }
+
     private void _IndicatorUpdate()
     {
         if (!_ShotPos) return;

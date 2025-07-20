@@ -1707,7 +1707,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 123921938}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -7414,6 +7414,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _TurnTorque: 0.05
   _TurnTestToggle: {fileID: 1767607852523835718}
+  _HpGage: {fileID: 324067612}
+  _HpGageColor:
+  - serializedVersion: 2
+    rgba: 4285907832
+  - serializedVersion: 2
+    rgba: 4283021000
+  - serializedVersion: 2
+    rgba: 4281478848
+  _HpGageBreakColor:
+    serializedVersion: 2
+    rgba: 4281478848
   _AmmoText: {fileID: 1706804246}
   _RankText: {fileID: 575673982}
   _ScoreText: {fileID: 1430400229}
@@ -18115,6 +18126,7 @@ MonoBehaviour:
   SetMainGun:
   - {fileID: 11400000, guid: 54faa1756f39ba340b0a33c851dfaa00, type: 2}
   - {fileID: 11400000, guid: fb9130e76285b9445acdfa664738634f, type: 2}
+  - {fileID: 11400000, guid: 2a475e5d78ce8444b8240678871e1528, type: 2}
   UseGun: 0
   SetSubGun: {fileID: 0}
   SetMainGunsCs: []
@@ -22011,7 +22023,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1666669302}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d4358a0aeeec3e429f48630cff42e1c, type: 3}
   m_Name: 
@@ -23096,7 +23108,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1813946113}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
   m_Name: 
@@ -25970,6 +25982,7 @@ GameObject:
   - component: {fileID: 3469287838201110374}
   - component: {fileID: 3469287838201110373}
   - component: {fileID: 3469287838201110375}
+  - component: {fileID: 3469287838201110376}
   m_Layer: 8
   m_Name: DomeBarrier
   m_TagString: Untagged
@@ -27533,11 +27546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b431b7b2250a27942b861285e3f3e647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _HpMax: 100
+  _HpMax: 50
   _Hp: 0
-  _AutoHealInterval: 0.5
-  _AutoHealPoint: 3
+  _AutoHealInterval: 1.5
+  _AutoHealPoint: 1
+  _Breaking: 0
+  _BreakHealTime: 10
   _Radius: 4
+  _DamageSE: {fileID: 8300000, guid: de98bb7f04d69bd449a9646a95503fbb, type: 3}
 --- !u!135 &3469287838201110374
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -27580,6 +27596,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &3469287838201110376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148536969851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _RandomStart: 0
+  _vfx: []
 --- !u!1 &3534166513699542635
 GameObject:
   m_ObjectHideFlags: 0
@@ -28849,7 +28879,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8340390259573055616 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8340390259410605050, guid: af5671621e71e3c4aa4b0edc6bc78d1c,

@@ -10,21 +10,27 @@ public class FrontHUD : MonoBehaviour
     [SerializeField] private Toggle _TurnTestToggle;
 
     [Space(30)]
-
-    [SerializeField] private Text _AmmoText;
+    [Header("HP表示UI")][SerializeField] private Image _HpGage;
+    [Header("HPバーの色")][SerializeField] private Color32[] _HpGageColor;
+    [Header("HPバーの色（ブレイク状態）")][SerializeField] private Color32 _HpGageBreakColor;
 
     [Space(30)]
 
-    [SerializeField] private Text _RankText;
-    [SerializeField] private Text _ScoreText;
+    [Header("残弾表示UI")][SerializeField] private Text _AmmoText;
+
+    [Space(30)]
+
+    [Header("スコアランク表示UI")][SerializeField] private Text _RankText;
+    [Header("スコア表示UI")][SerializeField] private Text _ScoreText;
 
     void Update()
     {
         if(!StageManager.instance) return;
 
         _CanvasUpdate();
-        _ScoreUpdate();
 
+        _HpUpdate();
+        _ScoreUpdate();
         _GunUpdate();
     }
 
@@ -42,6 +48,34 @@ public class FrontHUD : MonoBehaviour
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, _TurnTorque);
     }
 
+    /// <summary>
+    /// 体力UIアップデート
+    /// </summary>
+    private void _HpUpdate()
+    {
+        if(!StageManager.instance.DomeCs || !_HpGage) return;
+        PlayerDome Dome = StageManager.instance.DomeCs;
+        Color32 color = _HpGageColor[0];
+
+        if (!Dome.Breaking)
+        {
+            _HpGage.fillAmount = (float)Dome.Hp / Dome.HpMax;
+            for (int i = 1; i < _HpGageColor.Length; i++)
+            {
+                if (Dome.Hp < Dome.HpMax - Dome.HpMax * i / _HpGageColor.Length) color = _HpGageColor[i];
+            }
+        }
+        else
+        {
+            _HpGage.fillAmount = Dome.BreakTimer / Dome.BreakHealTime;
+            color = _HpGageBreakColor;
+        }
+        _HpGage.color = color;
+    }
+
+    /// <summary>
+    /// 弾数UIアップデート
+    /// </summary>
     private void _GunUpdate()
     {
         if (!_AmmoText) return;
@@ -52,6 +86,9 @@ public class FrontHUD : MonoBehaviour
         _AmmoText.text = $"{GunCs.MagazineBullet:D2}";
     }
 
+    /// <summary>
+    /// スコアUIアップデート
+    /// </summary>
     private void _ScoreUpdate()
     {
         if(!_RankText ||  !_ScoreText) return;

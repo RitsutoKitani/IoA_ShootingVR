@@ -155,6 +155,23 @@ public class StageManager : MonoBehaviour
         if (_ResultCs) _ResultCs.ResultStart();
     }
 
+    /// <summary>
+    /// メインハンド、サブハンドを返します
+    /// </summary>
+    /// <param name="sub"></param>
+    /// <returns></returns>
+    public GameObject MainSubHand(bool sub = false)
+    {
+        return GM.instance.LeftMain == sub ? RightHand : LeftHand;
+    }
+
+    /// <summary>
+    /// コントローラーを振動させます
+    /// </summary>
+    /// <param name="SubHand"></param>
+    /// <param name="strength"></param>
+    /// <param name="length"></param>
+
     public void MainSubHandVibe(bool SubHand = false, float strength = 1f, float length = 1f)
     {
         XRBaseController XRBC = (GM.instance.LeftMain == SubHand ? RightHand : LeftHand).GetComponent<XRBaseController>();

@@ -110,8 +110,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FillMax: 0.12
-    - _FillMin: -0.17
+    - _FillMax: 0.11
+    - _FillMin: -0.16
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

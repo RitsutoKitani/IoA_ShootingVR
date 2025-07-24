@@ -288,7 +288,6 @@ MonoBehaviour:
     enabled: 1
   forceRemoveInternetPermission: 0
   symmetricProjection: 0
-  foveatedRenderingApi: 0
   systemSplashScreen: {fileID: 0}
   optimizeBufferDiscards: 1
   lateLatchingMode: 0
@@ -388,32 +387,27 @@ MonoBehaviour:
   m_Name: Android
   m_EditorClassIdentifier: 
   features:
+  - {fileID: -5155892760555482370}
+  - {fileID: 1814177888085565675}
+  - {fileID: 7113295735575312234}
+  - {fileID: 4292713186556031215}
+  - {fileID: 3806864855903178293}
   - {fileID: -4217067710180975985}
+  - {fileID: -3142240356803079904}
   - {fileID: -6421626729318521059}
   - {fileID: -70761902241517392}
   - {fileID: 7442907001316431473}
   - {fileID: 6802014112094663862}
   - {fileID: 5595323677594703535}
   - {fileID: -3873863683491572383}
-  - {fileID: 2933197028530216094}
   - {fileID: -6857057180291041849}
-  - {fileID: -5155892760555482370}
-  - {fileID: 1814177888085565675}
-  - {fileID: 7113295735575312234}
-  - {fileID: 4292713186556031215}
-  - {fileID: 3806864855903178293}
-  - {fileID: -3142240356803079904}
   - {fileID: -4271944679055538540}
   - {fileID: 1642016888548853604}
   - {fileID: 4191122041107653217}
   - {fileID: -4195304048203572092}
   - {fileID: -7516546265866457872}
   - {fileID: 1954994730796850102}
-  - {fileID: -3744404806583680574}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -479,7 +473,6 @@ MonoBehaviour:
   - {fileID: -3792081341428173288}
   - {fileID: -3974675766597642498}
   - {fileID: 6923532910658218241}
-  - {fileID: -4657347694177643357}
   - {fileID: 7911844766311249279}
   - {fileID: 6669632947499650683}
   - {fileID: 7372683054140007160}
@@ -488,11 +481,7 @@ MonoBehaviour:
   - {fileID: -8376824195475703073}
   - {fileID: -3772502169806323725}
   - {fileID: 5750164947620030794}
-  - {fileID: -7832757104943711363}
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0
@@ -661,12 +650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5a1f07dc5afe854f9f12a4194aca3fb, type: 3}
   m_Name: WebGL
   m_EditorClassIdentifier: 
-  features:
-  - {fileID: -6135859657875158446}
+  features: []
   m_renderMode: 1
-  m_autoColorSubmissionMode: 1
-  m_colorSubmissionModes:
-    m_List: 00000000
   m_depthSubmissionMode: 0
   m_optimizeBufferDiscards: 0
   m_symmetricProjection: 0

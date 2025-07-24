@@ -50,4 +50,9 @@ public class TitleUI : MonoBehaviour
         _WindowNum = num;
     }
 
+    public void ChangeMainHand()
+    {
+        
+    }
+
 }

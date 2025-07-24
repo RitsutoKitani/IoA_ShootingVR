@@ -49,9 +49,6 @@
             "m_Id": "b096b683b08f4d42af8dd255eb7af872"
         },
         {
-            "m_Id": "cb7e8abbc7a746b7ba84ba9135ed2f84"
-        },
-        {
             "m_Id": "e96fbbcedf8a4e49b81455947ed90ab2"
         },
         {
@@ -746,7 +743,7 @@
         "coordinates"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -1023,10 +1020,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -852.9999389648438,
-            "y": 69.99998474121094,
+            "x": -893.0,
+            "y": 81.00001525878906,
             "width": 133.0,
-            "height": 33.999977111816409
+            "height": 34.0
         }
     },
     "m_Slots": [
@@ -1737,29 +1734,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector3MaterialSlot",
-    "m_ObjectId": "9a5aaf1f19054f9db826e0ed1a3a2b67",
-    "m_Id": 0,
-    "m_DisplayName": "Out",
-    "m_SlotType": 1,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Out",
-    "m_StageCapability": 3,
-    "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_DefaultValue": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "9b2d159203794fff87981793ba23395e",
     "m_Id": 0,
@@ -2063,43 +2037,6 @@
     "m_CustomColors": {
         "m_SerializableColors": []
     }
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.PositionNode",
-    "m_ObjectId": "cb7e8abbc7a746b7ba84ba9135ed2f84",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "Position",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": -1898.0,
-            "y": 368.9999694824219,
-            "width": 206.0,
-            "height": 130.99996948242188
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "9a5aaf1f19054f9db826e0ed1a3a2b67"
-        }
-    ],
-    "synonyms": [
-        "location"
-    ],
-    "m_Precision": 1,
-    "m_PreviewExpanded": false,
-    "m_DismissedVersion": 0,
-    "m_PreviewMode": 2,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_Space": 0,
-    "m_PositionSource": 0
 }
 
 {

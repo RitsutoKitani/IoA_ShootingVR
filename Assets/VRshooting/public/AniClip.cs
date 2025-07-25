@@ -10,6 +10,9 @@ public class AniClip : MonoBehaviour
 
     [SerializeField]
     private VisualEffect[] _vfx;
+
+    [SerializeField] private float _VibePow;
+    [SerializeField] private float _VibeLen;
     private Animator _ani;
 
     private void Start()
@@ -19,7 +22,7 @@ public class AniClip : MonoBehaviour
         if(_ani && _RandomStart) _ani.Play(_ani.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, Random.Range(0f, 1f));
     }
 
-    private void PlaySE(AudioClip SE)
+    public void PlaySE(AudioClip SE)
     {
         GM.instance.PlayOneSE(SE, transform);
     }
@@ -34,5 +37,10 @@ public class AniClip : MonoBehaviour
         if (_vfx.Length <= num || !_vfx[num]) return;
 
         _vfx[num].Play();
+    }
+
+    public void HandVibe()
+    {
+        StageManager.instance.UIHandVibe(_VibePow, _VibeLen);
     }
 }

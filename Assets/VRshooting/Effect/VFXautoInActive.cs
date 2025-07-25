@@ -7,6 +7,7 @@ public class VFXautoInActive : MonoBehaviour
 {
     private VisualEffect vfx;
     [SerializeField] private AudioClip _EffectSE;
+    private bool _check = false;
 
     private void Start()
     {
@@ -15,9 +16,20 @@ public class VFXautoInActive : MonoBehaviour
         vfx = GetComponent<VisualEffect>();
     }
 
+    private void OnEnable()
+    {
+        _check = false;
+        Invoke("_CheckTrue", 0.1f);
+    }
+
+    private void _CheckTrue()
+    {
+        _check = true;
+    }
+
     private void Update()
     {
-        if(vfx.aliveParticleCount == 0)
+        if(vfx.aliveParticleCount == 0 && _check)
         {
             gameObject.SetActive(false);
         }

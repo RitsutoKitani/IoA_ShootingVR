@@ -96,6 +96,8 @@ VFXRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_StaticBatchInfo:
@@ -130,3 +132,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5092ad9d5dc76be4fa3aab965309408d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _EffectSE: {fileID: 0}

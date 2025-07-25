@@ -84,7 +84,9 @@ public class HandUI : MonoBehaviour
 
     private void _HandActiveUpdate()
     {
-        _Interactor.gameObject.SetActive(GM.instance.UIhandLeft == _Left && Active);
+        _lr.enabled = GM.instance.UIhandLeft == _Left && Active;
+        _XRRI.enabled = GM.instance.UIhandLeft == _Left && Active;
+        _RayAni.enabled = GM.instance.UIhandLeft == _Left && Active;
         if(GM.instance.UIhandLeft != _Left && _SelectAct.WasPressedThisFrame() && Active) GM.instance.UIhandLeft = _Left;
     }
 
@@ -96,7 +98,7 @@ public class HandUI : MonoBehaviour
         lrPos[0] = _Interactor.position;
         lrPos[1] = _Interactor.position + _Interactor.forward * _DefaLength;
 
-        if (_AutoObj)
+        if (_AutoObj)//ターゲットロック
         {
             var aim = _AutoObj.transform.position - _FingerPoint.position;
             var aimRot = Quaternion.LookRotation(aim);

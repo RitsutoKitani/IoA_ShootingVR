@@ -7,13 +7,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Rigidbody _rb;
+    //private Rigidbody _rb;
 
     [Space(30)]
 
     [SerializeField, ReadOnly][Header("弾速")] private float _Speed;
     [SerializeField, ReadOnly][Header("攻撃力")] private int _Atk;
     [SerializeField, ReadOnly][Header("射程距離")] private float _LimitDistance;
+
+    [SerializeField][Header("半径")] private float _Rad;
+    [SerializeField][Header("レイヤーマスク")] private LayerMask _Layer;
+    private RaycastHit _Hit;
+    private Collider _HitCol;
+
+    [Space(30)]
     private Vector3 _StartPos;
     [SerializeField][Header("ヒットエフェクト（弱点）")] private GameObject _HitEffWeak;
     [SerializeField][Header("ヒットエフェクト（通常）")] private GameObject _HitEffNormal;
@@ -22,7 +29,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
+        //_rb = GetComponent<Rigidbody>();
         _StartPos = transform.position;
     }
 
@@ -30,8 +37,35 @@ public class Bullet : MonoBehaviour
     {
         float distance = (transform.position - _StartPos).sqrMagnitude;
         if (distance > _LimitDistance * _LimitDistance) _Vanish();
+
+        transform.position += transform.forward * _Speed * Time.deltaTime;
+
+        if(Physics.SphereCast(transform.position, _Rad, transform.forward, out _Hit, _Speed * Time.deltaTime, _Layer))
+        {
+            if (_Hit.collider == _HitCol) return;
+            _HitCol = _Hit.collider;
+            _HitEvent(_HitCol, _Hit.point);
+        }
     }
 
+    private void _HitEvent(Collider other, Vector3 pos)
+    {
+        GameObject Effect = _HitEffWall;
+
+        if (other.GetComponent<EnemyHitBox>())
+        {
+            EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
+            ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
+            if (ene.Pene <= 0.9f) Effect = _HitEffNormal;
+            else Effect = _HitEffWeak;
+        }
+
+        if (Effect) ObjPool.instance.MakeObjByList(Effect, pos, transform.rotation);
+
+        _Vanish();
+    }
+
+    /*
     private void OnTriggerEnter(Collider other)
     {
         GameObject Effect = _HitEffWall;
@@ -44,14 +78,19 @@ public class Bullet : MonoBehaviour
             else Effect = _HitEffWeak;
         }
 
-        if (Effect) ObjPool.instance.MakeObjByList(Effect, transform.position, transform.rotation);
+        if (Effect)
+        {
+            ObjPool.instance.MakeObjByList(Effect, transform.position, transform.rotation);
+            Debug.Log(Effect.name);
+        }
 
         _Vanish();
     }
+    */
 
     private void _Vanish()
     {
-        _rb.velocity = Vector3.zero;
+        //_rb.velocity = Vector3.zero;
 
         foreach (TrailRenderer tr in _tr)
         {
@@ -66,9 +105,15 @@ public class Bullet : MonoBehaviour
         _Speed = status.Speed;
         _Atk = status.Atk;
         _LimitDistance = status.LimitDistance;
+        _HitCol = null;
         if (_LimitDistance <= 0) _LimitDistance = 1000;
 
-        _rb.velocity = transform.forward * _Speed;
+        //_rb.velocity = transform.forward * _Speed;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, _Rad);
     }
 }
 

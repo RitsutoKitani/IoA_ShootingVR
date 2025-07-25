@@ -18,9 +18,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -624
-    y: -307
-    width: 4391
-    height: 1791
+    y: -424
+    width: 4393
+    height: 1935
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
   - name: Charging
     path: Charging
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Bool
     realType: Boolean
@@ -102,7 +102,7 @@ MonoBehaviour:
   - name: LineRate
     path: LineRate
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -118,7 +118,7 @@ MonoBehaviour:
   - name: LineSize
     path: LineSize
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -134,7 +134,7 @@ MonoBehaviour:
   - name: LineSpeed
     path: LineSpeed
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -150,7 +150,7 @@ MonoBehaviour:
   - name: SplitPow
     path: SplitPow
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -166,7 +166,7 @@ MonoBehaviour:
   - name: BallSize
     path: BallSize
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -182,7 +182,7 @@ MonoBehaviour:
   - name: BallFill
     path: BallFill
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -6971,7 +6971,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661615033}
-  m_UIPosition: {x: 2858, y: -74}
+  m_UIPosition: {x: 2858, y: -160}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -8816,7 +8816,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615101}
       inputSlot: {fileID: 8926484042661614994}
-    position: {x: 652, y: 1412}
+    position: {x: 752, y: 1412}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615101
@@ -9857,7 +9857,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615170}
   - {fileID: 8926484042661615176}
   - {fileID: 8926484042661615179}
-  m_UIPosition: {x: 3343, y: 871}
+  m_UIPosition: {x: 3345, y: 919}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:

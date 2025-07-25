@@ -50,6 +50,8 @@ TrailRenderer:
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -157,7 +159,6 @@ GameObject:
   - component: {fileID: 4302924288562582134}
   - component: {fileID: 4697872850594635498}
   - component: {fileID: 1758509416372057191}
-  - component: {fileID: 1871270640440903968}
   - component: {fileID: 651383802653870420}
   m_Layer: 9
   m_Name: BulletTest
@@ -207,6 +208,8 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -249,37 +252,10 @@ SphereCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Radius: 0.7
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &1871270640440903968
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7405893749740642319}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!114 &651383802653870420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +271,10 @@ MonoBehaviour:
   _Speed: 200
   _Atk: 5
   _LimitDistance: 0
+  _Rad: 0.06
+  _Layer:
+    serializedVersion: 2
+    m_Bits: 1216
   _HitEffWeak: {fileID: 3282133958298482795, guid: 243fd90d52632b940977aef1603fab32,
     type: 3}
   _HitEffNormal: {fileID: 8365342497103962713, guid: ccd7ca9002503a348bcd76c74227e3e8,

@@ -24,21 +24,13 @@ MonoBehaviour:
     - model: {fileID: 8926484042661614558}
       id: 0
       isStickyNote: 0
-  - title: New Group Node
-    position:
-      serializedVersion: 2
-      x: 0
-      y: 0
-      width: 100
-      height: 100
-    contents: []
   stickyNoteInfos: []
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: -0
+    x: 478
     y: -190
-    width: 4038
+    width: 3560
     height: 2385
 --- !u!114 &114350483966674976
 MonoBehaviour:
@@ -96,7 +88,7 @@ MonoBehaviour:
   - name: DustSprite
     path: DustSprite
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_NamedObject
     realType: Texture2D
@@ -112,7 +104,7 @@ MonoBehaviour:
   - name: Count
     path: Count
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Int
     realType: Int32
@@ -128,7 +120,7 @@ MonoBehaviour:
   - name: Speed
     path: Speed
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -144,7 +136,7 @@ MonoBehaviour:
   - name: DustSize
     path: DustSize
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -160,7 +152,7 @@ MonoBehaviour:
   - name: DustColor
     path: DustColor
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Vector4f
     realType: Color
@@ -176,7 +168,7 @@ MonoBehaviour:
   - name: KikiSprite
     path: KikiSprite
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_NamedObject
     realType: Texture2D
@@ -192,7 +184,7 @@ MonoBehaviour:
   - name: KikiSize
     path: KikiSize
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -208,7 +200,7 @@ MonoBehaviour:
   - name: KikiColor
     path: KikiColor
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Vector4f
     realType: Color
@@ -224,7 +216,7 @@ MonoBehaviour:
   - name: RingAlpha
     path: RingAlpha
     tooltip: 
-    space: 0
+    space: -1
     spaceable: 0
     sheetType: m_Float
     realType: Single
@@ -4860,7 +4852,7 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661615423}
     - outputSlot: {fileID: 8926484042661615421}
       inputSlot: {fileID: 8926484042661615126}
-    position: {x: 580, y: 703}
+    position: {x: 566, y: 548}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661615421
@@ -9114,8 +9106,6 @@ MonoBehaviour:
   - m_Id: 0
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615783}
-      inputSlot: {fileID: 8926484042661615777}
-    - outputSlot: {fileID: 8926484042661615783}
       inputSlot: {fileID: 8926484042661615819}
     position: {x: 3032, y: 1553}
     expandedSlots: []
@@ -9209,7 +9199,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Position, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-2.0}}'
+      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-0.5}}'
     m_Space: 0
   m_Property:
     name: Position
@@ -9441,7 +9431,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Position, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-2.0}}'
+      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-0.5}}'
     m_Space: 0
   m_Property:
     name: Position
@@ -9673,7 +9663,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEditor.VFX.Position, Unity.VisualEffectGraph.Editor,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-2.0}}'
+      m_SerializableObject: '{"position":{"x":0.0,"y":0.0,"z":-0.5}}'
     m_Space: 0
   m_Property:
     name: Position

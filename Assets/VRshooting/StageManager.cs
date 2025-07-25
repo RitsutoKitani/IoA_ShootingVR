@@ -180,6 +180,18 @@ public class StageManager : MonoBehaviour
     }
 
     /// <summary>
+    /// コントローラーを振動させます
+    /// </summary>
+    /// <param name="strength"></param>
+    /// <param name="length"></param>
+    public void UIHandVibe(float strength = 1f, float length = 1f)
+    {
+        XRBaseController XRBC = (GM.instance.UIhandLeft? LeftHand : RightHand).GetComponent<XRBaseController>();
+
+        XRBC.SendHapticImpulse(strength, length);
+    }
+
+    /// <summary>
     /// ハンドUIのターゲットロックを解除します
     /// </summary>
     public void HandUnlock()

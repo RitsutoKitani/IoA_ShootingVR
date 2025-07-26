@@ -1,9 +1,17 @@
 # ninja log v5
 31	504	7751496505830272	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	ea816539da0d89f0
 22	510	7751496505925613	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2026a065c7cd19b1
+0	532	7751496506159381	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	7dad0517c2cc7d10
 39	512	7751496505947003	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	c110647cfc358d6c
 48	515	7751496505983653	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	49f906fe37dfaa6b
-0	532	7751496506159381	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	7dad0517c2cc7d10
 14	569	7751496506529347	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2c0b3f2537efd8e8
 7	595	7751496506771853	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f0bbdf14acf69f9
 595	752	7751496507944640	C:/Users/kitan/GitHub/IoA_ShootingVR/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/1w2m1u6x/obj/arm64-v8a/libgame.so	8b5f225fedb2f7e7
+26	666	7752259530533898	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	ea816539da0d89f0
+37	673	7752259530664949	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	c110647cfc358d6c
+53	680	7752259530730333	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	49f906fe37dfaa6b
+1	702	7752259530985322	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	7dad0517c2cc7d10
+45	730	7752259531258265	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	2c0b3f2537efd8e8
+18	733	7752259531298453	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	2026a065c7cd19b1
+9	747	7752259531414634	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	f0bbdf14acf69f9
+747	954	7752259533027634	C:/Users/kitan/GitHub/IoA_ShootingVR/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/Debug/1w2m1u6x/obj/arm64-v8a/libgame.so	8b5f225fedb2f7e7

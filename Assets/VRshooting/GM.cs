@@ -78,7 +78,8 @@ public class GM : MonoBehaviour
 
         AudioSource seAS = se.GetComponent<AudioSource>();
         se.transform.position = pos.position;
+        seAS.clip = clip;
         seAS.volume = SEvol * volume;
-        seAS.PlayOneShot(clip);
+        seAS.Play();
     }
 }

@@ -86,6 +86,8 @@ public class MainGun : MonoBehaviour
     [SerializeField] private AudioClip _ReloadFinishSE;
     #endregion
 
+    [Header("ïêäÌç\Ç¶SE")][SerializeField] private AudioClip _HoldSE;
+
     private void Start()
     {
         _ani = GetComponent<Animator>();
@@ -275,6 +277,7 @@ public class MainGun : MonoBehaviour
 
     public void HoldSubHand(Transform subhand = null)
     {
+        if (_HoldSE) GM.instance.PlayOneSE(_HoldSE, transform);
         _SubHand = subhand;
     }
 }

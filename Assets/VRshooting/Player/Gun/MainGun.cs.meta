@@ -3,7 +3,18 @@ guid: 1678b11af22f90e4bb7ae5527ae3dc01
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _MainHand: {instanceID: 0}
+  - _SubHand: {instanceID: 0}
+  - _Data: {instanceID: 0}
+  - _ShotPos: {instanceID: 0}
+  - _SubHandle: {instanceID: 0}
+  - _Aimline: {instanceID: 0}
+  - _AimUI: {instanceID: 0}
+  - _rSEcs: {instanceID: 0}
+  - _ReloadingSE: {instanceID: 0}
+  - _ReloadFinishSE: {instanceID: 0}
+  - _HoldSE: {fileID: 8300000, guid: 7bc627f824acd124688300c93af880cd, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

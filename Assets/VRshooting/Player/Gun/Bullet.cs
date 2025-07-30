@@ -27,10 +27,21 @@ public class Bullet : MonoBehaviour
     [SerializeField][Header("ヒットエフェクト（壁）")] private GameObject _HitEffWall;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
+    [Space(30)]
+    [SerializeField][Header("ダメージ表記")] private GameObject _TextNotation;
+    [SerializeField][Header("ダメージ表記カラー（弱点）")] private Color _TNcolorWeak;
+    [SerializeField][Header("ダメージ表記カラー（通常")] private Color _TNcolorNormal;
+
+
     private void Awake()
     {
         //_rb = GetComponent<Rigidbody>();
         _StartPos = transform.position;
+    }
+
+    private void OnEnable()
+    {
+        _HitCol = null;
     }
 
     private void Update()
@@ -38,14 +49,14 @@ public class Bullet : MonoBehaviour
         float distance = (transform.position - _StartPos).sqrMagnitude;
         if (distance > _LimitDistance * _LimitDistance) _Vanish();
 
-        transform.position += transform.forward * _Speed * Time.deltaTime;
-
-        if(Physics.SphereCast(transform.position, _Rad, transform.forward, out _Hit, _Speed * Time.deltaTime, _Layer))
+        if (Physics.SphereCast(transform.position, _Rad, transform.forward, out _Hit, _Speed * Time.deltaTime + _Rad, _Layer))
         {
             if (_Hit.collider == _HitCol) return;
             _HitCol = _Hit.collider;
             _HitEvent(_HitCol, _Hit.point);
         }
+
+        transform.position += transform.forward * _Speed * Time.deltaTime;
     }
 
     private void _HitEvent(Collider other, Vector3 pos)
@@ -55,9 +66,16 @@ public class Bullet : MonoBehaviour
         if (other.GetComponent<EnemyHitBox>())
         {
             EnemyHitBox ene = other.GetComponent<EnemyHitBox>();
-            ene.EneCs.Damage(Mathf.FloorToInt(_Atk * ene.Pene));
-            if (ene.Pene <= 0.9f) Effect = _HitEffNormal;
-            else Effect = _HitEffWeak;
+            ene.EneCs.Damage(_Atk, ene.Pene);
+
+            Effect = ene.Pene > 0.9f ? _HitEffWeak : _HitEffNormal;
+
+            if(_TextNotation) //ダメージ表記オブジェ作成
+            {
+                Color TextColor = ene.Pene > 0.9f ? _TNcolorWeak : _TNcolorNormal;
+                GameObject tn = ObjPool.instance.MakeObjByList(_TextNotation, pos, transform.rotation);
+                tn.GetComponent<TextNotation>().Initialize(Mathf.FloorToInt(_Atk * ene.Pene).ToString(), 0.5f, TextColor, 0.8f);
+            }
         }
 
         if (Effect) ObjPool.instance.MakeObjByList(Effect, pos, transform.rotation);

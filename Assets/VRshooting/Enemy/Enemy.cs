@@ -27,6 +27,9 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     [Header("コライダー")] private Collider[] _cols;
 
+    [Space(30)]
+    [SerializeField][Header("ダメージ効果音（効果抜群）")] private AudioClip _DamageEffSE;
+    [SerializeField][Header("ダメージ効果音（通常）")] private AudioClip _DamageSE;
 
     private Vector3 _FirstPos;
     public Vector3 FirstPos { get => _FirstPos; }
@@ -44,9 +47,16 @@ public class Enemy : MonoBehaviour
     /// ダメージ
     /// </summary>
     /// <param name="damage"></param>
-    public void Damage(int damage)
+    public void Damage(int damage, float pene = 1.0f)
     {
-        _Hp -= damage;
+        _Hp -= Mathf.FloorToInt(damage * pene);
+
+        if (_DamageEffSE && _DamageSE)
+        {
+            AudioClip DamageClip = _DamageSE;
+            if (pene > 0.9) DamageClip = _DamageEffSE;
+            GM.instance.PlayOneSE(DamageClip, transform, 1f, Random.Range(0.9f, 1.1f)); //ダメージ効果音再生
+        }
 
         if (_Hp <= 0)
         {

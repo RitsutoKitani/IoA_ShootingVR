@@ -1312,6 +1312,8 @@ MonoBehaviour:
     Count: 10
   - Obj: {fileID: 944159201174548283, guid: ac278167b5ed0aa4ba8050398f56b2a5, type: 3}
     Count: 5
+  - Obj: {fileID: 3865928111787063369, guid: 1de19e3fbc9b7634592b316f081f2917, type: 3}
+    Count: 10
 --- !u!114 &108472025
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3169,7 +3171,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -3881,7 +3883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EneCs: {fileID: 1936726640517270147}
-  _Pene: 0.6
+  _Pene: 0.5
 --- !u!65 &293603105
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6963,7 +6965,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7971,7 +7973,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EneCs: {fileID: 1936726640517270147}
-  _Pene: 0.6
+  _Pene: 0.5
 --- !u!65 &553204094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11630,7 +11632,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12142,7 +12144,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -18850,7 +18852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EneCs: {fileID: 1936726640517270147}
-  _Pene: 0.6
+  _Pene: 0.5
 --- !u!65 &1455526683
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19175,7 +19177,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1467082437}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -19698,7 +19700,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1483425140}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -19942,7 +19944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EneCs: {fileID: 1936726640517270147}
-  _Pene: 0.6
+  _Pene: 0.5
 --- !u!65 &1519052179
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -25324,7 +25326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _EneCs: {fileID: 1936726640517270147}
-  _Pene: 0.6
+  _Pene: 0.5
 --- !u!65 &2063219826
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26733,7 +26735,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1535673444884249122
 GameObject:
   m_ObjectHideFlags: 0
@@ -27345,6 +27347,8 @@ MonoBehaviour:
   _FinishDel: 0
   _ani: {fileID: 0}
   _cols: []
+  _DamageEffSE: {fileID: 8300000, guid: 77890caef0b11444c95471f7961f3bb7, type: 3}
+  _DamageSE: {fileID: 8300000, guid: 8fbfb821bae6bba4585f9e4daebe13bf, type: 3}
 --- !u!4 &1952718963847020287
 Transform:
   m_ObjectHideFlags: 0

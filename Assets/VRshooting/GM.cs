@@ -57,7 +57,7 @@ public class GM : MonoBehaviour
     /// </summary>
     /// <param name="clip"></param>
     /// <param name="pos"></param>
-    public void PlayOneSE(AudioClip clip, Transform pos, float volume = 1f)
+    public void PlayOneSE(AudioClip clip, Transform pos, float volume = 1f, float pitch = 1f)
     {
         GameObject se = null;
         foreach (GameObject obj in _SEobjList)
@@ -80,6 +80,7 @@ public class GM : MonoBehaviour
         se.transform.position = pos.position;
         seAS.clip = clip;
         seAS.volume = SEvol * volume;
+        seAS.pitch = pitch;
         seAS.Play();
     }
 }

@@ -369,6 +369,8 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -465,6 +467,8 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -866,6 +870,8 @@ SkinnedMeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 3
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1030,7 +1036,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6224941526675411529
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1044,6 +1050,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1150,6 +1157,8 @@ MonoBehaviour:
   _FinishDel: 0
   _ani: {fileID: 0}
   _cols: []
+  _DamageEffSE: {fileID: 8300000, guid: 77890caef0b11444c95471f7961f3bb7, type: 3}
+  _DamageSE: {fileID: 8300000, guid: 8fbfb821bae6bba4585f9e4daebe13bf, type: 3}
 --- !u!114 &4739227326504518142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1253,6 +1262,7 @@ MonoBehaviour:
   _DecTimer: 0
   _StopTimer: 0
   _TestGizmoPreview: 1
+  _CheckGizmoPos: 0
 --- !u!114 &3724833477279912082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,6 +1345,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _RandomStart: 0
   _vfx: []
+  _VibePow: 0
+  _VibeLen: 0
 --- !u!114 &882785606831443407
 MonoBehaviour:
   m_ObjectHideFlags: 0

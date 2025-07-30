@@ -21,10 +21,8 @@ public class MainGun : MonoBehaviour
     [Space(10)]
     [SerializeField][Header("銃データ")] private GunData _Data;
 
-    [SerializeField]
-    [Header("発射位置")] private Transform _ShotPos;
-    [SerializeField]
-    [Header("サブ持ち手")] private Transform _SubHandle;
+    [SerializeField][Header("発射位置")] private Transform _ShotPos;
+    [SerializeField][Header("サブ持ち手")] private Transform _SubHandle;
     public Transform SubHandle { get => _SubHandle; }
 
     public GunData Data { get => _Data; }
@@ -41,22 +39,16 @@ public class MainGun : MonoBehaviour
 
     [Space(30)]
 
-    [SerializeField]
-    [Header("照準UI距離")] private float _AimUIdistance;
-    [SerializeField]
-    [Header("照準UIサイズ[距離]")] AnimationCurve _AimUIsize;
+    [SerializeField][Header("照準UI距離")] private float _AimUIdistance;
+    [SerializeField][Header("照準UIサイズ[距離]")] AnimationCurve _AimUIsize;
     [SerializeField][Header("照準UIrayレイヤーマスク")] private LayerMask _AimUIrayLayer;
 
-    [SerializeField]
-    [Header("ラインレンダラー")] private LineRenderer _Aimline;
+    [SerializeField][Header("ラインレンダラー")] private LineRenderer _Aimline;
 
-    [SerializeField, Range(0f, 1f)]
-    [Header("片手ブレ補正")] private float _OHstabi;
-    [SerializeField, Range(0f, 1f)]
-    [Header("両手ブレ補正")] private float _BHstabi;
+    [SerializeField, Range(0f, 1f)][Header("片手ブレ補正")] private float _OHstabi;
+    [SerializeField, Range(0f, 1f)][Header("両手ブレ補正")] private float _BHstabi;
 
-    [SerializeField]
-    [Header("武器切り替え時間")] private float _GunChangeTime;
+    [SerializeField][Header("武器切り替え時間")] private float _GunChangeTime;
     public float GunChangeTime { get => _GunChangeTime;}
 
     [Space(30)]
@@ -86,7 +78,9 @@ public class MainGun : MonoBehaviour
     [SerializeField] private AudioClip _ReloadFinishSE;
     #endregion
 
-    [Header("武器構えSE")][SerializeField] private AudioClip _HoldSE;
+    [Space(30)]
+    [SerializeField][Header("射撃SE")]  private AudioClip _ShotSE;
+    [SerializeField][Header("武器構えSE")] private AudioClip _HoldSE;
 
     private void Start()
     {
@@ -165,8 +159,6 @@ public class MainGun : MonoBehaviour
         if (!_ShotPos){
             Debug.LogError("発射位置が設定されていません"); return; }
 
-
-
         if (_MagazineBullet <= 0) return;
 
         float DiffAngle = 0f;
@@ -187,6 +179,7 @@ public class MainGun : MonoBehaviour
 
         _MainXRBC.SendHapticImpulse(0.6f, 0.05f); //持ち手に振動
         if (_SubHand) _SubXRBC.SendHapticImpulse(0.6f, 0.05f); //反対の手にも振動
+        if (_ShotSE) GM.instance.PlayOneSE(_ShotSE, _ShotPos, 0.6f, Random.Range(0.95f, 1.05f)); //SE再生
         if (_ani) _ani.SetTrigger("Shot");
     }
 

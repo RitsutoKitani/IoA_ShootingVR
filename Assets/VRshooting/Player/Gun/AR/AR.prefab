@@ -650,6 +650,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _ReloadFinishSE: {fileID: 8300000, guid: cb192ce2f40c28f4ca5b801365d513a3, type: 3}
+  _ShotSE: {fileID: 8300000, guid: d8c669619d158314684b785074c93219, type: 3}
   _HoldSE: {fileID: 8300000, guid: 7bc627f824acd124688300c93af880cd, type: 3}
 --- !u!114 &8818259061315394955
 MonoBehaviour:

@@ -6,6 +6,9 @@ using UnityEngine.VFX;
 public class AniClip : MonoBehaviour
 {
     [SerializeField]
+    [Header("タイムスケールの影響を受ける")] private bool _UseTimeScale;
+
+    [SerializeField]
     [Header("アニメーションの開始位置をランダム化")] private bool _RandomStart;
 
     [SerializeField]
@@ -20,6 +23,12 @@ public class AniClip : MonoBehaviour
         if(GetComponent<Animator>()) _ani = GetComponent<Animator>();
 
         if(_ani && _RandomStart) _ani.Play(_ani.GetCurrentAnimatorStateInfo(0).shortNameHash, 0, Random.Range(0f, 1f));
+    }
+
+    private void Update()
+    {
+        if (!_UseTimeScale) return;
+        _ani.speed = StageManager.instance.TimeScale;
     }
 
     public void PlaySE(AudioClip SE)

@@ -9,16 +9,19 @@ public class GunSlot : MonoBehaviour
 
     private GunData _Data;
     public GunData Data { get => _Data; }
+    private ButtonClip _ButtonClip;
     private Button _Button;
 
     private void Start()
     {
-        _Button = GetComponent<Button>();
+        if(GetComponent<ButtonClip>()) _ButtonClip = GetComponent<ButtonClip>();
+        if(GetComponent<Button>()) _Button = GetComponent<Button>();
     }
 
     private void Update()
     {
-        _Button.interactable = interact;
+        if(_ButtonClip) _ButtonClip.InterActive = interact;
+        if(_Button) _Button.interactable = interact;
     }
 
     public void SetData(GunData data)

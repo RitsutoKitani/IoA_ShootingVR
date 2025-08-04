@@ -26,6 +26,12 @@ public class EnemyBullet : MonoBehaviour
 
     private void Update()
     {
+        if (GM.instance.IsPose)
+        {
+            _rb.velocity = Vector3.zero;
+            return;
+        }
+
         MoveUpdate();
 
             float distance = (transform.position - _StartPos).sqrMagnitude;
@@ -36,14 +42,14 @@ public class EnemyBullet : MonoBehaviour
     {
         float dis = Vector3.SqrMagnitude(transform.position - StageManager.instance.DomeCs.transform.position);
         transform.localScale = Vector3.one * _DisSizeCurve.Evaluate(dis / _StartDis);
+        _rb.velocity = transform.forward * _Status.Speed * StageManager.instance.TimeScale;
 
+        if (_tr.Count <= 0) return;
         foreach (var tr in _tr)
         {
             tr.startWidth = transform.localScale.x;
             tr.endWidth = transform.localScale.x;
         }
-
-        _rb.velocity = transform.forward * _Status.Speed;
     }
 
     protected void OnTriggerEnter(Collider other)

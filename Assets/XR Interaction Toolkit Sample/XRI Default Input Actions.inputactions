@@ -2870,6 +2870,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pose",
+                    "type": "Button",
+                    "id": "fa175072-b273-4094-86d1-f497e5430b48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -2914,6 +2923,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "GunChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d9c165b8-7aac-4a81-9709-c16e4bc492c8",
+                    "path": "<XRController>{LeftHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pose",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2963,6 +2983,15 @@
                     "name": "LRchange",
                     "type": "Button",
                     "id": "9b8cf622-f2c6-4a82-bf50-cfd83d75a8d8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pose",
+                    "type": "Button",
+                    "id": "4633f3da-148a-47da-b253-2496cbf16f37",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -3022,6 +3051,17 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "GunChange",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f61e6440-24cb-4794-a3d6-1bb2f7edff9c",
+                    "path": "<XRController>{RightHand}/{PrimaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pose",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

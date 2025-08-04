@@ -78,16 +78,16 @@ public class EnemySplineMove : MonoBehaviour
 
         if (_Stop || _EneCs.Hp <= 0)
         {
-            if(_DecTimer > 0f) _DecTimer -= Time.deltaTime;
+            if(_DecTimer > 0f) _DecTimer -= Time.deltaTime * StageManager.instance.TimeScale;
             else _DecTimer = 0f;
         }
         else
         {
-            if (_DecTimer < _DecTime) _DecTimer += Time.deltaTime;
+            if (_DecTimer < _DecTime) _DecTimer += Time.deltaTime * StageManager.instance.TimeScale;
             else _DecTimer = _DecTime;
         }
 
-        _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime) * Time.deltaTime;
+        _SplinePos += Speed * Mathf.Lerp(0, 1, _DecTimer / _DecTime) * Time.deltaTime * StageManager.instance.TimeScale;
     }
 
     /// <summary>

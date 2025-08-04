@@ -13,19 +13,21 @@ public class FadeControl : MonoBehaviour
 
     [Space(30)]
 
-    [SerializeField]
-    private Volume _volume;
+    [SerializeField][Header("ライティングのボリュームコンポーネント")] private Volume _volume;
     private ColorAdjustments _ColorAdjust;
-    [SerializeField]
-    [Header("フェード時の背景色")]private Color _FilterColor = Color.white;
+    [SerializeField][Header("フェード時の背景色")]private Color _FilterColor = Color.white;
     [SerializeField, Range(0f, 1f)] private float _BlackFade;
 
     [Space(30)]
     [SerializeField]
-    [Header("読み込みゲージ")] private Image _Gage;
+    [Header("ポーズUI")] private CanvasGroup _PoseGroup;
+    [SerializeField, Range(0f, 1f)] private float _PoseAlpha;
 
     [Space(30)]
-    [SerializeField] private UnityEvent _FadeInEvent;
+    [SerializeField][Header("読み込みゲージ")] private Image _Gage;
+
+    [Space(30)]
+    [SerializeField][Header("フェードイン終了時のイベント")] private UnityEvent _FadeInEvent;
 
     private void Awake()
     {
@@ -36,6 +38,7 @@ public class FadeControl : MonoBehaviour
     private void Update()
     {
         if (!_ColorAdjust) return;
+        if (_PoseGroup) _PoseGroup.alpha = _PoseAlpha;
         _ColorAdjust.colorFilter.value = Color.Lerp(_FilterColor, Color.black, _BlackFade);
     }
 
@@ -49,6 +52,25 @@ public class FadeControl : MonoBehaviour
         _ani.SetTrigger("FadeOut");
 
         StartCoroutine(LoadScene(nextScene));
+    }
+
+    public void Pose()
+    {
+        Debug.Log("ポーズ");
+        GM.instance.IsPose = !GM.instance.IsPose;
+        _ani.SetBool("Pose", GM.instance.IsPose);
+        if (GM.instance.IsPose)
+        {
+            StageManager.instance.TimeScale = 0f;
+            //StageManager.instance.OriginCmaeraChange(1);
+            if (_PoseGroup) _PoseGroup.blocksRaycasts = true;
+        }
+        else
+        {
+            StageManager.instance.TimeScale = 1f;
+            //StageManager.instance.OriginCmaeraChange(0);
+            if (_PoseGroup) _PoseGroup.blocksRaycasts = false;
+        }
     }
 
     IEnumerator LoadScene(int SceneNum)

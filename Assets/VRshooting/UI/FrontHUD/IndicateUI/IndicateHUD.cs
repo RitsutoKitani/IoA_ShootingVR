@@ -27,7 +27,6 @@ public class IndicateHUD : MonoBehaviour
         for (int i = 0; i < _EneIconPool.ObjList.Count; i++)
         {
             GameObject icon = _EneIconPool.ObjList[i];
-            Transform camera = StageManager.instance.CameraObj.transform;
 
             if (ActEnemy.Count <= i)
             {

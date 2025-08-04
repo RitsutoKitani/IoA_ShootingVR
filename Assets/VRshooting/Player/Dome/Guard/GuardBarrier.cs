@@ -20,7 +20,7 @@ public class GuardBarrier : MonoBehaviour
     [Space(30)]
 
     [SerializeField] private ToggleButton _toggle;
-    [SerializeField] private Image _Gage;
+    [SerializeField] private Image _Gage; //ÉQÅ[ÉW
     private Animator _ani;
 
     private void Start()
@@ -31,8 +31,10 @@ public class GuardBarrier : MonoBehaviour
 
     private void Update()
     {
+        if (GM.instance.IsPose) return;
+
         _Guard = _toggle.Toggle && !_GuardLock;
-        _toggle.Interactable = !_GuardLock;
+        _toggle.Interactable = !_GuardLock && !GM.instance.IsPose;
         _ani.SetBool("Guard", _Guard);
         if (_Gage)
         {
@@ -53,7 +55,7 @@ public class GuardBarrier : MonoBehaviour
         }
         else
         {
-            if (_GuardTimer < _GuardTimeMax) _GuardTimer += Time.deltaTime * _GageUpSpeed;
+            if (_GuardTimer < _GuardTimeMax) _GuardTimer += Time.deltaTime * StageManager.instance.TimeScale * _GageUpSpeed;
             if (_GuardLock && _GuardTimer / _GuardTimeMax > 0.5f) _GuardLock = false;
         }
         

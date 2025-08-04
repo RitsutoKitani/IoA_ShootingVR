@@ -50,6 +50,7 @@ public class GM : MonoBehaviour
     public void SceneReset()
     {
         SetMainGunsCs = new List<MainGun>();
+        IsPose = false;
     }
 
     /// <summary>

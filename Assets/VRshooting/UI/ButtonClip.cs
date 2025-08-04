@@ -1,36 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ButtonClip : MonoBehaviour
 {
-    [SerializeField]
-    [Header("タッチ時バイブレーション")] private VibeInfo _TouchVibe;
-    [SerializeField]
-    [Header("タッチ時SE")] private AudioClip _TouchSE;
+    private Animator _ani;
+    public bool InterActive = true;
+    [SerializeField] private UnityEvent _Event;
 
     [Space(30)]
-    [SerializeField]
-    [Header("クリック時バイブレーション")] private VibeInfo _ClickVibe;
-    [SerializeField]
-    [Header("クリック時SE")] private AudioClip _ClickSE;
+    [SerializeField][Header("タッチ時")] private EventInfo _TouchInfo;
+    [SerializeField][Header("クリック時")] private EventInfo _ClickInfo;
 
+    private void Start()
+    {
+        if(GetComponent<Animator>()) _ani = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if(_ani) _ani.SetBool("Active", InterActive);
+    }
 
     public void Touch()
     {
-        StageManager.instance.UIHandVibe(_TouchVibe.strength, _TouchVibe.length);
-        GM.instance.PlayOneSE(_TouchSE, transform);
+        if (!InterActive) return;
+        StageManager.instance.UIHandVibe(_TouchInfo.strength, _TouchInfo.length);
+        GM.instance.PlayOneSE(_TouchInfo.SE, transform);
+
+        if(_ani) _ani.SetBool("Touch", true);
+    }
+
+    public void UnTouche()
+    {
+        if (_ani) _ani.SetBool("Touch", false);
     }
 
     public void Click()
     {
-        StageManager.instance.UIHandVibe(_ClickVibe.strength, _ClickVibe.length);
-        GM.instance.PlayOneSE(_ClickSE, transform);
+        if (!InterActive) return;
+        StageManager.instance.UIHandVibe(_ClickInfo.strength, _ClickInfo.length);
+        GM.instance.PlayOneSE(_ClickInfo.SE, transform);
+
+        _Event.Invoke();
+
+        if (_ani) _ani.SetTrigger("Click");
     }
 
     [System.Serializable]
-    public class VibeInfo
+    public class EventInfo
     {
+        public AudioClip SE;
+
         public float strength;
         public float length;
     }

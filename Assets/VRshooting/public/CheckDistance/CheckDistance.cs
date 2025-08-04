@@ -20,10 +20,7 @@ public class CheckDistance : MonoBehaviour
         float distance = Vector3.Distance(transform.position, _target.position);
         _text.text = string.Format("{0:0.0} m", distance);
 
-        if (StageManager.instance.CameraObj)
-        {
-            transform.rotation = Quaternion.LookRotation(transform.position - _target.position);
-        }
+        transform.rotation = Quaternion.LookRotation(transform.position - _target.position);
 
         if (_Canvas)
         {

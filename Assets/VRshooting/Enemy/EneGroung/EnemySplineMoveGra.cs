@@ -110,11 +110,11 @@ public class EnemySplineMoveGra : MonoBehaviour
         if (direction.sqrMagnitude > 0.001f && _isGround && !_Stop && _DecTimer > 0f) //‰ñ“]
         {
             Quaternion lookRotation = Quaternion.LookRotation(direction);
-            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 4f * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, 4f * Time.fixedDeltaTime * StageManager.instance.TimeScale);
         }
 
         float splineLength = _spline.CalculateLength();
-        float step = (currentSpeed * Time.fixedDeltaTime) / splineLength;
+        float step = (currentSpeed * Time.fixedDeltaTime * StageManager.instance.TimeScale) / splineLength;
         _SplinePos += step;
         _SplinePos = Mathf.Clamp01(_SplinePos);
     }
@@ -144,19 +144,19 @@ public class EnemySplineMoveGra : MonoBehaviour
     {
         if (_Stop || _EneCs.Hp <= 0)
         {
-            if (_DecTimer > 0f) _DecTimer -= Time.deltaTime;
+            if (_DecTimer > 0f) _DecTimer -= Time.deltaTime * StageManager.instance.TimeScale;
             else _DecTimer = 0f;
         }
         else
         {
-            if (_DecTimer < _DecTime) _DecTimer += Time.deltaTime;
+            if (_DecTimer < _DecTime) _DecTimer += Time.deltaTime * StageManager.instance.TimeScale;
             else _DecTimer = _DecTime;
         }
 
         if (!_Stop) return;
         if (_StopTimer > 0f)
         {
-            _StopTimer -= Time.deltaTime;
+            _StopTimer -= Time.deltaTime * StageManager.instance.TimeScale;
             return;
         }
 

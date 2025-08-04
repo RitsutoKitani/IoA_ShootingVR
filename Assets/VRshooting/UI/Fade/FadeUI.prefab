@@ -276,7 +276,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2756787341264735131}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _volume: {fileID: 0}
   _FilterColor: {r: 1, g: 1, b: 1, a: 1}
-  _BlackFade: 1
+  _BlackFade: 0
   _Gage: {fileID: 8877388520348128244}
   _FadeInEvent:
     m_PersistentCalls:
@@ -379,7 +379,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6920558367643719995}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0

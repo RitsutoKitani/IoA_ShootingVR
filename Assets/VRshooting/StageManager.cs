@@ -1,6 +1,7 @@
 using NUnit;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.XR.CoreUtils;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -11,6 +12,8 @@ using UnityEngine.XR.Interaction.Toolkit.Inputs;
 public class StageManager : MonoBehaviour
 {
     public static StageManager instance;
+
+    public float TimeScale = 1.0f;
 
     [SerializeField] private int _Score;
     [SerializeField] private int[] _LankScore = new int[3];
@@ -35,15 +38,14 @@ public class StageManager : MonoBehaviour
     [SerializeField][Header("チュートリアル終了時間")] private float _TutorialFinTime;
 
     [Space(30)]
-    [SerializeField]
-    private InputActionManager _IAM;
-    [HideInInspector]
-    public InputActionAsset IAA { get => _IAM.actionAssets[0]; }
-
+    [SerializeField] private InputActionManager _IAM;
+    [HideInInspector] public InputActionAsset IAA { get => _IAM.actionAssets[0]; }
+    private InputAction _PoseAct;
+    [SerializeField] private FadeControl _Fade;
 
     [Header("プレイヤー")] public GameObject Player;
-    [Header("カメラ")] public GameObject CameraObj;
 
+    [Space(30)]
     [Header("右手オブジェクト")] public GameObject RightHand;
     [Header("左手オブジェクト")] public GameObject LeftHand;
     [Header("ガードバリア")] public GuardBarrier GuardBarrier;
@@ -60,17 +62,23 @@ public class StageManager : MonoBehaviour
 
     private void Start()
     {
+        if (IAA)
+        {
+            string ActionMap = GM.instance.LeftMain ? "GunAction R" : "GunAction L";
+            _PoseAct = IAA.FindActionMap(ActionMap).FindAction("Pose");
+        }
     }
 
     private void Update()
     {
+        if (_PoseAct.WasPressedThisFrame() && _Fade) _Fade.Pose();
         if (!_StageActive || GM.instance.IsPose) return;
         _StageUpdate();
     }
 
     private void _StageUpdate()
     {
-        _StageTimer += Time.deltaTime;
+        _StageTimer += Time.deltaTime * TimeScale;
         bool EneCheck = false;
 
         foreach (EnemyInfo enemy in _Enemys) //敵活動開始！
@@ -208,7 +216,6 @@ public class StageManager : MonoBehaviour
         _StageActive = active;
     }
 
-
     [System.Serializable]
     public class EnemyInfo
     {
@@ -228,5 +235,6 @@ public class StageManager : MonoBehaviour
         [HideInInspector]
         public bool sortie = false;
     }
+
 }
 

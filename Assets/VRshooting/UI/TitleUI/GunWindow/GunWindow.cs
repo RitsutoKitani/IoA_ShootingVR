@@ -42,7 +42,7 @@ public class GunWindow : MonoBehaviour
 
     [Space(30)]
 
-    [SerializeField] private Button _SelectButton;
+    [SerializeField][Header("ïêäÌåàíËÉ{É^Éì")] private ButtonClip _SelectButton;
 
     private void Start()
     {
@@ -80,7 +80,7 @@ public class GunWindow : MonoBehaviour
             _slots[i].SetData(GM.instance.SetMainGun[i]);
             _slots[i].interact = _SelectSlot != i;
         }
-        _SelectButton.interactable = _SelectData != GM.instance.SetMainGun[_SelectSlot];
+        _SelectButton.InterActive = _SelectData != GM.instance.SetMainGun[_SelectSlot];
 
         if (!_SlotMeshFilter || !_SlotMeshRenderer) return;
         _StatusDataSet(false, Data);
@@ -95,7 +95,7 @@ public class GunWindow : MonoBehaviour
             slotCs.interact = _SelectData != slotCs.Data;
         }
 
-        _SelectButton.interactable = _SelectData != GM.instance.SetMainGun[_SelectSlot];
+        _SelectButton.InterActive = _SelectData != GM.instance.SetMainGun[_SelectSlot];
         _StatusDataSet(true, Data);
     }
 

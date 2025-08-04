@@ -46,17 +46,19 @@ public class Bullet : MonoBehaviour
 
     private void Update()
     {
+        if (GM.instance.IsPose) return;
+
         float distance = (transform.position - _StartPos).sqrMagnitude;
         if (distance > _LimitDistance * _LimitDistance) _Vanish();
 
-        if (Physics.SphereCast(transform.position, _Rad, transform.forward, out _Hit, _Speed * Time.deltaTime + _Rad, _Layer))
+        if (Physics.SphereCast(transform.position, _Rad, transform.forward, out _Hit, _Speed * Time.deltaTime * StageManager.instance.TimeScale + _Rad, _Layer))
         {
             if (_Hit.collider == _HitCol) return;
             _HitCol = _Hit.collider;
             _HitEvent(_HitCol, _Hit.point);
         }
 
-        transform.position += transform.forward * _Speed * Time.deltaTime;
+        transform.position += transform.forward * _Speed * Time.deltaTime * StageManager.instance.TimeScale;
     }
 
     private void _HitEvent(Collider other, Vector3 pos)

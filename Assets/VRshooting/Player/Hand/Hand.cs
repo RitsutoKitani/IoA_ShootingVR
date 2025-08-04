@@ -48,7 +48,7 @@ public class Hand : MonoBehaviour
 
     private void Update()
     {
-        if (GM.instance.SetMainGunsCs.Count <= 0) return;
+        if (GM.instance.SetMainGunsCs.Count <= 0 || GM.instance.IsPose) return;
 
         _UseGun = GM.instance.SetMainGunsCs[GM.instance.UseGun].gameObject;
         _UseGunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];

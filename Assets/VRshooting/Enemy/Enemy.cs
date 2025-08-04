@@ -38,9 +38,13 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        _ani = GetComponent<Animator>();;
-
+        _ani = GetComponent<Animator>();
         _FirstPos = transform.position;
+    }
+
+    private void Update()
+    {
+        if(_ani) _ani.speed = GM.instance.IsPose ? 0.0f : 1.0f;
     }
 
     /// <summary>

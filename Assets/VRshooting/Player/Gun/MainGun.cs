@@ -101,18 +101,8 @@ public class MainGun : MonoBehaviour
 
     void Update()
     {
-        if (!_MainHand)
-        {
-            Debug.Log("メイン手が設定されてませんでした");
-            Destroy(gameObject);
-            return;
-        }
-
-        if(CanShot) _ShotUpdate();
-
+        transform.position = _MainHand.position; //銃を手の位置に
         _IndicatorUpdate();
-
-        transform.position = _MainHand.position;
 
         Quaternion AimRot = _MainHand.rotation;
         float Stabi = _OHstabi;
@@ -125,25 +115,35 @@ public class MainGun : MonoBehaviour
 
         transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, Stabi);
 
+        if (GM.instance.IsPose) //ポーズ時サブハンドを外して終了
+        {
+            _SubHand = null;
+            return;
+        }
+
+        if(CanShot) _ShotUpdate();
 
         if (_ani) _ani.SetBool("Reloading", _Reloading);
         if (_GunReloadAct.WasPerformedThisFrame() && _MagazineBullet < Data.MagazineBulletMax && !_Reloading) _ReloadStart();
     }
 
+    /// <summary>
+    /// 射撃関連更新
+    /// </summary>
     private void _ShotUpdate()
     {
         _rSEcs.isPlaying = _Reloading;
         if (_Reloading)
         {
             _rSEcs.Volume = _ReloadingVolume.Evaluate(_ReloadTimer / Data.ReloadTime);
-            if (_ReloadTimer < Data.ReloadTime) _ReloadTimer += Time.deltaTime;
+            if (_ReloadTimer < Data.ReloadTime) _ReloadTimer += Time.deltaTime * StageManager.instance.TimeScale;
             else _ReloadFinish();
             return;
         }
 
         if (_ShotTimer < Data.ShotInterval)
         {
-            _ShotTimer += Time.deltaTime;
+            _ShotTimer += Time.deltaTime * StageManager.instance.TimeScale;
             return;
         }
 
@@ -206,6 +206,9 @@ public class MainGun : MonoBehaviour
         _ShotTimer = Data.ShotInterval;
     }
 
+    /// <summary>
+    /// インジケータ更新
+    /// </summary>
     private void _IndicatorUpdate()
     {
         if (!_ShotPos) return;

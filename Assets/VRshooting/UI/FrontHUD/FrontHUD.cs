@@ -36,9 +36,7 @@ public class FrontHUD : MonoBehaviour
 
     private void _CanvasUpdate()
     {
-        Transform Camera = StageManager.instance.CameraObj.transform;
-
-        Vector3 LookPos = Camera.transform.position + Camera.transform.forward * 8f;
+        Vector3 LookPos = Camera.main.transform.position + Camera.main.transform.forward * 8f;
 
         if (!_TurnTestToggle.isOn) LookPos = transform.position + Vector3.forward * 8f;
 

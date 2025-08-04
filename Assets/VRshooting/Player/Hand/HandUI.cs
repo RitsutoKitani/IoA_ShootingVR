@@ -72,7 +72,7 @@ public class HandUI : MonoBehaviour
         }
 
         RaycastHit hit;
-        if(_XRRI.TryGetCurrent3DRaycastHit(out hit))
+        if(_XRRI.TryGetCurrent3DRaycastHit(out hit) && !GM.instance.IsPose)
         {
             ishit = true;
             HitPos = hit.point;
@@ -122,7 +122,7 @@ public class HandUI : MonoBehaviour
 
         _lr.SetPositions(lrPos);
         _pointer.position = lrPos[1];
-        _pointer.rotation = Quaternion.LookRotation(lrPos[1] - StageManager.instance.CameraObj.transform.position);
+        _pointer.rotation = Quaternion.LookRotation(lrPos[1] - Camera.main.transform.position);
         _HandAni.SetBool("HandGun", ishit || _AutoObj);
         _RayAni.SetBool("Touch", ishit);
         if (_PointerAni) _PointerAni.SetBool("Active", ishit || _AutoObj);

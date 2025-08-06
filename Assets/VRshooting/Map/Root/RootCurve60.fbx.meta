@@ -8,17 +8,17 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: DarkGray
-    second: {fileID: 2100000, guid: 206d6506955566c44b03a21094152935, type: 2}
+    second: {fileID: 2100000, guid: e1cd4b17531a41744a853199361b0fb1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Light
-    second: {fileID: 2100000, guid: 3cbcd8a111204b44e8c4ebb7fd36ca8b, type: 2}
+    second: {fileID: 2100000, guid: e9d38f04eb4f3cf4cb87c673d5fa665d, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: LightGray
-    second: {fileID: 2100000, guid: f7e7e9f35d11f5a46a85e814e1c2ab95, type: 2}
+    second: {fileID: 2100000, guid: 9283f4ff0e23c57478641dd8ee48d234, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -31,8 +31,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

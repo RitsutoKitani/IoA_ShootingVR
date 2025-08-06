@@ -39,6 +39,8 @@ public class MainGun : MonoBehaviour
 
     [Space(30)]
 
+    [SerializeField] private GameObject _AimUI;
+    [SerializeField] private GameObject _FrameUI;
     [SerializeField][Header("照準UI距離")] private float _AimUIdistance;
     [SerializeField][Header("照準UIサイズ[距離]")] AnimationCurve _AimUIsize;
     [SerializeField][Header("照準UIrayレイヤーマスク")] private LayerMask _AimUIrayLayer;
@@ -52,7 +54,6 @@ public class MainGun : MonoBehaviour
     public float GunChangeTime { get => _GunChangeTime;}
 
     [Space(30)]
-    [SerializeField] private GameObject _AimUI;
 
     #region//VR入力関連
     private bool _Left;
@@ -226,8 +227,13 @@ public class MainGun : MonoBehaviour
         {
             float UIdis = hit.distance;
             if (hit.distance > _AimUIdistance || !ishit) UIdis = _AimUIdistance;
-            _AimUI.transform.localScale = Vector3.one * _AimUIsize.Evaluate(UIdis);
+            _AimUI.transform.localScale = Vector3.one * 0.002f * _AimUIsize.Evaluate(UIdis);
             _AimUI.transform.localPosition = new Vector3(0, 0, UIdis);
+        }
+
+        if (_FrameUI)
+        {
+            _FrameUI.transform.localPosition = new Vector3(0, 0, 5f);
         }
     }
 
@@ -273,7 +279,7 @@ public class MainGun : MonoBehaviour
 
     public void HoldSubHand(Transform subhand = null)
     {
-        if (_HoldSE) GM.instance.PlayOneSE(_HoldSE, transform);
+        if (_HoldSE && subhand) GM.instance.PlayOneSE(_HoldSE, transform);
         _SubHand = subhand;
     }
 }

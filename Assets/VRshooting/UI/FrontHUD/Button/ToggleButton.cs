@@ -15,6 +15,9 @@ public class ToggleButton : MonoBehaviour
     private Animator _ani;
     private XRSimpleInteractable _XRSI;
 
+    [SerializeField] private AudioClip _TouchSE;
+    [SerializeField] private AudioClip _ClickSE;
+
     private void Start()
     {
         _ani = GetComponent<Animator>();
@@ -30,6 +33,7 @@ public class ToggleButton : MonoBehaviour
     public void ToggleChange()
     {
         if (_PressType || GM.instance.IsPose) return;
+        if (_ClickSE) GM.instance.PlayOneSE(_ClickSE, transform);
         _Toggle = !_Toggle;
         _ani.SetTrigger("Click");
         _ani.SetBool("Toggle", _Toggle);
@@ -38,6 +42,7 @@ public class ToggleButton : MonoBehaviour
     public void TogglePress(bool press)
     {
         if(!_PressType || !Interactable || GM.instance.IsPose) return;
+        if (_ClickSE) GM.instance.PlayOneSE(_ClickSE, transform);
         _Toggle = press;
         _ani.SetBool("Toggle", _Toggle);
         if (press) _ani.SetTrigger("Click");
@@ -51,6 +56,7 @@ public class ToggleButton : MonoBehaviour
 
     public void TouchOnOff(bool touch)
     {
+        if (_TouchSE) GM.instance.PlayOneSE(_TouchSE, transform);
         _ani.SetBool("Touch", touch);
     }
 }

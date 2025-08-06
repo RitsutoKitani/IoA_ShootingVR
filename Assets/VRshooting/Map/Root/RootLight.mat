@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BuilldingWindow
+  m_Name: RootLight
   m_Shader: {fileID: -6465566751694194690, guid: b8f029ec309072a489af89c2d4c8530d,
     type: 3}
   m_Parent: {fileID: 0}
@@ -129,12 +129,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.5229619, g: 0.9612117, b: 0.9811321, a: 1}
-    - _BaseEmision: {r: 0.071422204, g: 0.1356688, b: 0.14150941, a: 1}
+    - _BaseColor: {r: 0.4575472, g: 0.97758466, b: 1, a: 1}
+    - _BaseEmision: {r: 0.13510145, g: 0.39355633, b: 0.41509432, a: 1}
     - _Color: {r: 0.7028302, g: 0.9867925, b: 1, a: 1}
     - _EmissionColor: {r: 0.03991634, g: 0.16639121, b: 0.21698111, a: 1}
-    - _SmokeColor: {r: 0.21929511, g: 0.46965313, b: 0.6037736, a: 1}
-    - _SmokeHeight: {r: -16, g: -60, b: 0, a: 0}
+    - _SmokeColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
+    - _SmokeHeight: {r: -20, g: -50, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

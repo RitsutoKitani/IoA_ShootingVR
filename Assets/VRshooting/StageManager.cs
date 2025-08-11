@@ -160,6 +160,7 @@ public class StageManager : MonoBehaviour
     public void StageFinish()
     {
         Debug.Log("ステージ終了！");
+        DataManager.instance.AddData(new ScoreData(_Score, "Test", GM.instance.SetMainGun[0].Name, GM.instance.SetMainGun[1].Name));
         if (_ResultCs) _ResultCs.ResultStart();
     }
 

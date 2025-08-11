@@ -86,6 +86,10 @@ public class GunWindow : MonoBehaviour
         _StatusDataSet(false, Data);
     }
 
+    /// <summary>
+    /// e‘I‘ğUIXV
+    /// </summary>
+    /// <param name="Data"></param>
     public void BsetData(GunData Data)
     {
         _SelectData = Data;

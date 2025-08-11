@@ -104,7 +104,7 @@ public class TutorialManager : MonoBehaviour
 
     private void _QuestUpadate()
     {
-        if(_Clear || !_Active || GM.instance.SetMainGunsCs.Count == 0) return;
+        if(_Clear || !_Active || GM.instance.SetMainGunsCs.Count < 3) return;
 
         MainGun GunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
         GameObject MainHand = GM.instance.LeftMain ? StageManager.instance.LeftHand : StageManager.instance.RightHand;

@@ -8,21 +8,22 @@ public class GM : MonoBehaviour
 {
     [Header("ポーズ中")] public bool IsPose;
 
-    [Space(40)]
+    [Space(30)]
     [Header("ステージマネージャー")] public StageManager StageManager;
 
-    [Space(20)]
+    [Space(30)]
     [Header("左手が利き手")] public bool LeftMain;
     [Header("チュートリアルスキップ")] public bool TutorialSkip;
     [Header("UIハンド")] public bool UIhandLeft;
 
-    [Space(20)]
-    [Header("セットメイン武器")] public List<GunData> SetMainGun;
-    [Header("使用メイン武器番号")] public int UseGun = 0;
-    [Header("セットサブ武器")] public GameObject SetSubGun;
+    [Space(30)]
+    [Header("セット中武器")] public List<GunData> SetMainGun;
+    [Header("使用武器番号")] public int UseGun = 0;
     [ReadOnly] public List<MainGun> SetMainGunsCs; //セット武器オブジェクト
+    [SerializeField][Header("銃リスト")] private GunData[] _GunList;
+    public GunData[] GunList { get => _GunList; }
 
-    [Space(40)]
+    [Space(30)]
     [SerializeField, Range(0f, 1f)]
     [Header("BGM音量")] public float BGMvol;
     [SerializeField, Range(0f, 1f)]
@@ -51,6 +52,16 @@ public class GM : MonoBehaviour
     {
         SetMainGunsCs = new List<MainGun>();
         IsPose = false;
+    }
+
+    public GunData GunSearchByName(string name)
+    {
+        GunData gunData = null;
+        for(int i = 0; i < _GunList.Length; i++)
+        {
+            if(_GunList[i].Name == name) return _GunList[i];
+        }
+        return gunData;
     }
 
     /// <summary>

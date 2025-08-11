@@ -158,7 +158,7 @@ public class EnemySplineMove : MonoBehaviour
     {
         if (_spline && _TestGizmoPreview)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_TestSplinePos));
             Gizmos.DrawSphere(_spline.EvaluatePosition(_TestSplinePos), 1f);
 
             Gizmos.color = Color.yellow;

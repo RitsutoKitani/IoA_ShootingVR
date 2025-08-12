@@ -25,4 +25,14 @@ public class RankingScore : MonoBehaviour
         if (_WeaponImageA) _WeaponImageA.sprite = GM.instance.GunSearchByName(data.WeaponA) ? GM.instance.GunSearchByName(data.WeaponA).Icon : _GunDefaultIcon;
         if (_WeaponImageB) _WeaponImageB.sprite = GM.instance.GunSearchByName(data.WeaponB) ? GM.instance.GunSearchByName(data.WeaponB).Icon : _GunDefaultIcon;
     }
+
+    public void InitializeByData(ScoreData data, int rank)
+    {
+        if (_RankText) _RankText.text = (rank + 1).ToString();
+        if (_NameText) _NameText.text = data.Name != "" ? data.Name : "-----";
+        if (_ScoreText) _ScoreText.text = data.Score.ToString("00000000");
+        if (_WeaponImageA) _WeaponImageA.sprite = GM.instance.GunSearchByName(data.WeaponA) ? GM.instance.GunSearchByName(data.WeaponA).Icon : _GunDefaultIcon;
+        if (_WeaponImageB) _WeaponImageB.sprite = GM.instance.GunSearchByName(data.WeaponB) ? GM.instance.GunSearchByName(data.WeaponB).Icon : _GunDefaultIcon;
+    }
 }
+

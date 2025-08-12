@@ -13,6 +13,7 @@ public class KeyBoard : MonoBehaviour
 
     [Space(30)]
     [SerializeField] private Text _TextUI;
+    [SerializeField] private ButtonClip _EnterButton;
 
     #region//文字変換用ディクショナリ
     public static readonly Dictionary<char, char[]> SmallKana = new Dictionary<char, char[]>
@@ -53,6 +54,11 @@ public class KeyBoard : MonoBehaviour
         { 'ホ', new char[] { 'ホ', 'ボ', 'ポ' } }
     };
     #endregion
+
+    private void Update()
+    {
+        _EnterButton.InterActive = _TextData.Length > 0;
+    }
 
     public void DataReset(int length)
     {

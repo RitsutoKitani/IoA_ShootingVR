@@ -261,9 +261,9 @@ public class MainGun : MonoBehaviour
     }
 
     /// <summary>
-    /// 武器切り替え時の設定。出現させる場合は「InRot」に手の位置情報を入れてください
+    /// 武器切り替え時の設定。しまう武器の時はOutをtrueにしてください
     /// </summary>
-    /// <param name="InRot"></param>
+    /// <param name="Out"></param>
     public void GunChangeSetting(bool Out)
     {
         if (Out)

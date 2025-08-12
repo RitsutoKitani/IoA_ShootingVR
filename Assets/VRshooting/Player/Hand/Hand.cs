@@ -70,11 +70,11 @@ public class Hand : MonoBehaviour
 
         if (_HandAni)
         {
-            _HandAni.SetBool("TriggerGrip", GM.instance.LeftMain == _Left);
+            _HandAni.SetBool("GunGrip", GM.instance.LeftMain == _Left && GM.instance.SetMainGunsCs.Count > 0);
             _HandAni.SetBool("Grip", (GM.instance.LeftMain != _Left) && (_UseGunCs.SubHand));
         }
 
-        if (_HandUI) _HandUI.Active = GM.instance.LeftMain != _Left && !_UseGunCs.SubHand;
+        if (_HandUI) _HandUI.Active = GM.instance.LeftMain != _Left && !_UseGunCs.SubHand || GM.instance.SetMainGunsCs.Count == 0;
     }
 
     private void LateUpdate()
@@ -149,10 +149,12 @@ public class Hand : MonoBehaviour
         */
     }
 
-    //武器が消える
+    /// <summary>
+    /// 武器が消える
+    /// </summary>
     private void _GunDitherOutUpdate()
     {
-        if (_NextNum < 0) return;
+        if (_NextNum == -1) return;
 
         ControlMat ctrlMat = _UseGun.GetComponent<ControlMat>();
         
@@ -163,14 +165,17 @@ public class Hand : MonoBehaviour
         }
         else
         {
-            _GunChange(_NextNum);
+            if (_NextNum == -2) _GunRemove();
+            else _GunChange(_NextNum);
         }
     }
 
-    //武器が現れる
+    /// <summary>
+    /// 武器が現れる
+    /// </summary>
     private void _GunDitherInUpdate()
     {
-        if (_NextNum >= 0) return;
+        if (_NextNum != -1) return;
         if (!_UseGun.GetComponent<ControlMat>()) return;
 
         ControlMat ctrlMat = _UseGun.GetComponent<ControlMat>();
@@ -194,22 +199,42 @@ public class Hand : MonoBehaviour
         GM.instance.SetMainGunsCs[num].GunChangeSetting(false);
         GM.instance.UseGun = num;
     }
+    /// <summary>
+    /// 武器を全て非アクティブ、削除する
+    /// </summary>
+    private void _GunRemove(bool destroy = false)
+    {
+        foreach(MainGun gunCs in GM.instance.SetMainGunsCs)
+        {
+            if(!destroy) gunCs.gameObject.SetActive(false);
+            else Destroy(gunCs.gameObject);
+
+            GM.instance.SetMainGunsCs = new List<MainGun>(0);
+        }
+    }
 
     /// <summary>
-    /// 武器を切り替える
+    /// 武器を切り替える（負の数の場合は武器を削除）
     /// </summary>
     /// <param name="gunNum">切り替え先の武器番号</param>
     public void GunChangeStart(int gunNum)
     {
-        if (GM.instance.SetMainGunsCs.Count < gunNum) return;
-        if (gunNum == GM.instance.UseGun) return;
+        if (GM.instance.SetMainGunsCs.Count < gunNum) return; //範囲外だったら
+        if (gunNum == GM.instance.UseGun) return; //同じ武器（番号）の指定だったら
 
         Debug.Log("銃切り替え : " + gunNum);
 
-        if(_UseGunCs.Reloading) _UseGunCs.ReloadCancel();
+        if(_UseGunCs.Reloading) _UseGunCs.ReloadCancel(); //リロードを中止
 
+        if (gunNum < 0)//武器削除の場合
+        {
+            GM.instance.SetMainGunsCs[GM.instance.UseGun].GunChangeSetting(true);
+            _NextNum = -2;
+            return;
+        }
+        
+        
         _NextNum = gunNum;
-
         if (_UseGun.GetComponent<ControlMat>()) //dither処理できる場合
         {
             MainGun GunCs = GM.instance.SetMainGunsCs[GM.instance.UseGun];
@@ -217,7 +242,7 @@ public class Hand : MonoBehaviour
             _GunChangeTimer = GunCs.GunChangeTime;
             _GunChangeTime = GunCs.GunChangeTime;
         }
-        else //できない場合
+        else //できない場合すぐに
         {
             _GunChange(_NextNum);
         }

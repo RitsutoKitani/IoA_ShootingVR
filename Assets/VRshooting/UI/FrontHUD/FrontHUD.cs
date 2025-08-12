@@ -23,9 +23,18 @@ public class FrontHUD : MonoBehaviour
     [Header("スコアランク表示UI")][SerializeField] private Text _RankText;
     [Header("スコア表示UI")][SerializeField] private Text _ScoreText;
 
+    private Animator _ani;
+
+    private void Start()
+    {
+        _ani = GetComponent<Animator>();
+    }
+
     void Update()
     {
         if(!StageManager.instance) return;
+
+        if (_ani) _ani.SetBool("Hide", StageManager.instance.finish);
 
         _CanvasUpdate();
 

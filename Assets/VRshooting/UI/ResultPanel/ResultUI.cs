@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class ResultUI : MonoBehaviour
 {
-    [SerializeField] private Text _ScoreText;
+    [Header("テキスト（スコア）")][SerializeField] private Text _ScoreText;
     [SerializeField, Range(0,1f)] private float _TextToScore;
 
-    [SerializeField] private Image _ScoreGage;
+    [Header("ゲージ（スコア）")][SerializeField] private Image _ScoreGage;
     [SerializeField, Range(0, 1f)] private float _GageToScore;
 
-    [SerializeField] private Text _RankText;
+    [Header("評価（A、Sなど）テキスト")][SerializeField] private Text _RankText;
+
+    [Space(30)]
+    [SerializeField] private RankingScore _RankUI;
+    [SerializeField] private KeyBoard _keyBoardUI;
+
+    private int _rank = -1; //順位
+    private ScoreData _ClearData;
 
     private Animator _ani;
 
@@ -54,11 +61,36 @@ public class ResultUI : MonoBehaviour
 
     public void ResultCheck()
     {
-        _ani.SetTrigger("Check");
+        AnimatorStateInfo state = _ani.GetCurrentAnimatorStateInfo(0);
+        if(state.normalizedTime < 1f) //アニメーション再生中であればスキップ
+        {
+            _ani.Play(state.fullPathHash, 0, 0.999f);
+            _ani.Update(0f);
+            return;
+        }
+
+        if (_rank < 0 || !_RankUI) _ani.SetTrigger("RetryBack"); //ランキング外の場合
+        else //ランキング内の場合
+        {
+            _RankUI.InitializeByData(_ClearData, _rank);
+            _ani.SetTrigger("Ranking");
+        }
     }
 
-    public void ResultStart()
+    /// <summary>
+    /// 入力した名前でランキングに追加
+    /// </summary>
+    public void RankingDataSet()
     {
+        _ClearData.Name = _keyBoardUI.TextData;
+        DataManager.instance.AddData(_ClearData);
+        _ani.SetTrigger("RetryBack");
+    }
+
+    public void ResultStart(ScoreData data, int rank = -1)
+    {
+        _ClearData = data;
+        _rank = rank;
         _ani.SetTrigger("Result");
     }
 }

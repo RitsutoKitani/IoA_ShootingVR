@@ -20,6 +20,10 @@ public class StageManager : MonoBehaviour
     public int[] LankScore { get => _LankScore; }
 
     public int Score { get => _Score; }
+    private ScoreData _ClearData;
+    public ScoreData ClearData { get => _ClearData; }
+    private int _ClearRank = -1;
+    public int ClearRank { get => _ClearRank; }
 
     [SerializeField][Header("ステージが稼働中か")] private bool _StageActive = false;
     public bool StageActive { get => _StageActive; }
@@ -27,6 +31,7 @@ public class StageManager : MonoBehaviour
     [SerializeField][Header("ステージ全体時間")] private float _StageTime;
     [SerializeField][Header("ステージ進行時間")] private float _StageTimer = 0.0f;
     private bool _finish = false;
+    public bool finish { get => _finish; }
 
     [Space(30)]
     [SerializeField][Header("敵活動リスト")] private List<EnemyInfo> _Enemys = new List<EnemyInfo>();
@@ -107,7 +112,7 @@ public class StageManager : MonoBehaviour
 
         if(_ActEnemys.Count > 0) EneCheck = true;
 
-        if (_StageTimer > _StageTime && !EneCheck && !_finish)
+        if (_StageTimer > _StageTime && !EneCheck && !_finish) //ステージ時間を超えていて活動中の敵がいないとき
         {
             StageFinish();
             _finish = true;
@@ -160,8 +165,23 @@ public class StageManager : MonoBehaviour
     public void StageFinish()
     {
         Debug.Log("ステージ終了！");
-        DataManager.instance.AddData(new ScoreData(_Score, "Test", GM.instance.SetMainGun[0].Name, GM.instance.SetMainGun[1].Name));
-        if (_ResultCs) _ResultCs.ResultStart();
+
+        _ClearData = new ScoreData(_Score, "", GM.instance.SetMainGun[0].Name, GM.instance.SetMainGun[1].Name);
+        ScoreData[] ranking = DataManager.instance.MainData.ScoreData;
+        _ClearRank = -1;
+        for (int i = 0; i < ranking.Length; i++)
+        {
+            if (_Score > ranking[i].Score)
+            {
+                _ClearRank = i;
+                break;
+            }
+        }
+
+
+        MainSubHand(false).GetComponent<Hand>().GunChangeStart(-1); //武器をしまう
+        if (_ResultCs) _ResultCs.ResultStart(_ClearData, _ClearRank);
+        Debug.Log("今回の順位は" + (_ClearRank < 0 ? "ランキング外でした   " : _ClearRank));
     }
 
     /// <summary>

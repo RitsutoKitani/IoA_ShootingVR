@@ -47,6 +47,7 @@ public class StageManager : MonoBehaviour
     [HideInInspector] public InputActionAsset IAA { get => _IAM.actionAssets[0]; }
     private InputAction _PoseAct;
     [SerializeField] private FadeControl _Fade;
+    public FadeControl Fade { get => _Fade; }
 
     [Header("プレイヤー")] public GameObject Player;
 
@@ -166,6 +167,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("ステージ終了！");
 
+        _StageActive = false;
         _ClearData = new ScoreData(_Score, "", GM.instance.SetMainGun[0].Name, GM.instance.SetMainGun[1].Name);
         ScoreData[] ranking = DataManager.instance.MainData.ScoreData;
         _ClearRank = -1;

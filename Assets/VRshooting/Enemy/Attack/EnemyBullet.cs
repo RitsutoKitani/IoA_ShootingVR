@@ -11,6 +11,7 @@ public class EnemyBullet : MonoBehaviour
     [SerializeField] private float _GuardPene = 0f;
     private Vector3 _StartPos;
     private float _StartDis;
+    private Vector3 _StartSize;
     [Header("距離におけるサイズ")][SerializeField] private AnimationCurve _DisSizeCurve;
     [SerializeField][Header("トレイルレンダラー")] private List<TrailRenderer> _tr = new List<TrailRenderer>();
 
@@ -22,6 +23,7 @@ public class EnemyBullet : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _StartPos = transform.position;
         _StartDis = Vector3.SqrMagnitude(transform.position - StageManager.instance.DomeCs.transform.position);
+        _StartSize = transform.localScale;
     }
 
     private void Update()
@@ -41,7 +43,7 @@ public class EnemyBullet : MonoBehaviour
     protected virtual void MoveUpdate()
     {
         float dis = Vector3.SqrMagnitude(transform.position - StageManager.instance.DomeCs.transform.position);
-        transform.localScale = Vector3.one * _DisSizeCurve.Evaluate(dis / _StartDis);
+        transform.localScale = _StartSize * _DisSizeCurve.Evaluate(dis / _StartDis);
         _rb.velocity = transform.forward * _Status.Speed * StageManager.instance.TimeScale;
 
         if (_tr.Count <= 0) return;

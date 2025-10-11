@@ -689,6 +689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _UseTimeScale: 0
   _RandomStart: 0
   _vfx:
   - {fileID: 8511989450295236720}
@@ -707,13 +708,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ShotPos: {fileID: 3506230730702667231}
-  _Bullet: {fileID: 7405893749740642319, guid: 1de1ee256d77971428f2e55012699361, type: 3}
+  _Bullet: {fileID: 7405893749740642319, guid: 686b6fd31e0cf7c448941db68bdf3bc0, type: 3}
   _Status:
     Speed: 50
-    Atk: 12
+    Atk: 30
     LimitDistance: 500
     HitEff: {fileID: 0}
-  _ChargeTime: 5
+  _ChargeTime: 6.5
   _ShotInterval: 1.5
   _TurnSpeed: 0.104
   _PointerColor: {r: 1, g: 0.19215687, b: 0.24705882, a: 1}
@@ -721,6 +722,7 @@ MonoBehaviour:
   _lrs:
   - {fileID: 7680752050308175872}
   _Charging: 0
+  _Looking: 0
   _EneCs: {fileID: 9064041576354927163}
   _ani: {fileID: 8105596132778105568}
   _splineMoveCs: {fileID: 0}

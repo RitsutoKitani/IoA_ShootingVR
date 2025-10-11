@@ -10393,7 +10393,7 @@ MonoBehaviour:
   _BarrierHitEffect: {fileID: 944159201174548283, guid: a178b8a78b47e944684b42a023498747,
     type: 3}
   _TargetPos: {x: 0, y: 0, z: 0}
-  _torque: 0.006
+  _torque: 0.01
   _PurgeDis: 35
   _PurgeUp: 1.5
 --- !u!114 &6713271507068059510
@@ -10431,6 +10431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _UseTimeScale: 0
   _RandomStart: 0
   _vfx: []
   _VibePow: 0

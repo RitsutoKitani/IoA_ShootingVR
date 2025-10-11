@@ -25,6 +25,11 @@ public class TitleMeshButton : MonoBehaviour
         if (touch && TitleUI.instance) TitleUI.instance.HelpText.text = _helpText;
     }
 
+    public void SendText()
+    {
+        if(TitleUI.instance) TitleUI.instance.HelpText.text = _helpText;
+    }
+
     public void ChangeInteractable(bool interactable)
     {
         _Interactable = interactable;

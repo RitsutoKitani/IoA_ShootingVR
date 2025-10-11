@@ -670,8 +670,8 @@ MonoBehaviour:
     NoGuideTime: 0.6
   _Bullet: {fileID: 7405893749740642319, guid: 1de1ee256d77971428f2e55012699361, type: 3}
   _ShotPos: {fileID: 5954407242305515703}
-  _ShotChargeTime: 4
-  _ShotInterval: 0.2
+  _ShotChargeTime: 8
+  _ShotInterval: 0.16
   _TurnSpeed: 60
   _TurnCurve:
     serializedVersion: 2

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class ObjPool : MonoBehaviour
@@ -15,7 +14,8 @@ public class ObjPool : MonoBehaviour
 
     [SerializeField, ReadOnly]private List<ObjPoolInfo> PoolList = new List<ObjPoolInfo>();
 
-    [SerializeField] private PreMake[] PreMakeObjs;
+    [SerializeField] private GameObject[] _PreVFX;
+    private List<GameObject> _PreObjs;
 
     private void Awake()
     {
@@ -24,24 +24,28 @@ public class ObjPool : MonoBehaviour
 
     private void Start()
     {
-        foreach (var pre in PreMakeObjs)
-        {
-            if(!pre.Obj || pre.Count <= 0) continue;
+        _PreObjs = new List<GameObject>();
 
+        foreach (var pre in _PreVFX)
+        {
             ObjPoolInfo opi = new ObjPoolInfo();
-            opi.Obj = pre.Obj;
+            opi.Obj = pre;
             opi.ObjList = new List<GameObject>();
 
-            while (pre.Count > 0)
-            {
-                GameObject obj = Instantiate(pre.Obj, transform.position, transform.rotation);
-                obj.SetActive(false);
-                opi.ObjList.Add(obj);
-                pre.Count--;
-            }
+            GameObject obj = Instantiate(pre, transform.position, transform.rotation);
+            opi.ObjList.Add(obj);
 
-            PoolList.Add(opi);
+            //PoolList.Add(opi);
+            _PreObjs.Add(obj);
         }
+
+        Invoke("_PreFin", 0.5f);
+    }
+
+    private void _PreFin()
+    {
+        foreach (var obj in _PreObjs) obj.SetActive(false);
+        if (StageManager.instance.Fade) StageManager.instance.Fade.FinFadeIn();
     }
 
     public GameObject MakeObj(ObjPoolInfo opi, Vector3 pos, Quaternion rot)
@@ -89,13 +93,6 @@ public class ObjPool : MonoBehaviour
         opi.ObjList = new List<GameObject>();
         PoolList.Add(opi);
         return MakeObj(opi, pos, rot);
-    }
-
-    [System.Serializable]
-    public class PreMake
-    {
-        public GameObject Obj;
-        public int Count;
     }
 }
 

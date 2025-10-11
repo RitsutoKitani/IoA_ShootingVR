@@ -45,7 +45,6 @@ public class GM : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
     }
 
     public void SceneReset()

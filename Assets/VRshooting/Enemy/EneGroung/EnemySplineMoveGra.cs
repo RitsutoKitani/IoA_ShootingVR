@@ -187,7 +187,7 @@ public class EnemySplineMoveGra : MonoBehaviour
             Gizmos.DrawSphere(_spline.EvaluatePosition(action.StopStartPos), 0.6f);
         }
 
-        Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_CheckGizmoPos));
+        Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_CheckGizmoPos) - 1f);
         Gizmos.DrawCube(_spline.EvaluatePosition(_CheckGizmoPos), Vector3.one);
     }
 }

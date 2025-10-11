@@ -11,7 +11,7 @@ public class EnemyFly : MonoBehaviour
     [SerializeField][Header("˜AŽËŠÔŠu")] private float _ShotInterval;
 
     [Space(30)]
-    [SerializeField, Range(0f, 1f)] private float _TurnSpeed;
+    [SerializeField, Range(0f, 1f)][Header("‰ñ“]‘¬“x")] private float _TurnSpeed;
 
     [Space(30)]
     [SerializeField] private Color _PointerColor;
@@ -19,7 +19,9 @@ public class EnemyFly : MonoBehaviour
     [SerializeField] private LineRenderer[] _lrs;
     private GameObject _WarningUI;
 
+    [Space(30)]
     [SerializeField, ReadOnly] private bool _Charging;
+    [SerializeField, ReadOnly] private bool _Looking;
     private float _timer = 0f;
     private int _BulletNum = -1;
     private Vector3 _AimPos;
@@ -48,6 +50,7 @@ public class EnemyFly : MonoBehaviour
     private void Update()
     {
         if(_Charging) _ChargeUpdate();
+        if(_Looking) _LookingUpdate();
         if(_ani) _ani.SetBool("Charging", _Charging);
         if(_splineMoveCs && !_splineMoveCs.enabled) _splineMoveCs.enabled = true;
         _PointerUpdate();
@@ -119,11 +122,6 @@ public class EnemyFly : MonoBehaviour
         if (bullet.GetComponent<EnemyBullet>()) bullet.GetComponent<EnemyBullet>().Setting(_Status);
     }
 
-    private void _ShotClip()
-    {
-
-    }
-
     private void _ShotFinish()
     {
         if (_splineMoveCs && _splineMoveCs.Stop && _BulletNum == 0)
@@ -142,5 +140,25 @@ public class EnemyFly : MonoBehaviour
             lr.SetPosition(0, _ShotPos.position);
             lr.SetPosition(1, _AimPos);
         }
+    }
+
+    public void LookStart(float time = 1f)
+    {
+        _Looking = true;
+        _timer = time;
+    }
+
+    private void _LookingUpdate()
+    {
+        if (_timer > 0f) _timer -= Time.deltaTime;
+        else
+        {
+            _Looking = false;
+            _splineMoveCs.StopFinish();
+        }
+
+        var diff = _AimPos - transform.position;
+        var targetRot = Quaternion.LookRotation(diff);
+        transform.rotation = Quaternion.Lerp(transform.rotation, targetRot, _TurnSpeed);
     }
 }

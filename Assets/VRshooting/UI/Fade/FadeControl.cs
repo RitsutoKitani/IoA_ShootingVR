@@ -11,6 +11,8 @@ public class FadeControl : MonoBehaviour
     private AsyncOperation _async;
     private Animator _ani;
 
+    [SerializeField] private bool _AutoFadeIn;
+
     [Space(30)]
 
     [SerializeField][Header("ライティングのボリュームコンポーネント")] private Volume _volume;
@@ -33,6 +35,7 @@ public class FadeControl : MonoBehaviour
     {
         _ani = GetComponent<Animator>();
         if (_volume) _volume.profile.TryGet(out _ColorAdjust);
+        if (_AutoFadeIn) FinFadeIn();
     }
 
     private void Update()
@@ -90,6 +93,11 @@ public class FadeControl : MonoBehaviour
         Debug.Log($"シーン{SceneNum}をロード完了！");
         if (_Gage) _Gage.fillAmount = 1f;
         _async.allowSceneActivation = true;
+    }
+
+    public void FinFadeIn()
+    {
+        _ani.SetTrigger("FadeIn");
     }
 
     private void _FadeInEveClip()

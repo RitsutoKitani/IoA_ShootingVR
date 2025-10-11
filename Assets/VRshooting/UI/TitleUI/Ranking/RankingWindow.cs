@@ -9,9 +9,12 @@ public class RankingWindow : MonoBehaviour
     [SerializeField] private Transform _RankingContent;
     [SerializeField] private ScrollRect _SR;
 
+    [SerializeField] private Text _SaveFolderText;
+
     IEnumerator Start()
     {
         _ScrollCreate();
+        if (_SaveFolderText) _SaveFolderText.text = DataManager.instance.filepath;
 
         yield return null; // 1ƒtƒŒ[ƒ€‘Ò‚Â
         if(_SR) _SR.verticalNormalizedPosition = 1f;

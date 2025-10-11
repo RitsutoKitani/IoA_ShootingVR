@@ -18,12 +18,13 @@ public class EnemySplineMove : MonoBehaviour
     private float _SplineLength; //ƒXƒvƒ‰ƒCƒ“‚Ì’·‚³
     private Vector3 _OffsetPos;
 
-    [SerializeField] private bool _Stop = false;
+    [SerializeField, ReadOnly] private bool _Stop = false;
     public bool Stop { get => _Stop; }
-    [SerializeField] private float _StopTimer = 0f;
+    [SerializeField, ReadOnly] private float _StopTimer = 0f;
+
     [SerializeField] [Header("’âŽ~ŽžŒ¸‘¬ŽžŠÔ")] private float _DecTime;
     [SerializeField] private float _DecTimer = 0f;
-    private UnityEvent _StopEvent = null;
+    private UnityEvent _StopEvent;
     private bool _EventPlay = false;
 
     [Space(20)]
@@ -95,7 +96,7 @@ public class EnemySplineMove : MonoBehaviour
     /// </summary>
     private void _LookUpdate()
     {
-        if (_SplinePos == 0f || _Stop) return;
+        if (_SplinePos <  0.1f || _Stop) return;
         Quaternion LookRot = Quaternion.LookRotation(_spline.EvaluateTangent(_SplinePos));
 
         _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, LookRot, _LookLerp);
@@ -121,10 +122,18 @@ public class EnemySplineMove : MonoBehaviour
         if (_StopTimer > 0f)
         {
             _StopTimer -= Time.deltaTime;
+            if(_StopEvent.GetPersistentEventCount() <= 0)
+            {
+                var diff = StageManager.instance.DomeCs.transform.position - transform.position;
+                var targetRot = Quaternion.LookRotation(diff);
+
+                _EneBody.transform.rotation = Quaternion.Slerp(_EneBody.transform.rotation, targetRot, _LookLerp);
+            }
+
             return;
         }
 
-        if (_StopEvent != null)
+        if (_StopEvent.GetPersistentEventCount() > 0)
         {
             if (!_EventPlay)
             {
@@ -158,7 +167,7 @@ public class EnemySplineMove : MonoBehaviour
     {
         if (_spline && _TestGizmoPreview)
         {
-            Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_TestSplinePos));
+            Gizmos.color = Color.Lerp(Color.blue, Color.red, _SpeedCurve.Evaluate(_TestSplinePos) / 4f);
             Gizmos.DrawSphere(_spline.EvaluatePosition(_TestSplinePos), 1f);
 
             Gizmos.color = Color.yellow;

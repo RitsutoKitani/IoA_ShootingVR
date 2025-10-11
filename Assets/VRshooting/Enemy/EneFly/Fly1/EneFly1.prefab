@@ -289,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ad32ac3f02a664bab859c8e688c9d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _UseTimeScale: 0
   _RandomStart: 0
   _vfx:
   - {fileID: 8965493377822011282}
@@ -310,17 +311,18 @@ MonoBehaviour:
   _Bullet: {fileID: 7405893749740642319, guid: 1de1ee256d77971428f2e55012699361, type: 3}
   _Status:
     Speed: 50
-    Atk: 5
+    Atk: 10
     LimitDistance: 500
     HitEff: {fileID: 0}
-  _ChargeTime: 3
+  _ChargeTime: 4.5
   _ShotInterval: 1.5
-  _TurnSpeed: 0.104
+  _TurnSpeed: 0.03
   _PointerColor: {r: 1, g: 0.19215687, b: 0.24705882, a: 1}
   _PointerAlpha: 0
   _lrs:
   - {fileID: 3318452941381088890}
   _Charging: 0
+  _Looking: 0
   _EneCs: {fileID: 283749875844892333}
   _ani: {fileID: 6940629075317846319}
   _splineMoveCs: {fileID: 0}

@@ -14,6 +14,7 @@ public class ToggleButton : MonoBehaviour
 
     private Animator _ani;
     private XRSimpleInteractable _XRSI;
+    private Collider _col;
 
     [SerializeField] private AudioClip _TouchSE;
     [SerializeField] private AudioClip _ClickSE;
@@ -22,11 +23,13 @@ public class ToggleButton : MonoBehaviour
     {
         _ani = GetComponent<Animator>();
         _XRSI = GetComponent<XRSimpleInteractable>();
+        _col = GetComponent<Collider>();
     }
 
     private void Update()
     {
-        _XRSI.enabled = !GM.instance.IsPose;
+        _XRSI.enabled = !GM.instance.IsPose && Interactable;
+        _col.enabled = !GM.instance.IsPose && Interactable;
         if (GM.instance.IsPose && _PressType && _Toggle) ToggleSet(false);
     }
 

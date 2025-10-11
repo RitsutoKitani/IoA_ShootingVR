@@ -93,7 +93,7 @@ public class Hand : MonoBehaviour
 
         if (GM.instance.LeftMain == _Left)
         {
-            HandTra.rotation = _UseGun.transform.rotation;
+            if(GM.instance.SetMainGunsCs.Count > 0) HandTra.rotation = _UseGun.transform.rotation;
         }
         else
         {
@@ -209,8 +209,10 @@ public class Hand : MonoBehaviour
             if(!destroy) gunCs.gameObject.SetActive(false);
             else Destroy(gunCs.gameObject);
 
-            GM.instance.SetMainGunsCs = new List<MainGun>(0);
         }
+
+        GM.instance.SetMainGunsCs = new List<MainGun>(0);
+        _HandAni.gameObject.transform.rotation = Quaternion.identity;
     }
 
     /// <summary>

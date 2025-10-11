@@ -314,9 +314,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1221559b588cab94ab035a5db93f9d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _AutoFadeIn: 1
   _volume: {fileID: 0}
   _FilterColor: {r: 1, g: 1, b: 1, a: 1}
   _BlackFade: 0
+  _PoseGroup: {fileID: 0}
+  _PoseAlpha: 0
   _Gage: {fileID: 8877388520348128244}
   _FadeInEvent:
     m_PersistentCalls:

@@ -34,7 +34,7 @@ public class GuardBarrier : MonoBehaviour
         if (GM.instance.IsPose) return;
 
         _Guard = _toggle.Toggle && !_GuardLock;
-        _toggle.Interactable = !_GuardLock && !GM.instance.IsPose;
+        _toggle.Interactable = !_GuardLock && !GM.instance.IsPose && StageManager.instance.StageActive;
         _ani.SetBool("Guard", _Guard);
         if (_Gage)
         {

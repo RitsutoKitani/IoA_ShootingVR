@@ -34,6 +34,10 @@ public class PlayerDome : MonoBehaviour
     [Space(30)]
     [Header("ダメージSE")][SerializeField] private AudioClip _DamageSE;
 
+    [Space(30)]
+    [Header("ブレイクSE")][SerializeField] private AudioClip _BreakSE;
+    [SerializeField] private GameObject _BreakParticle;
+
     private void Start()
     {
         _ani = GetComponent<Animator>();
@@ -84,6 +88,9 @@ public class PlayerDome : MonoBehaviour
         handCs.GunChangeStart(2); //武器をハンドガンへ
         _Breaking = true;
         _BreakTimer = 0f;
+
+        if (_BreakSE) GM.instance.PlayOneSE(_BreakSE, transform, 1f);
+        if (_BreakParticle) _BreakParticle.SetActive(true);
     }
 
     public void Damage(int damage)

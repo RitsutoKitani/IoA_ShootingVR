@@ -2854,15 +2854,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "GunChange",
-                    "type": "Button",
-                    "id": "526b6956-71ac-4c86-bbfd-83756f2de888",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Hold",
                     "type": "Button",
                     "id": "319a7d23-fc94-45cb-8cc3-3c3a5e601ecd",
@@ -2872,9 +2863,27 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "GunChange",
+                    "type": "Button",
+                    "id": "526b6956-71ac-4c86-bbfd-83756f2de888",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Pose",
                     "type": "Button",
                     "id": "fa175072-b273-4094-86d1-f497e5430b48",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Guard",
+                    "type": "Button",
+                    "id": "75f2b5aa-4cb2-454d-993f-140deb7364e3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -2890,17 +2899,6 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "GunShot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "21342819-3a90-4283-b910-52a5e232f92c",
-                    "path": "<XRController>{LeftHand}/{GripButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Generic XR Controller",
-                    "action": "Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -2934,6 +2932,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "21342819-3a90-4283-b910-52a5e232f92c",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Generic XR Controller",
+                    "action": "Hold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6977a2a-8626-4c49-85cd-7003f370bbb2",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -2980,18 +3000,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LRchange",
+                    "name": "Pose",
                     "type": "Button",
-                    "id": "9b8cf622-f2c6-4a82-bf50-cfd83d75a8d8",
+                    "id": "4633f3da-148a-47da-b253-2496cbf16f37",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Pose",
+                    "name": "Guard",
                     "type": "Button",
-                    "id": "4633f3da-148a-47da-b253-2496cbf16f37",
+                    "id": "64bd6f32-77af-4461-bffd-3a565d26fa43",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -3018,17 +3038,6 @@
                     "processors": "",
                     "groups": "Generic XR Controller",
                     "action": "GunShot",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12e5b7a7-5504-4175-9131-5c998b33440d",
-                    "path": "<XRController>{RightHand}/{PrimaryButton}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Generic XR Controller",
-                    "action": "LRchange",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -3062,6 +3071,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pose",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d21ca8b4-20e4-4a4c-be57-ffbacbe9f6eb",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

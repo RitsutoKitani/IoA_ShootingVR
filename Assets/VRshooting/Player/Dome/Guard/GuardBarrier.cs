@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class GuardBarrier : MonoBehaviour
@@ -21,19 +22,32 @@ public class GuardBarrier : MonoBehaviour
 
     [SerializeField] private ToggleButton _toggle;
     [SerializeField] private Image _Gage; //ÉQÅ[ÉW
+
+    [Space(30)]
+    [SerializeField] private AudioSource _GuardAS;
+
+
+    private InputAction _GuardAct;
+
     private Animator _ani;
 
     private void Start()
     {
         _ani = GetComponent<Animator>();
         _GuardTimer = _GuardTimeMax;
+
+        if (StageManager.instance)
+        {
+            string ActionMap = GM.instance.LeftMain ? "GunAction R" : "GunAction L";
+            _GuardAct = StageManager.instance.IAA.FindActionMap(ActionMap).FindAction("Guard");
+        }
     }
 
     private void Update()
     {
         if (GM.instance.IsPose) return;
 
-        _Guard = _toggle.Toggle && !_GuardLock;
+        _Guard = (_toggle.Toggle || _GuardAct.IsPressed()) && !_GuardLock;
         _toggle.Interactable = !_GuardLock && !GM.instance.IsPose && StageManager.instance.StageActive;
         _ani.SetBool("Guard", _Guard);
         if (_Gage)
@@ -45,6 +59,8 @@ public class GuardBarrier : MonoBehaviour
 
         if(_Guard)
         {
+            if(_GuardAS && !_GuardAS.isPlaying) _GuardAS.Play();
+
             if (_GuardTimer > 0) _GuardTimer -= Time.deltaTime;
             else
             {
@@ -55,6 +71,8 @@ public class GuardBarrier : MonoBehaviour
         }
         else
         {
+            if(_GuardAS && _GuardAS.isPlaying) _GuardAS.Stop();
+
             if (_GuardTimer < _GuardTimeMax) _GuardTimer += Time.deltaTime * StageManager.instance.TimeScale * _GageUpSpeed;
             if (_GuardLock && _GuardTimer / _GuardTimeMax > 0.5f) _GuardLock = false;
         }

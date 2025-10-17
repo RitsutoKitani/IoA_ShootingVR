@@ -111,8 +111,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FillMax: 0.11
-    - _FillMin: -0.16
+    - _FillMax: 0.34
+    - _FillMin: -0.3
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -137,7 +137,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     - _alpha: 0.7
-    - _fill: 0
+    - _fill: 1
     - _flash: 0
     - _size: 0.008
     m_Colors:

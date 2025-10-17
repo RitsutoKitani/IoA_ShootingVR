@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5379a8b8847a3b41850795b6b0a598f, type: 3}
   m_Name: AR_Data
   m_EditorClassIdentifier: 
-  Name: AR
+  Name: "\u30A2\u30B5\u30EB\u30C8\u30E9\u30A4\u30D5\u30EB"
   Icon: {fileID: 21300000, guid: 0f8e71ba81f3a804ea99deb0a0d24937, type: 3}
   IconMesh: {fileID: -5523277661179574252, guid: d3dd6afe7814b9a43a714e268296f6fc,
     type: 3}

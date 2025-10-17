@@ -178,7 +178,7 @@ AnimationClip:
   - time: 0
     functionName: PlaySE
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: d8c669619d158314684b785074c93219,
+    objectReferenceParameter: {fileID: 8300000, guid: 01442f4ab6a3d674a93459bdb4f9f700,
       type: 3}
     floatParameter: 0
     intParameter: 0

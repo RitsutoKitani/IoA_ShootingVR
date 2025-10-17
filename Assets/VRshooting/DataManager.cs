@@ -80,6 +80,7 @@ public class DataManager : MonoBehaviour
 
     public void DataReset()
     {
-        _MainData = new SaveData();
+        for(int i = 0;i < _MainData.ScoreData.Length;i++) _MainData.ScoreData[i] = new ScoreData();
+        Save(_MainData);
     }
 }

@@ -18,6 +18,8 @@ public class Hand : MonoBehaviour
     private float _GunChangeTimer = 0f;
     private float _GunChangeTime = 0f;
 
+    private bool _MatchGunAngle = false;     //片手持ちの際に持っている武器に角度を合わせる
+
     #region//VR操作
     private InputActionAsset _IAA;
     private InputAction _GunChangeAct;
@@ -82,7 +84,7 @@ public class Hand : MonoBehaviour
         if (!_HandAni) return;
 
         Transform HandTra = _HandAni.gameObject.transform;
-        if (!_UseGunCs || !_UseGun)
+        if (!_UseGunCs || !_UseGun) //銃を持っていないとき
         {
             if (HandTra.parent != transform) HandTra.parent = transform;
             return;
@@ -91,9 +93,12 @@ public class Hand : MonoBehaviour
         HandTra.localPosition = Vector3.zero;
         //HandTra.localRotation = Quaternion.Euler(0, 0, 0);
 
-        if (GM.instance.LeftMain == _Left)
+        if (GM.instance.LeftMain == _Left)  //メインハンドの時
         {
-            if(GM.instance.SetMainGunsCs.Count > 0) HandTra.rotation = _UseGun.transform.rotation;
+            if (GM.instance.SetMainGunsCs.Count > 0)
+            {
+                HandTra.rotation = _UseGun.transform.rotation;
+            }
         }
         else
         {
@@ -133,6 +138,7 @@ public class Hand : MonoBehaviour
             gun.GetComponent<MainGun>().InitalSetting(transform, _Left);
             gun.GetComponent<ControlMat>().SetDither(0f);
             gun.gameObject.SetActive(false);
+            gun.transform.localScale = _Left ? new Vector3(1f, 1f, 1f) : new Vector3(-1f, 1f, 1f);  //右手持ちの際左右反転
             GM.instance.SetMainGunsCs.Add(gun.GetComponent<MainGun>());
         }
 
@@ -193,11 +199,16 @@ public class Hand : MonoBehaviour
     {
         _NextNum = -1;
         GM.instance.SetMainGunsCs[GM.instance.UseGun].gameObject.SetActive(false); //しまう武器を非アクティブに
-        GM.instance.SetMainGunsCs[num].gameObject.transform.rotation = transform.rotation; //取り出す武器の位置・回転を手に同期
-        GM.instance.SetMainGunsCs[num].gameObject.transform.position = transform.position;
-        GM.instance.SetMainGunsCs[num].gameObject.SetActive(true); //取り出す武器をアクティブに
-        GM.instance.SetMainGunsCs[num].GunChangeSetting(false);
+
         GM.instance.UseGun = num;
+
+        MainGun NewUseGun = GM.instance.SetMainGunsCs[num];
+        NewUseGun.gameObject.transform.rotation = transform.rotation; //取り出す武器の位置・回転を手に同期
+        NewUseGun.gameObject.transform.position = transform.position;
+        NewUseGun.gameObject.SetActive(true); //取り出す武器をアクティブに
+        NewUseGun.GunChangeSetting(false);
+
+        _MatchGunAngle = NewUseGun is GatlingGun;
     }
     /// <summary>
     /// 武器を全て非アクティブ、削除する

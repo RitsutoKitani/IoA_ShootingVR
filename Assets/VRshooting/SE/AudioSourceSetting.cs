@@ -7,6 +7,7 @@ public class AudioSourceSetting : MonoBehaviour
     [SerializeField] private AudioSource[] _AS;
     private float[] _DefoVol;
     [SerializeField] private AudioType _Type;
+    float _Fade = 0f;
 
     [Space(20)]
     [SerializeField] private Vector2 _PitchRandmize = new Vector2(1f,1f);
@@ -19,6 +20,7 @@ public class AudioSourceSetting : MonoBehaviour
 
     private void OnEnable()
     {
+        _Fade = 0f;
         foreach(var AS in _AS) AS.pitch = Random.Range(_PitchRandmize.x, _PitchRandmize.y);
     }
 
@@ -38,7 +40,10 @@ public class AudioSourceSetting : MonoBehaviour
         float volume = _Type == AudioType.SE ? GM.instance.SEvol : GM.instance.BGMvol;
         for(int i = 0; i < _AS.Length; i++)
         {
-            _AS[i].volume = _DefoVol[i] * volume;
+            _AS[i].volume = _DefoVol[i] * volume * _Fade;
         }
+
+        if (_Fade < 1f) _Fade += Time.deltaTime;
+        else _Fade = 1f;
     }
 }

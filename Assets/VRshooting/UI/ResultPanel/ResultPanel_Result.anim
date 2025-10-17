@@ -479,6 +479,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 2
     messageOptions: 0
+  - time: 0
+    functionName: PlaySE
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 15239aa8313909a459ace610cdb54224,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2
     functionName: ChangeWindow
     data: 

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5379a8b8847a3b41850795b6b0a598f, type: 3}
+  m_Name: GG_Data
+  m_EditorClassIdentifier: 
+  Name: "\u30AC\u30C8\u30EA\u30F3\u30B0\u30AC\u30F3"
+  Icon: {fileID: 21300000, guid: 730059d300e82aa4b846f6aea2c277a9, type: 3}
+  IconMesh: {fileID: 6882654099237089629, guid: 1114ccc837576854ea4123e2821cc233,
+    type: 3}
+  IconMaterials:
+  - {fileID: 2100000, guid: 2708f1b54cfcc3a4a967a94e4c8d8225, type: 2}
+  - {fileID: 2100000, guid: aeec9bec55b84b34fb1913e874012417, type: 2}
+  - {fileID: 2100000, guid: 12d489c925a18394eaa0eb6ce0b519d5, type: 2}
+  - {fileID: 2100000, guid: 5aa103be6a8f9814c888bc19679aee69, type: 2}
+  GunObj: {fileID: 3763755734927477944, guid: 2bc0723325c66254eaa4fc74c9a92b38, type: 3}
+  BulletStatus:
+    Speed: 300
+    Atk: 3
+    LimitDistance: 150
+    HitEff: {fileID: 5491253305569871425, guid: fba63042f2e9c3747a59c8609cd8c7a4,
+      type: 3}
+  MagazineBulletMax: 0
+  ShotInterval: 0.06
+  ReloadTime: 1.6
+  DiffAngleOH: 1.8
+  DiffAngleBH: 0.8

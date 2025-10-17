@@ -3,30 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Inputs;
 
 public class MainGun : MonoBehaviour
 {
-    [SerializeField, ReadOnly][Header("メイン手")] private Transform _MainHand;
+    [SerializeField, ReadOnly][Header("メイン手")] protected Transform _MainHand;
 
-    [SerializeField, ReadOnly][Header("サブ手")] private Transform _SubHand;
+    [SerializeField, ReadOnly][Header("サブ手")] protected Transform _SubHand;
     public Transform SubHand { get => _SubHand; }
+    private Vector3 _SubHandOffset;
 
     [Space(30)]
     [SerializeField]
-    private bool _CanShot = true;
+    protected bool _CanShot = true;
     public bool CanShot { get =>  _CanShot; }
 
 
     [Space(10)]
-    [SerializeField][Header("銃データ")] private GunData _Data;
+    [SerializeField][Header("銃データ")] protected GunData _Data;
 
     [SerializeField][Header("発射位置")] private Transform _ShotPos;
     [SerializeField][Header("サブ持ち手")] private Transform _SubHandle;
     public Transform SubHandle { get => _SubHandle; }
 
     public GunData Data { get => _Data; }
-    [SerializeField][Header("マガジン弾数")] private int _MagazineBullet;
+    [SerializeField][Header("マガジン弾数")] protected int _MagazineBullet;
     public int MagazineBullet { get => _MagazineBullet; }
     private float _ShotTimer = 0f;
 
@@ -47,8 +47,8 @@ public class MainGun : MonoBehaviour
 
     [SerializeField][Header("ラインレンダラー")] private LineRenderer _Aimline;
 
-    [SerializeField, Range(0f, 1f)][Header("片手ブレ補正")] private float _OHstabi;
-    [SerializeField, Range(0f, 1f)][Header("両手ブレ補正")] private float _BHstabi;
+    [SerializeField, Range(0f, 1f)][Header("片手ブレ補正")] protected float _OHstabi;
+    [SerializeField, Range(0f, 1f)][Header("両手ブレ補正")] protected float _BHstabi;
 
     [SerializeField][Header("武器切り替え時間")] private float _GunChangeTime;
     public float GunChangeTime { get => _GunChangeTime;}
@@ -60,14 +60,14 @@ public class MainGun : MonoBehaviour
     private XRBaseController _MainXRBC;
     private XRBaseController _SubXRBC;
     private InputActionAsset _IAA;
-    private InputAction _GunShotAct;
+    protected InputAction _GunShotAct;
     public InputAction GunShotAct { get => _GunShotAct; }
 
     private InputAction _GunReloadAct;
     public InputAction GunReloadAct { get => _GunReloadAct; }
     #endregion
 
-    private Animator _ani;
+    protected Animator _ani;
     private ControlMat _MatCtrl;
 
     [Space(30)]
@@ -100,12 +100,25 @@ public class MainGun : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
-        transform.position = _MainHand.position; //銃を手の位置に
+        transform.position = _MainHand.position;    //銃を手の位置に
         _IndicatorUpdate();
 
-        Quaternion AimRot = _MainHand.rotation;
+        _GunRotUpdate();
+
+        if (GM.instance.IsPose) //ポーズ時サブハンドを外して終了
+        {
+            _SubHand = null;
+            return;
+        }
+
+         _ShotUpdate();
+    }
+
+    protected virtual void _GunRotUpdate()
+    {
+        Quaternion AimRot = _MainHand.rotation;     //銃の向き
         float Stabi = _OHstabi;
         if (_SubHand)
         {
@@ -115,34 +128,28 @@ public class MainGun : MonoBehaviour
         }
 
         transform.rotation = Quaternion.Slerp(transform.rotation, AimRot, Stabi);
-
-        if (GM.instance.IsPose) //ポーズ時サブハンドを外して終了
-        {
-            _SubHand = null;
-            return;
-        }
-
-        if(CanShot) _ShotUpdate();
-
-        if (_ani) _ani.SetBool("Reloading", _Reloading);
-        if (_GunReloadAct.WasPerformedThisFrame() && _MagazineBullet < Data.MagazineBulletMax && !_Reloading) _ReloadStart();
     }
 
     /// <summary>
     /// 射撃関連更新
     /// </summary>
-    private void _ShotUpdate()
+    protected virtual void _ShotUpdate()
     {
+        if (_ani) _ani.SetBool("Reloading", _Reloading);
+        if (_GunReloadAct.WasPerformedThisFrame() && _MagazineBullet < _Data.MagazineBulletMax && !_Reloading) _ReloadStart();
+
+        if (!CanShot) return;
+
         _rSEcs.isPlaying = _Reloading;
         if (_Reloading)
         {
-            _rSEcs.Volume = _ReloadingVolume.Evaluate(_ReloadTimer / Data.ReloadTime);
-            if (_ReloadTimer < Data.ReloadTime) _ReloadTimer += Time.deltaTime * StageManager.instance.TimeScale;
+            _rSEcs.Volume = _ReloadingVolume.Evaluate(_ReloadTimer / _Data.ReloadTime);
+            if (_ReloadTimer < _Data.ReloadTime) _ReloadTimer += Time.deltaTime * StageManager.instance.TimeScale;
             else _ReloadFinish();
             return;
         }
 
-        if (_ShotTimer < Data.ShotInterval)
+        if (_ShotTimer < _Data.ShotInterval)
         {
             _ShotTimer += Time.deltaTime * StageManager.instance.TimeScale;
             return;
@@ -152,7 +159,7 @@ public class MainGun : MonoBehaviour
         if (_GunShotAct.IsPressed()) _Shot();
     }
 
-    private void _Shot()
+    protected void _Shot()
     {
         if (!ObjPool.instance) {
             Debug.LogError("ObjectPoolスクリプトがありません"); return; }
@@ -160,11 +167,11 @@ public class MainGun : MonoBehaviour
         if (!_ShotPos){
             Debug.LogError("発射位置が設定されていません"); return; }
 
-        if (_MagazineBullet <= 0) return;
+        if (_MagazineBullet <= 0 && _Data.MagazineBulletMax > 0) return;
 
         float DiffAngle = 0f;
-        if (_SubHand) DiffAngle = Data.DiffAngleBH;
-        else DiffAngle = Data.DiffAngleOH;
+        if (_SubHand) DiffAngle = _Data.DiffAngleBH;
+        else DiffAngle = _Data.DiffAngleOH;
 
         Vector2 ShotDiff = Vector2.zero;
         ShotDiff.x = Random.Range(-DiffAngle, DiffAngle);
@@ -173,10 +180,10 @@ public class MainGun : MonoBehaviour
         GameObject bullet = ObjPool.instance.MakeObj(ObjPool.instance.BulletPool, _ShotPos.position, _ShotPos.rotation); //弾生成
         bullet.transform.Rotate(transform.right, ShotDiff.y);
         bullet.transform.Rotate(transform.up, ShotDiff.x);
-        bullet.GetComponent<Bullet>().ReStatus(Data.BulletStatus);
+        bullet.GetComponent<Bullet>().ReStatus(_Data.BulletStatus);
 
         _ShotTimer = 0f;
-        _MagazineBullet--;
+        if(_Data.MagazineBulletMax > 0) _MagazineBullet--;
 
         _MainXRBC.SendHapticImpulse(0.6f, 0.05f); //持ち手に振動
         if (_SubHand) _SubXRBC.SendHapticImpulse(0.6f, 0.05f); //反対の手にも振動
@@ -242,7 +249,7 @@ public class MainGun : MonoBehaviour
     /// </summary>
     /// <param name="hand"></param>
     /// <param name="Left"></param>
-    public void InitalSetting(Transform hand, bool Left)
+    public virtual void InitalSetting(Transform hand, bool Left)
     {
         _MainHand = hand;
         _Left = Left;

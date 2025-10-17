@@ -31,6 +31,11 @@ public class EnemyFly : MonoBehaviour
     [SerializeField] private Animator _ani;
     [SerializeField] private EnemySplineMove _splineMoveCs;
 
+    [Space(30)]
+    [SerializeField] private AudioSource _ChargeAS;
+    [SerializeField] private AnimationCurve _ChargePitch;
+    [SerializeField] private AnimationCurve _ChargeVol;
+
     private void OnEnable()
     {
         if (GetComponent<Enemy>()) _EneCs = GetComponent<Enemy>();
@@ -74,6 +79,8 @@ public class EnemyFly : MonoBehaviour
         Vector3 worldDir = domeTra.TransformDirection(dir);
         _AimPos = domeTra.position + worldDir * StageManager.instance.DomeCs.Radius;
 
+        if (_ChargeAS) _ChargeAS.Play();
+
         /*
         if (ObjPool.instance)
         {
@@ -93,10 +100,16 @@ public class EnemyFly : MonoBehaviour
 
         if (_timer > 0f)
         {
+            if (_ChargeAS)
+            {
+                _ChargeAS.pitch = _ChargePitch.Evaluate(_timer / _ChargeTime);
+                _ChargeAS.volume = _ChargeVol.Evaluate(_timer / _ChargeTime) * GM.instance.SEvol;
+            }
             _timer -= Time.deltaTime;
             return;
         }
 
+        if(_ChargeAS && _ChargeAS.isPlaying) _ChargeAS.Stop();
         if (_ani) _ani.SetTrigger("Shot");
         else _Shot();
 

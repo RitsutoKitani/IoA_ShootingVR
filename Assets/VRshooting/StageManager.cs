@@ -30,6 +30,7 @@ public class StageManager : MonoBehaviour
 
     [SerializeField][Header("ステージ全体時間")] private float _StageTime;
     [SerializeField][Header("ステージ進行時間")] private float _StageTimer = 0.0f;
+    public float StageTimer { get => _StageTimer; }
     private bool _finish = false;
     public bool finish { get => _finish; }
 
@@ -41,6 +42,9 @@ public class StageManager : MonoBehaviour
 
     [Space(30)]
     [SerializeField][Header("チュートリアル終了時間")] private float _TutorialFinTime;
+    public float TutorialFinTime { get => _TutorialFinTime; }
+
+    [SerializeField] private UnityEvent _ClearEvent;
 
     [Space(30)]
     [SerializeField] private InputActionManager _IAM;
@@ -167,6 +171,7 @@ public class StageManager : MonoBehaviour
     {
         Debug.Log("ステージ終了！");
 
+        _ClearEvent.Invoke();
         _StageActive = false;
         _ClearData = new ScoreData(_Score, "", GM.instance.SetMainGun[0].Name, GM.instance.SetMainGun[1].Name);
         ScoreData[] ranking = DataManager.instance.MainData.ScoreData;

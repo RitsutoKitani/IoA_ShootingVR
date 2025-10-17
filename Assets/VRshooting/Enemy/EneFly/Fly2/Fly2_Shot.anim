@@ -3473,3 +3473,11 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.13333334
+    functionName: PlaySE
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: e61e499da72142342b19f09ee7b3deef,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

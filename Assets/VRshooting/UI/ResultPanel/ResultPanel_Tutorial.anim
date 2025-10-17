@@ -423,4 +423,12 @@ AnimationClip:
     flags: 0
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.33333334
+    functionName: PlaySE
+    data: 
+    objectReferenceParameter: {fileID: 8300000, guid: 24fcae7068e3e25479814cde1057c31d,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

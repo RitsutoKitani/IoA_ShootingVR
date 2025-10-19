@@ -51581,7 +51581,7 @@ MonoBehaviour:
   IsPose: 0
   StageManager: {fileID: 0}
   LeftMain: 0
-  TutorialSkip: 0
+  TutorialSkip: 1
   UIhandLeft: 1
   SetMainGun:
   - {fileID: 11400000, guid: 54faa1756f39ba340b0a33c851dfaa00, type: 2}
